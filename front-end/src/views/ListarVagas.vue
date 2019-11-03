@@ -12,7 +12,7 @@
       ></v-text-field>
 
       <v-spacer></v-spacer>
-      
+
       <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
         <v-btn icon large flat slot="activator">
           <v-avatar size="30px">
@@ -116,6 +116,61 @@
       </div>
     </v-navigation-drawer>
 
+    <v-content>
+      <v-container>
+        <div>
+          <v-toolbar flat color="white">
+            <v-toolbar-title>
+              <v-container fluid>
+                <v-layout row wrap align-center>
+                  <v-flex xs6>
+                    <v-subheader>Categorias:</v-subheader>
+                  </v-flex>
+
+                  <v-flex xs4>
+                    <v-select
+                      v-model="select"
+                      :items="items"
+                      item-text="state"
+                      item-value="abbr"
+                      single-line
+                      return-object
+                    ></v-select>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn class="ma-2" tile color="#2ED47A">
+              <span class="white--text">
+                <v-icon left>add</v-icon>Adicionar Novo Cargo
+              </span>
+            </v-btn>
+          </v-toolbar>
+          <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :search="search"
+            hide-actions
+            :pagination.sync="pagination"
+            class="elevation-1"
+          >
+            <template v-slot:items="props">
+              <td>
+                <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+              </td>
+              <td class="justify-center">{{ props.item.vaga }}</td>
+              <td class="justify-center">{{ props.item.tipo }}</td>
+              <td class="justify-center">{{ props.item.salario }}</td>
+              <td class="justify-center">{{ props.item.cargo }}</td>
+            </template>
+          </v-data-table>
+          <div class="text-xs-center pt-2">
+            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+          </div>
+        </div>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
@@ -125,12 +180,91 @@ export default {
   data() {
     return {
       drawer: true,
-      right: null
+      right: null,
+      expand: false,
+      search: "",
+      pagination: {},
+      selected: [],
+      headers: [
+        {
+          text: "",
+          align: "left",
+          sortable: false,
+          value: "selecionarVaga"
+        },
+        {
+          text: "Vaga",
+          align: "left",
+          sortable: false,
+          value: true
+        },
+        { text: "Tipo", value: "tipo" },
+        { text: "Salário", value: "salário" },
+        { text: "Cargo", value: "cargo" }
+      ],
+      desserts: [
+        {
+          selecionarVaga: "",
+          vaga: "AAAAAAAAA",
+          tipo: "AAAA",
+          salario: "R$ 1500,00",
+          cargo: "Diretor"
+        },
+        {
+          selecionarVaga: "",
+          vaga: "AAAAAAAAA",
+          tipo: "AAAA",
+          salario: "R$ 1500,00",
+          cargo: "Diretor"
+        },
+        {
+          selecionarVaga: "",
+          vaga: "AAAAAAAAA",
+          tipo: "AAAA",
+          salario: "R$ 1500,00",
+          cargo: "Diretor"
+        },
+        {
+          selecionarVaga: "",
+          vaga: "AAAAAAAAA",
+          tipo: "AAAA",
+          salario: "R$ 1500,00",
+          cargo: "Diretor"
+        },
+        {
+          selecionarVaga: "",
+          vaga: "AAAAAAAAA",
+          tipo: "AAAA",
+          salario: "R$ 1500,00",
+          cargo: "Diretor"
+        }
+      ],
+      select: { state: "Florida", abbr: "FL" },
+      items: [
+        { state: "Florida", abbr: "FL" },
+        { state: "Georgia", abbr: "GA" },
+        { state: "Nebraska", abbr: "NE" },
+        { state: "California", abbr: "CA" },
+        { state: "New York", abbr: "NY" }
+      ]
     };
   },
   methods: {
     logout() {
       this.$router.push("/logout");
+    }
+  },
+  computed: {
+    pages() {
+      if (
+        this.pagination.rowsPerPage == null ||
+        this.pagination.totalItems == null
+      )
+        return 0;
+
+      return Math.ceil(
+        this.pagination.totalItems / this.pagination.rowsPerPage
+      );
     }
   }
 };
@@ -138,7 +272,7 @@ export default {
 
 <style lang="css" scoped>
 .barra-lateral-1 {
-  margin-top: 13px;
+  margin-top: 12px;
 }
 
 .barra-lateral-2 {
