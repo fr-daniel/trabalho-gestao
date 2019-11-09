@@ -12,6 +12,8 @@ import MsgEnvioEmailPage from "../views/inicio/MsgEnvioEmail";
 import NovaSenhaPage from "../views/inicio/NovaSenha";
 import MsgAlteracaoSenhaPage from "../views/inicio/MsgAlteracaoSenha";
 import TelaInicialPage from "../views/inicio/TelaInicial";
+import DashboardPage from "../views/inicio/Dashboard";
+import ListarVagasPage from "../views/ListarVagas";
 
 export default [
   {
@@ -55,6 +57,24 @@ export default [
     props: true,
     name: "TelaInicial",
     component: TelaInicialPage
+  },
+  {
+    path: "/dashboard",
+    meta: {
+      public: true
+    },
+    props: true,
+    name: "Dashboard",
+    component: DashboardPage
+  },
+  {
+    path: "/listarVagas",
+    meta: {
+      public: true
+    },
+    props: true,
+    name: "ListarVagas",
+    component: ListarVagasPage
   },
   {
     path: "/recuperacao",

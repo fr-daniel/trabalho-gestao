@@ -12,7 +12,7 @@
       ></v-text-field>
 
       <v-spacer></v-spacer>
-      
+
       <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
         <v-btn icon large flat slot="activator">
           <v-avatar size="30px">
@@ -116,6 +116,63 @@
       </div>
     </v-navigation-drawer>
 
+    <v-content>
+      <v-container>
+        <v-card>
+          <v-container>
+            <v-card-title primary-title>
+              <div>
+                <div class="headline">Vagas Cadastradas</div>
+                <div class="grey--text">
+                  Data da Última atualização:
+                  <span class="black--text">December 23, 2018</span>
+                </div>
+                <div class="grey--text">
+                  Último Cadastro:
+                  <span class="black--text">Gerente de Recursos Humanos</span>
+                </div>
+              </div>
+              <v-layout>
+                <v-spacer></v-spacer>
+
+                <v-btn class="ma-2" tile color="#2ED47A">
+                  <span class="white--text">
+                    <v-icon left>add</v-icon>Adicionar Novo Cargo
+                  </span>
+                </v-btn>
+              </v-layout>
+            </v-card-title>
+          </v-container>
+
+          <v-divider></v-divider>
+
+          <v-container>
+            <v-card-title primary-title>
+              <div>
+                <div class="headline">Cadastrar Funcionário</div>
+                <div class="grey--text">
+                  Última Atualização:
+                  <span class="black--text">20 de outubro de 2019</span>
+                </div>
+                <div class="grey--text">
+                  Quantidade de Funcionários:
+                  <span class="black--text">5.000</span>
+                </div>
+              </div>
+              <v-layout>
+                <v-spacer></v-spacer>
+
+                <v-btn class="ma-2" tile color="#F7685B">
+                  <span class="white--text">
+                    <v-icon left>add</v-icon>Adicionar Funcionário
+                  </span>
+                </v-btn>
+              </v-layout>
+            </v-card-title>
+          </v-container>
+        </v-card>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
@@ -126,7 +183,7 @@ export default {
     return {
       drawer: true,
       right: null
-    };
+    }
   },
   methods: {
     logout() {
@@ -138,7 +195,7 @@ export default {
 
 <style lang="css" scoped>
 .barra-lateral-1 {
-  margin-top: 13px;
+  margin-top: 12px;
 }
 
 .barra-lateral-2 {
