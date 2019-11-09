@@ -42,6 +42,8 @@ public class AuthControllerImpl implements AuthController {
 	public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
 
 		try {
+			System.out.println(data.getCpf());
+			System.out.println(data.getPassword());
 			String username = data.getCpf();
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
 			List<String> roles = new ArrayList<>();
