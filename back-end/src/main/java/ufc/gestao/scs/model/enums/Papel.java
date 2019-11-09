@@ -3,8 +3,10 @@ package ufc.gestao.scs.model.enums;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Papel implements GrantedAuthority {
-    CANDIDATO("DadosCandidato"), COORDENADOR("Coordenador"), SECRETARIO("Secretario"), EXAMINADOR("Examinador");
-    private String descricao;
+    
+	FUNCIONARIO("FUNCIONARIO"), RECURSOS_HUMANOS("RECURSOS_HUMANOS"), ADMINISTRADOR("ADMINISTRADOR");
+   
+	private String descricao;
 
     Papel(String valor) {
         descricao = valor;

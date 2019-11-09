@@ -1,6 +1,5 @@
 package ufc.gestao.scs.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,19 +19,12 @@ import javax.persistence.OneToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import ufc.gestao.scs.model.enums.EstadoCivil;
-import ufc.gestao.scs.model.enums.NecessidadeEspecial;
 import ufc.gestao.scs.model.enums.Papel;
-import ufc.gestao.scs.model.enums.Sexo;
 
 @Entity
 public class Usuario implements UserDetails {
 
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5429387806362006604L;
 
 	@Id
@@ -55,31 +47,6 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario")
     private List<Token> token;
-
-    private String telefone;
-
-    private String observacaoNecessidade;
-
-    private String pais;
-
-    private String uf;
-
-    private String cidade;
-
-    private String endereco;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dataNascimento;
-
-    @Enumerated(EnumType.STRING)
-    private NecessidadeEspecial necessidadeEspecial;
-
-    @Enumerated(EnumType.STRING)
-    private EstadoCivil estadoCivil;
-
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
-
 
     public Integer getId() {
         return id;
@@ -144,87 +111,7 @@ public class Usuario implements UserDetails {
 
     public void setToken(List<Token> token) {
         this.token = token;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getObservacaoNecessidade() {
-        return observacaoNecessidade;
-    }
-
-    public void setObservacaoNecessidade(String observacaoNecessidade) {
-        this.observacaoNecessidade = observacaoNecessidade;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public NecessidadeEspecial getNecessidadeEspecial() {
-        return necessidadeEspecial;
-    }
-
-    public void setNecessidadeEspecial(NecessidadeEspecial necessidadeEspecial) {
-        this.necessidadeEspecial = necessidadeEspecial;
-    }
-
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
+    }  
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
