@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ufc.gestao.scs.config.JwtTokenProvider;
 import ufc.gestao.scs.controller.AuthController;
+import ufc.gestao.scs.model.Usuario;
 import ufc.gestao.scs.model.enums.Papel;
 import ufc.gestao.scs.repository.UsuarioRepository;
 import ufc.gestao.scs.util.AuthenticationRequest;
@@ -42,18 +43,19 @@ public class AuthControllerImpl implements AuthController {
 	public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
 
 		try {
-			System.out.println(data.getCpf());
-			System.out.println(data.getPassword());
 			String username = data.getCpf();
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
 			List<String> roles = new ArrayList<>();
-			for (Papel papel : this.usuarioRepository.findByCpf(username).getPapeis()) {
+			Usuario usuario = this.usuarioRepository.findByCpf(username);
+			for (Papel papel : usuario.getPapeis()) {
 				roles.add(papel.name());
 			}
 			String token = jwtTokenProvider.createToken(username, new ArrayList<String>());
 
 			Map<Object, Object> model = new HashMap<>();
 			model.put("username", username);
+			model.put("name", usuario.getNome());
+			model.put("email", usuario.getEmail());
 			model.put("papeis", roles);
 			model.put("token", "Bearer " + token);
 			return ok(model);

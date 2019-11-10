@@ -60,6 +60,7 @@
                   </v-flex>
                 </v-layout>
               </v-layout>
+              <v-divider class="mt-2 mb-2"></v-divider>
 
               <h5>
                 <b>Atividade</b>
@@ -77,7 +78,6 @@
                   <v-textarea
                     auto-grow
                     rows="1"
-                    box
                     v-model="descricaoAtividade"
                     label="Descrição"
                     value
@@ -85,6 +85,8 @@
                   ></v-textarea>
                 </v-flex>
               </v-layout>
+
+              <v-divider class="mt-2 mb-2"></v-divider>
 
               <h5>
                 <b>Conhecimento</b>
@@ -95,7 +97,6 @@
                   <v-textarea
                     auto-grow
                     rows="1"
-                    box
                     v-model="descricaoConhecimento"
                     label="Descrição"
                     value
@@ -104,7 +105,6 @@
                   <v-flex xs12 sm4 d-flex>
                     <v-select
                       :items="niveisConhecimento"
-                      box
                       label="Nível do Conhecimento"
                       prepend-inner-icon="dehaze"
                     ></v-select>
@@ -130,7 +130,8 @@
                   <v-flex xs12 sm4 d-flex>
                     <v-select
                       :items="classificacoesTreinamento"
-                      box
+                      item-text="text"
+                      item-value="value"
                       label="Classificação do Treinamento"
                       prepend-inner-icon="dehaze"
                     ></v-select>
@@ -212,7 +213,10 @@ export default {
       descricaoConhecimento: "",
       niveisConhecimento: ["BÁSICO", "MÉDIO", "AVANÇADO"],
       descricaoTreinamento: "",
-      classificacoesTreinamento: ["DESEJÁVEL", "REQUERIDO"],
+      classificacoesTreinamento: [
+        { text: "Desejável", value: "DESEJAVEL" },
+        { text: "Requerido", value: "REQUERIDO" }
+      ],
       tituloBeneficio: "",
       descricaoBeneficio: "",
       valorBeneficio: 0

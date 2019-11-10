@@ -24,10 +24,9 @@ import ufc.gestao.scs.model.enums.Papel;
 @Entity
 public class Usuario implements UserDetails {
 
+    private static final long serialVersionUID = 5429387806362006604L;
 
-	private static final long serialVersionUID = 5429387806362006604L;
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -101,7 +100,8 @@ public class Usuario implements UserDetails {
     }
 
     public void addPapel(Papel papel) {
-        if (this.papeis == null) this.papeis = new ArrayList<>();
+        if (this.papeis == null)
+            this.papeis = new ArrayList<>();
         this.papeis.add(papel);
     }
 
@@ -111,7 +111,7 @@ public class Usuario implements UserDetails {
 
     public void setToken(List<Token> token) {
         this.token = token;
-    }  
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

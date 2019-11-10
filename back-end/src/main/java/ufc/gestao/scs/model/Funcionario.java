@@ -32,6 +32,8 @@ public class Funcionario {
 
 	private String rg;
 
+	private String nis;
+
 	private String email;
 
 	private String telefone;
@@ -80,6 +82,14 @@ public class Funcionario {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public String getNis() {
+		return nis;
+	}
+
+	public void setNis(String nis) {
+		this.nis = nis;
 	}
 
 	public String getEmail() {

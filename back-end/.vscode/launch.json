@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SCSApplication",
+            "request": "launch",
+            "mainClass": "ufc.gestao.scs.SCSApplication",
+            "projectName": "proficiencia-backend"
+        }
+    ]
+}

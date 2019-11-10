@@ -1,6 +1,9 @@
 package ufc.gestao.scs.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -9,11 +12,15 @@ import javax.persistence.Table;
 @Table(name = "salario")
 public class Salario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
     private Double salarioBase;
     private Integer cargaHoraria;
 
     @OneToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
     private Funcionario funcionario;
 
     public Double getSalarioBase() {

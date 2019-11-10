@@ -1,11 +1,11 @@
 <template>
   <v-app id="telaInicial">
-     <v-toolbar color="white" fixed app>
+    <v-toolbar color="white" fixed app>
       <v-text-field
         flat
         solo
         prepend-icon="search"
-        placeholder="Realizar Uma Busca"
+        placeholder="Realizar uma Busca por Cargo ou Funcionário"
         v-model="search"
         hide-details
         class="hidden-sm-and-down"
@@ -49,7 +49,7 @@
 
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile avatar>
+        <v-list-tile class="mt-3" avatar>
           <v-list-tile-avatar>
             <img src="https://randomuser.me/api/portraits/men/85.jpg" />
           </v-list-tile-avatar>
@@ -86,7 +86,7 @@
               <v-icon color="#C2CFE0">monetization_on</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Todos os Salários</v-list-tile-title>
+              <v-list-tile-title>Todos os Funcionários</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -115,7 +115,6 @@
         </v-list>
       </div>
     </v-navigation-drawer>
-
   </v-app>
 </template>
 
@@ -124,7 +123,7 @@
 export default {
   data() {
     return {
-      search: '',
+      search: "",
       drawer: true,
       right: null
     };

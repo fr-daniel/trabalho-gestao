@@ -6,7 +6,7 @@
           <v-container>
             <v-card-title primary-title>
               <div>
-                <div class="headline">Vagas Cadastradas</div>
+                <div class="headline">Cargos Cadastradas</div>
                 <div class="grey--text">
                   Data da Última atualização:
                   <span class="black--text">December 23, 2018</span>

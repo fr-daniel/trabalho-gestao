@@ -26,7 +26,6 @@
                 <v-textarea
                   auto-grow
                   rows="1"
-                  box
                   v-model="missao"
                   label="Missão"
                   value
@@ -35,7 +34,6 @@
                 <v-textarea
                   auto-grow
                   rows="1"
-                  box
                   v-model="experienciaMinima"
                   label="Experiência Mínima"
                   value
@@ -90,11 +88,11 @@ export default {
     return {
       hidden: false,
       addCargo: false,
-      titulo: '',
-      missao: '',
-      experienciaMinima: '',
-      area: '',
-      unidade: '',
+      titulo: "",
+      missao: "",
+      experienciaMinima: "",
+      area: "",
+      unidade: "",
       salarioBaseMinimo: 0,
       salarioBaseMaximo: 0
     };
