@@ -1,6 +1,6 @@
 <template>
   <v-app id="telaInicial">
-    <v-toolbar color="white" fixed app>
+     <v-toolbar color="white" fixed app>
       <v-text-field
         flat
         solo
@@ -12,7 +12,7 @@
       ></v-text-field>
 
       <v-spacer></v-spacer>
-      
+
       <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
         <v-btn icon large flat slot="activator">
           <v-avatar size="30px">
@@ -63,7 +63,7 @@
 
       <div class="barra-lateral-2">
         <v-list class="pt-0" dense>
-          <v-list-tile>
+          <v-list-tile :to="{name: 'Dashboard'}">
             <v-list-tile-action>
               <v-icon color="#C2CFE0">dashboard</v-icon>
             </v-list-tile-action>
@@ -72,7 +72,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile :to="{name: 'ListarCargos'}">
             <v-list-tile-action>
               <v-icon color="#C2CFE0">work</v-icon>
             </v-list-tile-action>
@@ -124,6 +124,7 @@
 export default {
   data() {
     return {
+      search: '',
       drawer: true,
       right: null
     };

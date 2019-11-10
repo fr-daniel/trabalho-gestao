@@ -13,7 +13,8 @@ import NovaSenhaPage from "../views/inicio/NovaSenha";
 import MsgAlteracaoSenhaPage from "../views/inicio/MsgAlteracaoSenha";
 import TelaInicialPage from "../views/inicio/TelaInicial";
 import DashboardPage from "../views/inicio/Dashboard";
-import ListarVagasPage from "../views/ListarVagas";
+import ListarCargosPage from "../views/ListarCargos";
+import EditarCargoPage from "../views/EditarCargo";
 
 export default [
   {
@@ -61,20 +62,35 @@ export default [
   {
     path: "/dashboard",
     meta: {
-      public: true
+      requiresAuth: true,
+      permissions: [
+        {
+          role: "ADMINISTRADOR",
+          access: true
+        }
+      ]
     },
     props: true,
     name: "Dashboard",
     component: DashboardPage
   },
   {
-    path: "/listarVagas",
+    path: "/listarCargos",
     meta: {
       public: true
     },
     props: true,
-    name: "ListarVagas",
-    component: ListarVagasPage
+    name: "ListarCargos",
+    component: ListarCargosPage
+  },
+  {
+    path: "/editarCargo",
+    meta: {
+      public: true
+    },
+    props: true,
+    name: "EditarCargo",
+    component: EditarCargoPage
   },
   {
     path: "/recuperacao",
@@ -125,20 +141,8 @@ export default [
   {
     path: "/",
     name: "Root",
-    meta: {
-      requiresAuth: true,
-      permissions: [
-        {
-          role: "ADMINISTRADOR",
-          access: false,
-          redirect: "CoordenadorExames"
-        },
-        {
-          role: "CANDIDATO",
-          access: false,
-          redirect: "CandidatoInscricoes"
-        }
-      ]
+    redirect: {
+      name: 'Dashboard'
     }
   },
 
