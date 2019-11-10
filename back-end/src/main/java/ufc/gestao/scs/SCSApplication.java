@@ -9,6 +9,7 @@ public class SCSApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SCSApplication.class, args);
+        //System.out.println(new BCryptPasswordEncoder().encode("123456"));
     }
 
 }
