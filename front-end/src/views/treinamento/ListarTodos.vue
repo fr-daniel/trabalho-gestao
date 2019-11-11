@@ -87,7 +87,7 @@
 
 <script>
 import axios from "axios";
-import CadastrarTreinamento from "../CadastrarTreinamento";
+import CadastrarTreinamento from "../treinamento/CadastrarTreinamento";
 import store from "@/store";
 
 export default {
@@ -125,25 +125,28 @@ export default {
           text: "ID",
           align: "left",
           sortable: true,
-          value: "titulo"
+          value: "id"
         },
         {
           text: "Descrição",
           align: "left",
           sortable: false,
-          value: "treinamento"
+          value: "descricao"
         },
         {
           text: "Classificação",
           align: "left",
           sortable: false,
-          value: "treinamento"
+          value: "classificacao"
         },
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
       treinamentos: [],
       dialog: false,
-      treinamentoDelete: null
+      treinamentoDelete: null,
+      dSnackbar: false,
+      dMensagem: "",
+      dCor: ""
     };
   },
   created: function() {

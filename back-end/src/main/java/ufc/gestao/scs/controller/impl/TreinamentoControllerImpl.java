@@ -30,7 +30,7 @@ public class TreinamentoControllerImpl implements TreinamentoController {
 
     @Override
     @DeleteMapping("/excluir/{treinamentoId}")
-    public ResponseEntity<Void> deletarUsuario(Integer treinamentoId) {
+    public ResponseEntity<Void> deletarTreinamento(Integer treinamentoId) {
         treinamentoService.excluirTreinamento(treinamentoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

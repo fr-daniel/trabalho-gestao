@@ -7,4 +7,6 @@ public interface BeneficioService {
 
     List<Map<String, Object>> buscarBeneficios();
 
+    void excluirBeneficio(Integer id);
+
 }

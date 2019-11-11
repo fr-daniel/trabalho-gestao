@@ -13,6 +13,6 @@ public interface TreinamentoController {
     ResponseEntity<List<Map<String, Object>>> listarTreinamentos();
 
     @ApiOperation(value = "Exclui um Treinamento", notes = "Este controller é responsável por deletar um treinamento no sistema")
-    ResponseEntity<Void> deletarUsuario(Integer treinamentoId);
+    ResponseEntity<Void> deletarTreinamento(Integer treinamentoId);
 
 }
