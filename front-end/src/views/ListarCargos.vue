@@ -142,14 +142,6 @@ export default {
           dataAtualizacao: "12/11/2019",
           salario: "R$ 1500,00"
         }
-      ],
-      select: { state: "Florida", abbr: "FL" },
-      items: [
-        { state: "Florida", abbr: "FL" },
-        { state: "Georgia", abbr: "GA" },
-        { state: "Nebraska", abbr: "NE" },
-        { state: "California", abbr: "CA" },
-        { state: "New York", abbr: "NY" }
       ]
     };
   },
