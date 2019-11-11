@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufc.gestao.scs.controller.TreinamentoController;
+import ufc.gestao.scs.model.Treinamento;
 import ufc.gestao.scs.service.TreinamentoService;
 
 @RestController
@@ -20,6 +22,13 @@ public class TreinamentoControllerImpl implements TreinamentoController {
 
     @Autowired
     private TreinamentoService treinamentoService;
+
+    @Override
+    @PostMapping
+    public ResponseEntity<Treinamento> createTreinamento(Treinamento t) {
+        Treinamento treinamento = treinamentoService.salvarTreinamento(t);
+        return new ResponseEntity<>(treinamento, HttpStatus.CREATED);
+    }
 
     @Override
     @GetMapping("/listar")

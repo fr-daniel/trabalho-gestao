@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import ufc.gestao.scs.model.Treinamento;
 import ufc.gestao.scs.repository.TreinamentoRepository;
 import ufc.gestao.scs.service.TreinamentoService;
 
@@ -28,6 +29,11 @@ public class TreinamentoServiceImpl implements TreinamentoService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void excluirTreinamento(Integer id) {
         this.treinamentoRepository.deleteById(id);
+    }
+
+    @Override
+    public Treinamento salvarTreinamento(Treinamento t) {
+        return treinamentoRepository.save(t);
     }
 
 }
