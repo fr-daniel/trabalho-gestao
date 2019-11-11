@@ -17,7 +17,7 @@ public class Beneficio {
     private Integer id;
 
     private String titulo;
-    private String descricao;
+    private String informacoes;
     private String valor;
 
     public Integer getId() {
@@ -36,12 +36,12 @@ public class Beneficio {
         this.titulo = titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getInformacoes() {
+        return informacoes;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setInformacoes(String informacoes) {
+        this.informacoes = informacoes;
     }
 
     public String getValor() {

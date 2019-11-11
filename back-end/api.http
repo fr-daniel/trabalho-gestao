@@ -4,13 +4,13 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNDE2OTY0LCJleHAiOjE1NzM0NTI5NjR9._eqkTON97eTMkZfVI6_hOCiu734K-Jg5f0Z36SzZC_k
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNDgwMDU5LCJleHAiOjE1NzM1MTYwNTl9.e_9T_sKF1C4QAH7C2OAGs55RpqSEa2_IM_g-ehftcdo
 
 ###
 
 @name = hello
 
-POST https://{{host}}/login HTTP/1.1
+POST http://{{host}}/login HTTP/1.1
 content-type: application/json
 
 {
