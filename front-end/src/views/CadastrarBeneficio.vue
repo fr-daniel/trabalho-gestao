@@ -18,9 +18,8 @@
               <v-flex xs12>
                 <v-text-field flat v-model="titulo" label="Título" value append-icon="title"></v-text-field>
                 <v-textarea
-                  box
-                  v-model="descricao"
-                  label="Descrição"
+                  v-model="informacoes"
+                  label="Informações"
                   value
                   append-icon="description"
                 ></v-textarea>
@@ -66,7 +65,7 @@ export default {
       hidden: false,
       addBeneficio: false,
       titulo: "",
-      descricao: "",
+      iformacoes: "",
       valor: 0
     };
   },
@@ -74,7 +73,7 @@ export default {
   computed: {},
   methods: {
     limpar() {
-      (this.titulo = ""), (this.descricao = ""), (this.valor = 0);
+      this.titulo = "", this.informacoes = "", this.valor = 0;
     }
   }
 };

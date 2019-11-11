@@ -17,13 +17,6 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field flat v-model="titulo" label="Título" value append-icon="title"></v-text-field>
-                <v-textarea
-                  box
-                  v-model="descricao"
-                  label="Descrição"
-                  value
-                  append-icon="description"
-                ></v-textarea>
                 <v-flex xs12 sm6 d-flex>
                   <v-select
                     :items="classificacoes"
@@ -66,7 +59,6 @@ export default {
       hidden: false,
       addTreinamento: false,
       titulo: "",
-      descricao: "",
       classificacoes: [
         { text: "Desejável", value: "DESEJAVEL" },
         { text: "Requerido", value: "REQUERIDO" }
@@ -77,7 +69,7 @@ export default {
   computed: {},
   methods: {
     limpar() {
-      (this.titulo = ""), (this.descricao = "");
+      this.descricao = "";
     }
   }
 };

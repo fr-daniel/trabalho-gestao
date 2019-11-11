@@ -23,9 +23,8 @@
                   value
                   append-icon="title"
                 ></v-text-field>
-                <v-textarea box v-model="missao" label="Missão" value append-icon="format_size"></v-textarea>
+                <v-textarea v-model="missao" label="Missão" value append-icon="format_size"></v-textarea>
                 <v-textarea
-                  box
                   v-model="experienciaMinima"
                   label="Experiência Mínima"
                   value
@@ -34,7 +33,7 @@
                 <v-text-field flat v-model="area" label="Área" value append-icon="school"></v-text-field>
                 <v-text-field flat v-model="unidade" label="Unidade" value append-icon="group"></v-text-field>
               </v-flex>
-              <v-layout row wrap>
+              <v-layout row wrap justify-center>
                 <v-flex xs4>
                   <v-text-field
                     flat
@@ -44,7 +43,6 @@
                     append-icon="monetization_on"
                   ></v-text-field>
                 </v-flex>
-                <v-spacer></v-spacer>
                 <v-flex xs4>
                   <v-text-field
                     flat

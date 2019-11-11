@@ -79,7 +79,13 @@ export default [
   {
     path: "/listarCargos",
     meta: {
-      public: true
+      requiresAuth: true,
+      permissions: [
+        {
+          role: "ADMINISTRADOR",
+          access: true
+        }
+      ]
     },
     props: true,
     name: "ListarCargos",
@@ -88,7 +94,13 @@ export default [
   {
     path: "/editarCargo",
     meta: {
-      public: true
+      requiresAuth: true,
+      permissions: [
+        {
+          role: "ADMINISTRADOR",
+          access: true
+        }
+      ]
     },
     props: true,
     name: "EditarCargo",
@@ -97,7 +109,13 @@ export default [
   {
     path: "/listarTreinamentos",
     meta: {
-      public: true
+      requiresAuth: true,
+      permissions: [
+        {
+          role: "ADMINISTRADOR",
+          access: true
+        }
+      ]
     },
     props: true,
     name: "ListarTreinamentos",
@@ -106,7 +124,13 @@ export default [
   {
     path: "/listarBeneficios",
     meta: {
-      public: true
+      requiresAuth: true,
+      permissions: [
+        {
+          role: "ADMINISTRADOR",
+          access: true
+        }
+      ]
     },
     props: true,
     name: "ListarBeneficios",
