@@ -12,7 +12,7 @@
 
       <v-card>
         <v-card-text>
-          <v-card-title class="headline">Cadastrar Benefício</v-card-title>
+          <v-card-title class="headline black white--text">Cadastrar Benefício</v-card-title>
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
@@ -65,7 +65,7 @@ export default {
       hidden: false,
       addBeneficio: false,
       titulo: "",
-      iformacoes: "",
+      informacoes: "",
       valor: 0
     };
   },

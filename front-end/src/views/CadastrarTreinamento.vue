@@ -12,7 +12,7 @@
 
       <v-card>
         <v-card-text>
-          <v-card-title class="headline">Cadastrar Treinamento</v-card-title>
+          <v-card-title class="headline black white--text">Cadastrar Treinamento</v-card-title>
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>

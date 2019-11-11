@@ -3,36 +3,36 @@
     <v-container grid-list-xl fluid>
       <v-layout row wrap justify-center>
         <v-flex xs12>
+          <v-card-title class="headline black white--text">Editar Cargo</v-card-title>
           <div id="app">
             <v-app id="inspire">
               <v-card>
-                <v-card-title class="headline">Editar Cargo</v-card-title>
                 <v-tabs centered icons-and-text :grow="true">
                   <v-tabs-slider color="blue"></v-tabs-slider>
 
                   <v-tab href="#tab-1">
                     CARGOS
-                    <v-icon>pie_chart</v-icon>
+                    <v-icon>work</v-icon>
                   </v-tab>
 
                   <v-tab href="#tab-2">
                     ATIVIDADES
-                    <v-icon>show_chart</v-icon>
+                    <v-icon>border_color</v-icon>
                   </v-tab>
 
                   <v-tab href="#tab-3">
                     CONHECIMENTOS
-                    <v-icon>dns</v-icon>
+                    <v-icon>local_library</v-icon>
                   </v-tab>
 
                   <v-tab href="#tab-4">
                     TREINAMENTOS
-                    <v-icon>category</v-icon>
+                    <v-icon>assignment_turned_in</v-icon>
                   </v-tab>
 
                   <v-tab href="#tab-5">
                     BENEFÍCIOS
-                    <v-icon>gavel</v-icon>
+                    <v-icon>monetization_on</v-icon>
                   </v-tab>
 
                   <v-tab-item v-for="i in 5" :key="i" :value="'tab-' + i">
@@ -100,6 +100,15 @@
                             </v-layout>
                           </v-card-text>
                         </v-layout>
+                        <v-card-actions class="justify-center">
+                          <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
+                            <span class="white--text">Cancelar</span>
+                          </v-btn>
+
+                          <v-btn class="ma-2" tile color="#109CF1">
+                            <span class="white--text">Salvar</span>
+                          </v-btn>
+                        </v-card-actions>
                       </v-container>
                     </div>
 
@@ -122,6 +131,51 @@
                             ></v-textarea>
                           </v-flex>
                         </v-layout>
+                        <v-layout>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-btn class="ma-2" tile color="#109CF1">
+                              <span class="white--text">Salvar</span>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-layout>
+
+                        <v-data-table
+                          :headers="headersAtividades"
+                          :items="desserts1"
+                          :search="search"
+                          hide-actions
+                          :pagination.sync="pagination1"
+                          class="elevation-1"
+                        >
+                          <template v-slot:items="props">
+                            <td>
+                              <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                            </td>
+                            <td class="justify-center">{{ props.item.titulo }}</td>
+                            <td class="justify-center">{{ props.item.descricao }}</td>
+                            <td class="justify-center">
+                              <v-btn
+                                class="ma-2"
+                                tile
+                                depressed
+                                dark
+                                icon
+                                color="#192A3E"
+                                small
+                                :to="{name: 'EditarCargo'}"
+                              >
+                                <v-icon small>edit</v-icon>
+                              </v-btn>
+                              <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
+                                <v-icon small>delete</v-icon>
+                              </v-btn>
+                            </td>
+                          </template>
+                        </v-data-table>
+                        <div class="text-xs-center pt-2">
+                          <v-pagination v-model="pagination1.page" :length="pages1"></v-pagination>
+                        </div>
                       </v-container>
                     </div>
 
@@ -145,6 +199,51 @@
                             ></v-select>
                           </v-flex>
                         </v-layout>
+                        <v-layout>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-btn class="ma-2" tile color="#109CF1">
+                              <span class="white--text">Salvar</span>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-layout>
+
+                        <v-data-table
+                          :headers="headersConhecimentos"
+                          :items="desserts2"
+                          :search="search"
+                          hide-actions
+                          :pagination.sync="pagination2"
+                          class="elevation-1"
+                        >
+                          <template v-slot:items="props">
+                            <td>
+                              <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                            </td>
+                            <td class="justify-center">{{ props.item.titulo }}</td>
+                            <td class="justify-center">{{ props.item.nivel }}</td>
+                            <td class="justify-center">
+                              <v-btn
+                                class="ma-2"
+                                tile
+                                depressed
+                                dark
+                                icon
+                                color="#192A3E"
+                                small
+                                :to="{name: 'EditarCargo'}"
+                              >
+                                <v-icon small>edit</v-icon>
+                              </v-btn>
+                              <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
+                                <v-icon small>delete</v-icon>
+                              </v-btn>
+                            </td>
+                          </template>
+                        </v-data-table>
+                        <div class="text-xs-center pt-2">
+                          <v-pagination v-model="pagination2.page" :length="pages2"></v-pagination>
+                        </div>
                       </v-container>
                     </div>
 
@@ -174,6 +273,14 @@
                               <template v-slot:append-item></template>
                             </v-select>
                           </v-flex>
+                        </v-layout>
+                        <v-layout>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-btn class="ma-2" tile color="#109CF1">
+                              <span class="white--text">Salvar</span>
+                            </v-btn>
+                          </v-card-actions>
                         </v-layout>
                       </v-container>
                     </div>
@@ -205,20 +312,18 @@
                             </v-select>
                           </v-flex>
                         </v-layout>
+                        <v-layout>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-btn class="ma-2" tile color="#109CF1">
+                              <span class="white--text">Salvar</span>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-layout>
                       </v-container>
                     </div>
                   </v-tab-item>
                 </v-tabs>
-
-                <v-card-actions class="justify-center">
-                  <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
-                    <span class="white--text">Cancelar</span>
-                  </v-btn>
-
-                  <v-btn class="ma-2" tile color="#109CF1">
-                    <span class="white--text">Salvar</span>
-                  </v-btn>
-                </v-card-actions>
               </v-card>
             </v-app>
           </div>
@@ -237,6 +342,8 @@ export default {
       drawer: true,
       right: null,
       search: "",
+      pagination1: {},
+      pagination2: {},
       hidden: false,
       tituloCargo: "",
       missaoCargo: "",
@@ -248,7 +355,11 @@ export default {
       tituloAtividade: "",
       descricaoAtividade: "",
       tituloConhecimento: "",
-      niveisConhecimento: ["BÁSICO", "MÉDIO", "AVANÇADO"],
+      niveisConhecimento: [
+        { text: "Básico", value: "BÁSICO" },
+        { text: "Médio", value: "MÉDIO" },
+        { text: "Avançado", value: "AVANÇADO" }
+      ],
       fruits: [
         "Apples",
         "Apricots",
@@ -257,7 +368,61 @@ export default {
         "Blueberries",
         "Blackberries"
       ],
-      selectedFruits: []
+      selectedFruits: [],
+      headersAtividades: [
+        {
+          text: "",
+          align: "left",
+          sortable: false,
+          value: "selecionarAtividade"
+        },
+        {
+          text: "Título",
+          align: "left",
+          sortable: true,
+          value: true
+        },
+        {
+          text: "Descrição",
+          sortable: false,
+          value: "descricao"
+        },
+        { text: "Opções", sortable: false, value: "opcoes" }
+      ],
+      desserts1: [
+        {
+          selecionarAtividade: "",
+          titulo: "AAAAAAAAA",
+          descricao: "12/11/2019"
+        }
+      ],
+      headersConhecimentos: [
+        {
+          text: "",
+          align: "left",
+          sortable: false,
+          value: "selecionarConhecimento"
+        },
+        {
+          text: "Título",
+          align: "left",
+          sortable: true,
+          value: true
+        },
+        {
+          text: "Nível",
+          sortable: false,
+          value: "nivel"
+        },
+        { text: "Opções", sortable: false, value: "opcoes" }
+      ],
+      desserts2: [
+        {
+          selecionarConhecimento: "",
+          titulo: "AAAAAAAAA",
+          nivel: "Básico"
+        }
+      ]
     };
   },
 
@@ -272,6 +437,28 @@ export default {
       if (this.likesAllFruit) return "mdi-close-box";
       if (this.likesSomeFruit) return "mdi-minus-box";
       return "mdi-checkbox-blank-outline";
+    },
+    pages1() {
+      if (
+        this.pagination1.rowsPerPage == null ||
+        this.pagination1.totalItems == null
+      )
+        return 0;
+
+      return Math.ceil(
+        this.pagination1.totalItems / this.pagination1.rowsPerPage
+      );
+    },
+    pages2() {
+      if (
+        this.pagination2.rowsPerPage == null ||
+        this.pagination2.totalItems == null
+      )
+        return 0;
+
+      return Math.ceil(
+        this.pagination2.totalItems / this.pagination2.rowsPerPage
+      );
     }
   },
   methods: {
