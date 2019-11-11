@@ -59,7 +59,6 @@ export default {
   components: { CadastrarTreinamento, AppToolbar },
   data() {
     return {
-      drawer: true,
       right: null,
       expand: false,
       search: "",
