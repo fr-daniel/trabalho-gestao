@@ -1,62 +1,65 @@
 <template>
   <v-app id="telaInicial">
-    <AppToolbar></AppToolbar>
-
-    <v-content>
-      <v-container>
-        <div>
-          <v-toolbar flat color="white">
-            <CadastrarTreinamento></CadastrarTreinamento>
-          </v-toolbar>
-          <v-data-table
-            :headers="headers"
-            :items="desserts"
-            :search="search"
-            hide-actions
-            :pagination.sync="pagination"
-            class="elevation-1"
-          >
-            <template v-slot:items="props">
-              <td>
-                <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
-              </td>
-              <td class="justify-center">{{ props.item.titulo }}</td>
-              <td class="justify-center">{{ props.item.descricao }}</td>
-              <td class="justify-center">{{ props.item.treinamento }}</td>
-              <td class="justify-center">
-                <v-btn
-                  class="ma-2"
-                  tile
-                  depressed
-                  dark
-                  icon
-                  color="#192A3E"
-                  small
-                  :to="{name: 'EditarCargo'}"
+    <v-container grid-list-xl fluid>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-card>
+            <v-container>
+              <div>
+                <v-toolbar flat color="white">
+                  <CadastrarTreinamento></CadastrarTreinamento>
+                </v-toolbar>
+                <v-data-table
+                  :headers="headers"
+                  :items="desserts"
+                  :search="search"
+                  hide-actions
+                  :pagination.sync="pagination"
+                  class="elevation-1"
                 >
-                  <v-icon small>edit</v-icon>
-                </v-btn>
-                <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
-                  <v-icon small>delete</v-icon>
-                </v-btn>
-              </td>
-            </template>
-          </v-data-table>
-          <div class="text-xs-center pt-2">
-            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-          </div>
-        </div>
-      </v-container>
-    </v-content>
+                  <template v-slot:items="props">
+                    <td>
+                      <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                    </td>
+                    <td class="justify-center">{{ props.item.titulo }}</td>
+                    <td class="justify-center">{{ props.item.treinamento }}</td>
+                    <td class="justify-center">
+                      <v-btn
+                        class="ma-2"
+                        tile
+                        depressed
+                        dark
+                        icon
+                        color="#192A3E"
+                        small
+                        :to="{name: 'EditarCargo'}"
+                      >
+                        <v-icon small>edit</v-icon>
+                      </v-btn>
+                      <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
+                        <v-icon small>delete</v-icon>
+                      </v-btn>
+                    </td>
+                  </template>
+                </v-data-table>
+                <div class="text-xs-center pt-2">
+                  <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+                </div>
+              </div>
+            </v-container>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-app>
 </template>
 
 
 <script>
 import CadastrarTreinamento from "./CadastrarTreinamento";
-import AppToolbar from "../components/core/AppToolbar";
+
 export default {
-  components: { CadastrarTreinamento, AppToolbar },
+  components: { CadastrarTreinamento },
   data() {
     return {
       right: null,
@@ -78,12 +81,6 @@ export default {
           value: "titulo"
         },
         {
-          text: "Descrição",
-          align: "left",
-          sortable: false,
-          value: "descricao"
-        },
-        {
           text: "Treinamento",
           align: "left",
           sortable: false,
@@ -95,31 +92,26 @@ export default {
         {
           selecionarTreinamento: "",
           titulo: "BBBBBBB",
-          descricao: "AAAAAAAAA",
           treinamento: "12/11/2019"
         },
         {
           selecionarTreinamento: "",
           titulo: "BBBBBBB",
-          descricao: "AAAAAAAAA",
           treinamento: "12/11/2019"
         },
         {
           selecionarTreinamento: "",
           titulo: "BBBBBBB",
-          descricao: "AAAAAAAAA",
           treinamento: "12/11/2019"
         },
         {
           selecionarTreinamento: "",
           titulo: "BBBBBBB",
-          descricao: "AAAAAAAAA",
           treinamento: "12/11/2019"
         },
         {
           selecionarTreinamento: "",
           titulo: "BBBBBBB",
-          descricao: "AAAAAAAAA",
           treinamento: "12/11/2019"
         }
       ]
@@ -147,5 +139,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 </style>

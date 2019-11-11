@@ -1,206 +1,237 @@
 <template>
   <v-app id="telaInicial">
-    <AppToolbar></AppToolbar>
+    <v-container grid-list-xl fluid>
+      <v-layout row wrap justify-center>
+        <v-flex xs12>
+          <div id="app">
+            <v-app id="inspire">
+              <v-card>
+                <v-card-title class="headline">Editar Cargo</v-card-title>
+                <v-tabs centered icons-and-text :grow="true">
+                  <v-tabs-slider color="blue"></v-tabs-slider>
 
-    <v-content>
-      <v-container>
-        <v-card>
-          <v-card-text>
-            <v-card-title class="headline">Editar Cargo</v-card-title>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12>
-                  <v-text-field
-                    flat
-                    v-model="tituloCargo"
-                    label="Título do Cargo"
-                    value
-                    append-icon="title"
-                  ></v-text-field>
-                  <v-textarea
-                    box
-                    v-model="missaoCargo"
-                    label="Missão"
-                    value
-                    append-icon="format_size"
-                  ></v-textarea>
-                  <v-textarea
-                    box
-                    v-model="experienciaMinima"
-                    label="Experiência Mínima"
-                    value
-                    append-icon="assignment"
-                  ></v-textarea>
-                  <v-text-field flat v-model="area" label="Área" value append-icon="school"></v-text-field>
-                  <v-text-field flat v-model="unidade" label="Unidade" value append-icon="group"></v-text-field>
-                </v-flex>
-                <v-layout row wrap>
-                  <v-flex xs4>
-                    <v-text-field
-                      flat
-                      v-model="salarioBaseMinimo"
-                      label="Salário Base Mínimo"
-                      value
-                      append-icon="monetization_on"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-spacer></v-spacer>
-                  <v-flex xs4>
-                    <v-text-field
-                      flat
-                      v-model="salarioBaseMaximo"
-                      label="Salário Base Máximo"
-                      value
-                      append-icon="monetization_on"
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-layout>
-              <v-divider class="mt-2 mb-2"></v-divider>
+                  <v-tab href="#tab-1">
+                    CARGOS
+                    <v-icon>pie_chart</v-icon>
+                  </v-tab>
 
-              <h5>
-                <b>Atividades</b>
-              </h5>
+                  <v-tab href="#tab-2">
+                    ATIVIDADES
+                    <v-icon>show_chart</v-icon>
+                  </v-tab>
 
-              <v-layout wrap>
-                <v-flex xs12>
-                  <v-text-field
-                    flat
-                    v-model="tituloAtividade"
-                    label="Título"
-                    value
-                    append-icon="title"
-                  ></v-text-field>
-                  <v-textarea
-                    box
-                    v-model="descricaoAtividade"
-                    label="Descrição"
-                    value
-                    append-icon="description"
-                  ></v-textarea>
-                </v-flex>
-              </v-layout>
+                  <v-tab href="#tab-3">
+                    CONHECIMENTOS
+                    <v-icon>dns</v-icon>
+                  </v-tab>
 
-              <v-divider class="mt-2 mb-2"></v-divider>
+                  <v-tab href="#tab-4">
+                    TREINAMENTOS
+                    <v-icon>category</v-icon>
+                  </v-tab>
 
-              <h5>
-                <b>Conhecimentos</b>
-              </h5>
+                  <v-tab href="#tab-5">
+                    BENEFÍCIOS
+                    <v-icon>gavel</v-icon>
+                  </v-tab>
 
-              <!-- auto-grow rows="1" -->
+                  <v-tab-item v-for="i in 5" :key="i" :value="'tab-' + i">
+                    <div v-if="i == 1">
+                      <v-container grid-list-md>
+                        <v-layout row wrap>
+                          <v-card-text>
+                            <v-layout wrap>
+                              <v-flex xs12>
+                                <v-text-field
+                                  flat
+                                  v-model="tituloCargo"
+                                  label="Título do Cargo"
+                                  value
+                                  append-icon="title"
+                                ></v-text-field>
+                                <v-textarea
+                                  v-model="missaoCargo"
+                                  label="Missão"
+                                  value
+                                  append-icon="format_size"
+                                ></v-textarea>
+                                <v-textarea
+                                  v-model="experienciaMinima"
+                                  label="Experiência Mínima"
+                                  value
+                                  append-icon="assignment"
+                                ></v-textarea>
+                                <v-text-field
+                                  flat
+                                  v-model="area"
+                                  label="Área"
+                                  value
+                                  append-icon="school"
+                                ></v-text-field>
+                                <v-text-field
+                                  flat
+                                  v-model="unidade"
+                                  label="Unidade"
+                                  value
+                                  append-icon="group"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-layout row wrap justify-center>
+                                <v-flex xs4>
+                                  <v-text-field
+                                    flat
+                                    v-model="salarioBaseMinimo"
+                                    label="Salário Base Mínimo"
+                                    value
+                                    append-icon="monetization_on"
+                                  ></v-text-field>
+                                </v-flex>
 
-              <v-layout wrap>
-                <v-flex xs12>
-                  <v-text-field
-                    flat
-                    v-model="tituloAtividade"
-                    label="Título"
-                    value
-                    append-icon="title"
-                  ></v-text-field>
-                  <v-textarea
-                    box
-                    v-model="descricaoConhecimento"
-                    label="Descrição"
-                    value
-                    append-icon="description"
-                  ></v-textarea>
-                  <v-flex xs12 sm4 d-flex>
-                    <v-select
-                      :items="niveisConhecimento"
-                      label="Nível do Conhecimento"
-                      prepend-inner-icon="dehaze"
-                    ></v-select>
-                  </v-flex>
-                </v-flex>
-              </v-layout>
+                                <v-flex xs4>
+                                  <v-text-field
+                                    flat
+                                    v-model="salarioBaseMaximo"
+                                    label="Salário Base Máximo"
+                                    value
+                                    append-icon="monetization_on"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-layout>
+                            </v-layout>
+                          </v-card-text>
+                        </v-layout>
+                      </v-container>
+                    </div>
 
-              <v-divider class="mt-2 mb-2"></v-divider>
+                    <div v-if="i == 2">
+                      <v-container grid-list-xl fluid>
+                        <v-layout row wrap>
+                          <v-flex xs12>
+                            <v-text-field
+                              flat
+                              v-model="tituloAtividade"
+                              label="Título"
+                              value
+                              append-icon="title"
+                            ></v-text-field>
+                            <v-textarea
+                              v-model="descricaoAtividade"
+                              label="Descrição"
+                              value
+                              append-icon="description"
+                            ></v-textarea>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </div>
 
-              <h5>
-                <b>Treinamentos</b>
-              </h5>
+                    <div v-if="i == 3">
+                      <v-container grid-list-xl fluid>
+                        <v-layout row wrap>
+                          <v-flex xs12>
+                            <v-text-field
+                              flat
+                              v-model="tituloConhecimento"
+                              label="Título"
+                              value
+                              append-icon="title"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12 sm4 d-flex>
+                            <v-select
+                              :items="niveisConhecimento"
+                              label="Nível do Conhecimento"
+                              prepend-inner-icon="dehaze"
+                            ></v-select>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </div>
 
-              <v-layout wrap>
-                <v-flex xs12 sm4 d-flex>
-                  <v-select
-                    v-model="selectedFruits"
-                    :items="fruits"
-                    label="Selecionar Treinamentos"
-                    multiple
-                  >
-                    <template v-slot:prepend-item>
-                      <v-list-tile ripple @click="toggle">
-                        <v-list-tile-action>
-                          <v-icon
-                            :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
-                          >{{ icon }}</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
-                      <v-divider class="mt-2"></v-divider>
-                    </template>
-                    <template v-slot:append-item></template>
-                  </v-select>
-                </v-flex>
-              </v-layout>
+                    <div v-if="i == 4">
+                      <v-container grid-list-xl fluid>
+                        <v-layout row wrap>
+                          <v-flex xs12 sm12 d-flex>
+                            <v-select
+                              v-model="selectedFruits"
+                              :items="fruits"
+                              label="Selecionar Treinamentos"
+                              multiple
+                            >
+                              <template v-slot:prepend-item>
+                                <v-list-tile ripple @click="toggle">
+                                  <v-list-tile-action>
+                                    <v-icon
+                                      :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
+                                    >{{ icon }}</v-icon>
+                                  </v-list-tile-action>
+                                  <v-list-tile-content>
+                                    <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                                  </v-list-tile-content>
+                                </v-list-tile>
+                                <v-divider class="mt-2"></v-divider>
+                              </template>
+                              <template v-slot:append-item></template>
+                            </v-select>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </div>
 
-              <v-divider class="mt-2 mb-2"></v-divider>
+                    <div v-if="i === 5">
+                      <v-container grid-list-xl fluid>
+                        <v-layout row wrap>
+                          <v-flex xs12 sm12 d-flex>
+                            <v-select
+                              v-model="selectedFruits"
+                              :items="fruits"
+                              label="Selecionar Benefícios"
+                              multiple
+                            >
+                              <template v-slot:prepend-item>
+                                <v-list-tile ripple @click="toggle">
+                                  <v-list-tile-action>
+                                    <v-icon
+                                      :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
+                                    >{{ icon }}</v-icon>
+                                  </v-list-tile-action>
+                                  <v-list-tile-content>
+                                    <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                                  </v-list-tile-content>
+                                </v-list-tile>
+                                <v-divider class="mt-2"></v-divider>
+                              </template>
+                              <template v-slot:append-item></template>
+                            </v-select>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </div>
+                  </v-tab-item>
+                </v-tabs>
 
-              <h5>
-                <b>Benefícios</b>
-              </h5>
+                <v-card-actions class="justify-center">
+                  <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
+                    <span class="white--text">Cancelar</span>
+                  </v-btn>
 
-              <v-layout wrap>
-                <v-flex xs12 sm4 d-flex>
-                  <v-select
-                    v-model="selectedFruits"
-                    :items="fruits"
-                    label="Selecionar Benefícios"
-                    multiple
-                  >
-                    <template v-slot:prepend-item>
-                      <v-list-tile ripple @click="toggle">
-                        <v-list-tile-action>
-                          <v-icon
-                            :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
-                          >{{ icon }}</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
-                      <v-divider class="mt-2"></v-divider>
-                    </template>
-                    <template v-slot:append-item></template>
-                  </v-select>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-          <v-card-actions class="justify-center">
-            <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
-              <span class="white--text">Cancelar</span>
-            </v-btn>
-
-            <v-btn class="ma-2" tile color="#109CF1">
-              <span class="white--text">Salvar</span>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-container>
-    </v-content>
+                  <v-btn class="ma-2" tile color="#109CF1">
+                    <span class="white--text">Salvar</span>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-app>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-app>
 </template>
 
 <script>
 import axios from "axios";
-import AppToolbar from "../components/core/AppToolbar";
 
 export default {
-  components: { AppToolbar },
   data() {
     return {
       drawer: true,
@@ -217,7 +248,6 @@ export default {
       tituloAtividade: "",
       descricaoAtividade: "",
       tituloConhecimento: "",
-      descricaoConhecimento: "",
       niveisConhecimento: ["BÁSICO", "MÉDIO", "AVANÇADO"],
       fruits: [
         "Apples",
