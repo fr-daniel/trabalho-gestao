@@ -1,7 +1,7 @@
 import store from "../store";
 import axios from "axios";
 
-// import HomePage from "../components/Home";
+import HomePage from "../components/Home";
 
 import NotFoundPage from "../views/utils/NotFoundPage";
 import AccessDeniedPage from "../views/utils/AccessDeniedPage";
@@ -15,7 +15,7 @@ import TelaInicialPage from "../views/inicio/TelaInicial";
 import DashboardPage from "../views/inicio/Dashboard";
 import ListarCargosPage from "../views/ListarCargos";
 import EditarCargoPage from "../views/EditarCargo";
-import ListarTreinamentosPage from "../views/ListarTreinamentos";
+import ListarTreinamentosPage from "../views/treinamento/ListarTodos";
 import ListarBeneficiosPage from "../views/ListarBeneficios";
 
 export default [
@@ -107,19 +107,18 @@ export default [
     component: EditarCargoPage
   },
   {
-    path: "/listarTreinamentos",
-    meta: {
-      requiresAuth: true,
-      permissions: [
-        {
-          role: "ADMINISTRADOR",
-          access: true
-        }
-      ]
-    },
-    props: true,
-    name: "ListarTreinamentos",
-    component: ListarTreinamentosPage
+    path: "/treinamento",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "listar",
+        name: "ListarTreinamentos",
+        component: ListarTreinamentosPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
   },
   {
     path: "/listarBeneficios",
@@ -186,7 +185,7 @@ export default [
     path: "/",
     name: "Root",
     redirect: {
-      name: 'Dashboard'
+      name: "Dashboard"
     }
   },
 

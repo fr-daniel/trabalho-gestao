@@ -17,6 +17,16 @@ const state = {
       label: "Viúvo(a)"
     }
   ],
+  classificacoesTreinamento: [
+    {
+      value: "DESEJAVEL",
+      label: "Desejável"
+    },
+    {
+      value: "REQUERIDO",
+      label: "Requerido"
+    }
+  ],
   necessidades: [
     {
       value: "FISICA",
@@ -105,6 +115,15 @@ const getters = {
     return value => {
       const sexo = state.sexos.find(sexo => sexo.value == value);
       return sexo != undefined ? sexo.label : value;
+    };
+  },
+
+  getLabelClassificacaoTreinamento(state) {
+    return value => {
+      const classificacao = state.classificacoesTreinamento.find(
+        classificacao => classificacao.value == value
+      );
+      return classificacao != undefined ? classificacao.label : value;
     };
   }
 };
