@@ -6,28 +6,7 @@
       <v-container>
         <div>
           <v-toolbar flat color="white">
-            <!-- <v-toolbar-title>
-              <v-container fluid>
-                <v-layout row wrap align-center>
-                  <v-flex xs6>
-                    <v-subheader>Categorias:</v-subheader>
-                  </v-flex>
-
-                  <v-flex xs4>
-                    <v-select
-                      v-model="select"
-                      :items="items"
-                      item-text="state"
-                      item-value="abbr"
-                      single-line
-                      return-object
-                    ></v-select>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-toolbar-title>-->
-
-            <CadastrarCargo></CadastrarCargo>
+            <CadastrarBeneficio></CadastrarBeneficio>
           </v-toolbar>
           <v-data-table
             :headers="headers"
@@ -41,9 +20,9 @@
               <td>
                 <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
               </td>
-              <td class="justify-center">{{ props.item.vaga }}</td>
-              <td class="justify-center">{{ props.item.dataAtualizacao }}</td>
-              <td class="justify-center">{{ props.item.salario }}</td>
+              <td class="justify-center">{{ props.item.titulo }}</td>
+              <td class="justify-center">{{ props.item.descricao }}</td>
+              <td class="justify-center">{{ props.item.valor }}</td>
               <td class="justify-center">
                 <v-btn
                   class="ma-2"
@@ -74,10 +53,10 @@
 
 
 <script>
-import CadastrarCargo from "./CadastrarCargo";
+import CadastrarBeneficio from "./CadastrarBeneficio";
 import AppToolbar from "../components/core/AppToolbar";
 export default {
-  components: { CadastrarCargo, AppToolbar },
+  components: { CadastrarBeneficio, AppToolbar },
   data() {
     return {
       drawer: true,
@@ -91,61 +70,59 @@ export default {
           text: "",
           align: "left",
           sortable: false,
-          value: "selecionarVaga"
+          value: "selecionarBeneficio"
         },
         {
-          text: "Vaga",
+          text: "Título",
           align: "left",
           sortable: true,
-          value: true
+          value: "titulo"
         },
         {
-          text: "Última Atualização",
+          text: "Descrição",
+          align: "left",
           sortable: false,
-          value: "dataAtualizacao"
+          value: "descricao"
         },
-        { text: "Salário", sortable: false, value: "salario" },
+        {
+          text: "Valor",
+          align: "left",
+          sortable: false,
+          value: "valor"
+        },
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
       desserts: [
         {
-          selecionarVaga: "",
-          vaga: "AAAAAAAAA",
-          dataAtualizacao: "12/11/2019",
-          salario: "R$ 1500,00"
+          selecionarBeneficio: "",
+          titulo: "BBBBBBBBB",
+          descricao: "AAAAAAAAA",
+          valor: "12/11/2019"
         },
         {
-          selecionarVaga: "",
-          vaga: "AAAAAAAAA",
-          dataAtualizacao: "12/11/2019",
-          salario: "R$ 1500,00"
+          selecionarBeneficio: "",
+          titulo: "BBBBBBBBB",
+          descricao: "AAAAAAAAA",
+          valor: "12/11/2019"
         },
         {
-          selecionarVaga: "",
-          vaga: "AAAAAAAAA",
-          dataAtualizacao: "12/11/2019",
-          salario: "R$ 1500,00"
+          selecionarBeneficio: "",
+          titulo: "BBBBBBBBB",
+          descricao: "AAAAAAAAA",
+          valor: "12/11/2019"
         },
         {
-          selecionarVaga: "",
-          vaga: "AAAAAAAAA",
-          dataAtualizacao: "12/11/2019",
-          salario: "R$ 1500,00"
+          selecionarBeneficio: "",
+          titulo: "BBBBBBBBB",
+          descricao: "AAAAAAAAA",
+          valor: "12/11/2019"
         },
         {
-          selecionarVaga: "",
-          vaga: "AAAAAAAAA",
-          dataAtualizacao: "12/11/2019",
-          salario: "R$ 1500,00"
+          selecionarBeneficio: "",
+          titulo: "BBBBBBBBB",
+          descricao: "AAAAAAAAA",
+          valor: "12/11/2019"
         }
-      ],
-      select: { state: "Florida", abbr: "FL" },
-      items: [
-        { state: "Florida", abbr: "FL" },
-        { state: "Georgia", abbr: "GA" },
-        { state: "Nebraska", abbr: "NE" },
-        { state: "California", abbr: "CA" },
-        { state: "New York", abbr: "NY" }
       ]
     };
   },

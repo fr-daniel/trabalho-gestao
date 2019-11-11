@@ -18,6 +18,7 @@
               </div>
 
               <CadastrarCargo></CadastrarCargo>
+              
             </v-card-title>
           </v-container>
 
@@ -74,15 +75,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.barra-lateral-1 {
-  margin-top: 12px;
-}
 
-.barra-lateral-2 {
-  margin-top: 30px;
-}
-
-.barra-lateral-3 {
-  margin-top: 100px;
-}
 </style>

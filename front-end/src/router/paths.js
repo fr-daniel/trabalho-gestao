@@ -15,6 +15,8 @@ import TelaInicialPage from "../views/inicio/TelaInicial";
 import DashboardPage from "../views/inicio/Dashboard";
 import ListarCargosPage from "../views/ListarCargos";
 import EditarCargoPage from "../views/EditarCargo";
+import ListarTreinamentosPage from "../views/ListarTreinamentos";
+import ListarBeneficiosPage from "../views/ListarBeneficios";
 
 export default [
   {
@@ -91,6 +93,24 @@ export default [
     props: true,
     name: "EditarCargo",
     component: EditarCargoPage
+  },
+  {
+    path: "/listarTreinamentos",
+    meta: {
+      public: true
+    },
+    props: true,
+    name: "ListarTreinamentos",
+    component: ListarTreinamentosPage
+  },
+  {
+    path: "/listarBeneficios",
+    meta: {
+      public: true
+    },
+    props: true,
+    name: "ListarBeneficios",
+    component: ListarBeneficiosPage
   },
   {
     path: "/recuperacao",

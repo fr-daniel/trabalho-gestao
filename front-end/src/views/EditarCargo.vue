@@ -18,8 +18,6 @@
                     append-icon="title"
                   ></v-text-field>
                   <v-textarea
-                    auto-grow
-                    rows="1"
                     box
                     v-model="missaoCargo"
                     label="Missão"
@@ -27,8 +25,6 @@
                     append-icon="format_size"
                   ></v-textarea>
                   <v-textarea
-                    auto-grow
-                    rows="1"
                     box
                     v-model="experienciaMinima"
                     label="Experiência Mínima"
@@ -63,7 +59,7 @@
               <v-divider class="mt-2 mb-2"></v-divider>
 
               <h5>
-                <b>Atividade</b>
+                <b>Atividades</b>
               </h5>
 
               <v-layout wrap>
@@ -76,8 +72,7 @@
                     append-icon="title"
                   ></v-text-field>
                   <v-textarea
-                    auto-grow
-                    rows="1"
+                    box
                     v-model="descricaoAtividade"
                     label="Descrição"
                     value
@@ -89,14 +84,22 @@
               <v-divider class="mt-2 mb-2"></v-divider>
 
               <h5>
-                <b>Conhecimento</b>
+                <b>Conhecimentos</b>
               </h5>
+
+              <!-- auto-grow rows="1" -->
 
               <v-layout wrap>
                 <v-flex xs12>
+                  <v-text-field
+                    flat
+                    v-model="tituloAtividade"
+                    label="Título"
+                    value
+                    append-icon="title"
+                  ></v-text-field>
                   <v-textarea
-                    auto-grow
-                    rows="1"
+                    box
                     v-model="descricaoConhecimento"
                     label="Descrição"
                     value
@@ -112,64 +115,67 @@
                 </v-flex>
               </v-layout>
 
+              <v-divider class="mt-2 mb-2"></v-divider>
+
               <h5>
-                <b>Treinamento</b>
+                <b>Treinamentos</b>
               </h5>
 
               <v-layout wrap>
-                <v-flex xs12>
-                  <v-textarea
-                    auto-grow
-                    rows="1"
-                    box
-                    v-model="descricaoTreinamento"
-                    label="Descrição"
-                    value
-                    append-icon="description"
-                  ></v-textarea>
-                  <v-flex xs12 sm4 d-flex>
-                    <v-select
-                      :items="classificacoesTreinamento"
-                      item-text="text"
-                      item-value="value"
-                      label="Classificação do Treinamento"
-                      prepend-inner-icon="dehaze"
-                    ></v-select>
-                  </v-flex>
+                <v-flex xs12 sm4 d-flex>
+                  <v-select
+                    v-model="selectedFruits"
+                    :items="fruits"
+                    label="Selecionar Treinamentos"
+                    multiple
+                  >
+                    <template v-slot:prepend-item>
+                      <v-list-tile ripple @click="toggle">
+                        <v-list-tile-action>
+                          <v-icon
+                            :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
+                          >{{ icon }}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider class="mt-2"></v-divider>
+                    </template>
+                    <template v-slot:append-item></template>
+                  </v-select>
                 </v-flex>
               </v-layout>
 
+              <v-divider class="mt-2 mb-2"></v-divider>
+
               <h5>
-                <b>Benefício</b>
+                <b>Benefícios</b>
               </h5>
 
               <v-layout wrap>
-                <v-flex xs12>
-                  <v-text-field
-                    flat
-                    v-model="tituloBeneficio"
-                    label="Título"
-                    value
-                    append-icon="title"
-                  ></v-text-field>
-                  <v-textarea
-                    auto-grow
-                    rows="1"
-                    box
-                    v-model="descricaoBeneficio"
-                    label="Descrição"
-                    value
-                    append-icon="description"
-                  ></v-textarea>
-                  <v-flex xs4>
-                    <v-text-field
-                      flat
-                      v-model="valorBeneficio"
-                      label="Valor"
-                      value
-                      append-icon="monetization_on"
-                    ></v-text-field>
-                  </v-flex>
+                <v-flex xs12 sm4 d-flex>
+                  <v-select
+                    v-model="selectedFruits"
+                    :items="fruits"
+                    label="Selecionar Benefícios"
+                    multiple
+                  >
+                    <template v-slot:prepend-item>
+                      <v-list-tile ripple @click="toggle">
+                        <v-list-tile-action>
+                          <v-icon
+                            :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
+                          >{{ icon }}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider class="mt-2"></v-divider>
+                    </template>
+                    <template v-slot:append-item></template>
+                  </v-select>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -210,23 +216,43 @@ export default {
       salarioBaseMaximo: 0,
       tituloAtividade: "",
       descricaoAtividade: "",
+      tituloConhecimento: "",
       descricaoConhecimento: "",
       niveisConhecimento: ["BÁSICO", "MÉDIO", "AVANÇADO"],
-      descricaoTreinamento: "",
-      classificacoesTreinamento: [
-        { text: "Desejável", value: "DESEJAVEL" },
-        { text: "Requerido", value: "REQUERIDO" }
+      fruits: [
+        "Apples",
+        "Apricots",
+        "Avocado",
+        "Bananas",
+        "Blueberries",
+        "Blackberries"
       ],
-      tituloBeneficio: "",
-      descricaoBeneficio: "",
-      valorBeneficio: 0
+      selectedFruits: []
     };
   },
 
-  computed: {},
+  computed: {
+    likesAllFruit() {
+      return this.selectedFruits.length === this.fruits.length;
+    },
+    likesSomeFruit() {
+      return this.selectedFruits.length > 0 && !this.likesAllFruit;
+    },
+    icon() {
+      if (this.likesAllFruit) return "mdi-close-box";
+      if (this.likesSomeFruit) return "mdi-minus-box";
+      return "mdi-checkbox-blank-outline";
+    }
+  },
   methods: {
-    logout() {
-      this.$router.push("/logout");
+    toggle() {
+      this.$nextTick(() => {
+        if (this.likesAllFruit) {
+          this.selectedFruits = [];
+        } else {
+          this.selectedFruits = this.fruits.slice();
+        }
+      });
     }
   }
 };

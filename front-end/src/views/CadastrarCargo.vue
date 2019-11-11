@@ -23,17 +23,9 @@
                   value
                   append-icon="title"
                 ></v-text-field>
+                <v-textarea box v-model="missao" label="Missão" value append-icon="format_size"></v-textarea>
                 <v-textarea
-                  auto-grow
-                  rows="1"
-                  v-model="missao"
-                  label="Missão"
-                  value
-                  append-icon="format_size"
-                ></v-textarea>
-                <v-textarea
-                  auto-grow
-                  rows="1"
+                  box
                   v-model="experienciaMinima"
                   label="Experiência Mínima"
                   value

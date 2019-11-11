@@ -72,6 +72,24 @@
             </v-list-tile-content>
           </v-list-tile>
 
+          <v-list-tile :to="{name: 'ListarTreinamentos'}">
+            <v-list-tile-action>
+              <v-icon color="#C2CFE0">assignment_turned_in</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Treinamentos</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
+          <v-list-tile :to="{name: 'ListarBeneficios'}">
+            <v-list-tile-action>
+              <v-icon color="#C2CFE0">monetization_on</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Benefícios</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
           <v-list-tile :to="{name: 'ListarCargos'}">
             <v-list-tile-action>
               <v-icon color="#C2CFE0">work</v-icon>
@@ -83,7 +101,7 @@
 
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon color="#C2CFE0">monetization_on</v-icon>
+              <v-icon color="#C2CFE0">assignment_ind</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Todos os Funcionários</v-list-tile-title>
