@@ -3,7 +3,10 @@
     <template v-if="!$route.meta.public">
       <v-app>
         <app-toolbar></app-toolbar>
-        <v-content>
+
+        <app-menu></app-menu>
+
+        <v-content class="mt-5">
           <v-container fluid>
             <div class="page-wrapper">
               <router-view></router-view>
@@ -12,13 +15,9 @@
         </v-content>
         <!-- App Footer -->
         <v-footer height="auto" class="white pa-3 app--footer">
-          <span
-            class="caption"
-          >Núcleo de Práticas em Informática &copy; {{ new Date().getFullYear() }}</span>
+          <span class="caption">Gestão de Projetos &copy; {{ new Date().getFullYear() }}</span>
           <v-spacer></v-spacer>
-          <span class="caption">
-            v1.0.0
-          </span>
+          <span class="caption">v1.0.0</span>
         </v-footer>
       </v-app>
     </template>
@@ -28,22 +27,21 @@
           <router-view :key="$route.fullpath"></router-view>
         </keep-alive>
       </transition>
-     
-
     </template>
   </div>
-  
 </template>
 
 <script>
 import AppToolbar from "./components/core/AppToolbar";
+import AppMenu from "./components/core/AppMenu";
 // import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    AppToolbar
-  },
+    AppToolbar,
+    AppMenu
+  }
 };
 </script>
 
@@ -57,6 +55,6 @@ export default {
 }
 
 .v-content {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 </style>

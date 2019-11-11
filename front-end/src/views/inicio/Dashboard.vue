@@ -18,7 +18,6 @@
               </div>
 
               <CadastrarCargo></CadastrarCargo>
-              
             </v-card-title>
           </v-container>
 
@@ -75,5 +74,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 </style>
