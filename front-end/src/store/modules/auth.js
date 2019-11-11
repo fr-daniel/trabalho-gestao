@@ -6,6 +6,8 @@ const state = {
   token: localStorage.getItem("token"),
   token_update_date: new Date(localStorage.getItem("token_update_date")),
   user: {
+    nome: JSON.parse(localStorage.getItem("nome")),
+    email: JSON.parse(localStorage.getItem("email")),
     roles: JSON.parse(localStorage.getItem("papeis"))
       ? JSON.parse(localStorage.getItem("papeis"))
       : []
@@ -24,11 +26,15 @@ const actions = {
         .then(res => {
           const date = new Date();
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("nome", res.data.name);
+          localStorage.setItem("email", res.data.email);
           localStorage.setItem("papeis", JSON.stringify(res.data.papeis));
           localStorage.setItem("token_update_date", date);
           commit("AUTHENTICATE", {
             token: res.data.token,
             papeis: res.data.papeis,
+            nome: res.data.name,
+            email: res.data.email,
             date
           });
         })
@@ -38,6 +44,8 @@ const actions = {
 
   logout({ commit }) {
     localStorage.removeItem("token");
+    localStorage.removeItem("nome");
+    localStorage.removeItem("email");
     localStorage.removeItem("papeis");
     localStorage.removeItem("token_update_date");
     commit("CLEAR_AUTH_DATA");
@@ -91,11 +99,15 @@ const mutations = {
     state.token = authUser.token;
     state.user.roles = authUser.papeis;
     state.token_update_date = authUser.date;
+    state.user.nome = authUser.nome;
+    state.user.email = authUser.email;
   },
   CLEAR_AUTH_DATA: state => {
     state.token = null;
     state.user.roles = null;
     state.token_update_date = null;
+    state.user.nome = null;
+    state.user.email = null;
   },
   UPDATE_AUTH_DATA: (state, tokenData) => {
     state.token = tokenData.token;

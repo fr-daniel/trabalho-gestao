@@ -20,7 +20,7 @@
           </v-avatar>
         </v-btn>
         <v-list class="pa-0">
-          <v-list-tile @click>
+          <v-list-tile>
             <v-list-tile-action>
               <v-icon>face</v-icon>
             </v-list-tile-action>
@@ -55,8 +55,8 @@
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>Profissional de RH</v-list-tile-title>
-            <v-list-tile-sub-title>profissional@email.com</v-list-tile-sub-title>
+            <v-list-tile-title>{{user.nome}}</v-list-tile-title>
+            <v-list-tile-sub-title>{{user.email}}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -138,6 +138,8 @@
 
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -146,6 +148,12 @@ export default {
       right: null
     };
   },
+  computed: {
+    ...mapGetters({
+      user: "auth/user"
+    })
+  },
+
   methods: {
     logout() {
       this.$router.push("/logout");
