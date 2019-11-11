@@ -27,7 +27,7 @@ public class Cargo {
     private String unidade;
 
     private Double salarioBaseMinimo;
-    private Double salarioBaseMaxiomo;
+    private Double salarioBaseMaximo;
 
     @ManyToMany
     @JoinTable(name = "cargo_has_beneficio", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
@@ -101,12 +101,12 @@ public class Cargo {
         this.salarioBaseMinimo = salarioBaseMinimo;
     }
 
-    public Double getSalarioBaseMaxiomo() {
-        return salarioBaseMaxiomo;
+    public Double getSalarioBaseMaximo() {
+        return salarioBaseMaximo;
     }
 
-    public void setSalarioBaseMaxiomo(Double salarioBaseMaxiomo) {
-        this.salarioBaseMaxiomo = salarioBaseMaxiomo;
+    public void setSalarioBaseMaximo(Double salarioBaseMaximo) {
+        this.salarioBaseMaximo = salarioBaseMaximo;
     }
 
     public List<Beneficio> getBeneficios() {
