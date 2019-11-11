@@ -16,7 +16,7 @@ import DashboardPage from "../views/inicio/Dashboard";
 import ListarCargosPage from "../views/ListarCargos";
 import EditarCargoPage from "../views/EditarCargo";
 import ListarTreinamentosPage from "../views/treinamento/ListarTodos";
-import ListarBeneficiosPage from "../views/ListarBeneficios";
+import ListarBeneficiosPage from "../views/beneficio/ListarTodos";
 
 export default [
   {
@@ -121,19 +121,18 @@ export default [
     ]
   },
   {
-    path: "/listarBeneficios",
-    meta: {
-      requiresAuth: true,
-      permissions: [
-        {
-          role: "ADMINISTRADOR",
-          access: true
-        }
-      ]
-    },
-    props: true,
-    name: "ListarBeneficios",
-    component: ListarBeneficiosPage
+    path: "/beneficio",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "listar",
+        name: "ListarBeneficios",
+        component: ListarBeneficiosPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
   },
   {
     path: "/recuperacao",

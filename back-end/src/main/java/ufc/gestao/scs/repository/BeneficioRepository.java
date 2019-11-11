@@ -12,7 +12,7 @@ import ufc.gestao.scs.model.Beneficio;
 @Repository
 public interface BeneficioRepository extends JpaRepository<Beneficio, Integer> {
 
-    @Query("SELECT b.id as id, b.titulo as titulo, b.valor as valor FROM Beneficio as b")
+    @Query("SELECT b.id as id, b.titulo as titulo, b.informacoes as informacoes, b.valor as valor FROM Beneficio as b")
     List<Map<String, Object>> findAllBeneficiosView();
 
 }

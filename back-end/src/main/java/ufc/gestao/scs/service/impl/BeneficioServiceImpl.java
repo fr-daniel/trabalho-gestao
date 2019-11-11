@@ -23,4 +23,10 @@ public class BeneficioServiceImpl implements BeneficioService {
         return beneficioRepository.findAllBeneficiosView();
     }
 
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void excluirBeneficio(Integer id) {
+        this.beneficioRepository.deleteById(id);
+    }
+
 }
