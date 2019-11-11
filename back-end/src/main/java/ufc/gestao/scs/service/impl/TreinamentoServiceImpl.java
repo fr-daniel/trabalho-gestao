@@ -24,4 +24,10 @@ public class TreinamentoServiceImpl implements TreinamentoService {
 
     }
 
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void excluirTreinamento(Integer id) {
+        this.treinamentoRepository.deleteById(id);
+    }
+
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,13 @@ public class TreinamentoControllerImpl implements TreinamentoController {
     public ResponseEntity<List<Map<String, Object>>> listarTreinamentos() {
         List<Map<String, Object>> treinamentos = this.treinamentoService.buscarTreinamento();
         return new ResponseEntity<>(treinamentos, HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping("/excluir/{treinamentoId}")
+    public ResponseEntity<Void> deletarUsuario(Integer treinamentoId) {
+        treinamentoService.excluirTreinamento(treinamentoId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

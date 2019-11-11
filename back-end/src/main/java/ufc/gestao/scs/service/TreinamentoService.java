@@ -7,4 +7,6 @@ public interface TreinamentoService {
 
     List<Map<String, Object>> buscarTreinamento();
 
+    void excluirTreinamento(Integer id);
+
 }
