@@ -18,7 +18,7 @@
               <v-flex xs12>
                 <v-text-field
                   flat
-                  v-model="titulo"
+                  v-model="titulacao"
                   label="Título do Cargo"
                   value
                   append-icon="title"
@@ -57,11 +57,11 @@
           </v-container>
         </v-card-text>
         <v-card-actions class="justify-center">
-          <v-btn class="ma-2" tile color="#F7685B" @click="addCargo = false">
+          <v-btn class="ma-2" tile color="#F7685B" @click="addCargo = false, limpar()">
             <span class="white--text">Cancelar</span>
           </v-btn>
 
-          <v-btn class="ma-2" tile color="#109CF1">
+          <v-btn class="ma-2" tile color="#109CF1" @click="submit">
             <span class="white--text">Salvar</span>
           </v-btn>
         </v-card-actions>
@@ -71,25 +71,76 @@
 </template>
 
 <script>
+import Vue from "vue";
 import axios from "axios";
+import VeeValidate from "vee-validate";
+
+Vue.use(VeeValidate);
 
 export default {
   data() {
     return {
       hidden: false,
       addCargo: false,
-      titulo: "",
+      titulacao: "",
       missao: "",
       experienciaMinima: "",
       area: "",
       unidade: "",
       salarioBaseMinimo: 0,
-      salarioBaseMaximo: 0
+      salarioBaseMaximo: 0,
+      dictionary: {},
+      snackbar: false,
+      cor: "",
+      mensagem: ""
     };
   },
+  mounted() {
+    this.$validator.localize("pt", this.dictionary);
+  },
+  methods: {
+    submit() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          axios
+            .post("/cargo", {
+              titulacao: this.titulacao,
+              missao: this.missao,
+              experienciaMinima: this.experienciaMinima,
+              area: this.area,
+              unidade: this.unidade,
+              salarioBaseMinimo: this.salarioBaseMinimo,
+              salarioBaseMaximo: this.salarioBaseMaximo
+            })
+            .then(res => {
+              this.$emit("cadastrou-funcionario", res.data);
+              this.limpar();
+              this.addCargo = false;
+            })
+            .catch(() => {
+              this.mensagem = "Ocorreu um erro ao cadastrar o cargo.";
+              this.cor = "error";
+              this.snackbar = true;
+            });
+        } else {
+          this.mensagem = "O formulário contém erros!";
+          this.cor = "error";
+          this.snackbar = true;
+        }
+      });
+      // this.limpar();
+    },
 
-  computed: {},
-  methods: {}
+    limpar() {
+      this.titulacao = "";
+      this.missao = "";
+      this.experienciaMinima = "";
+      this.area = "";
+      this.unidade = "";
+      this.salarioBaseMinimo = 0;
+      this.salarioBaseMaximo = 0;
+    }
+  }
 };
 </script>
 

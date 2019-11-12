@@ -145,7 +145,6 @@
                           :items="desserts1"
                           :search="search"
                           hide-actions
-                          :pagination.sync="pagination1"
                           class="elevation-1"
                         >
                           <template v-slot:items="props">
@@ -155,27 +154,12 @@
                             <td class="justify-center">{{ props.item.titulo }}</td>
                             <td class="justify-center">{{ props.item.descricao }}</td>
                             <td class="justify-center">
-                              <v-btn
-                                class="ma-2"
-                                tile
-                                depressed
-                                dark
-                                icon
-                                color="#192A3E"
-                                small
-                                :to="{name: 'EditarCargo'}"
-                              >
-                                <v-icon small>edit</v-icon>
-                              </v-btn>
                               <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
                                 <v-icon small>delete</v-icon>
                               </v-btn>
                             </td>
                           </template>
                         </v-data-table>
-                        <div class="text-xs-center pt-2">
-                          <v-pagination v-model="pagination1.page" :length="pages1"></v-pagination>
-                        </div>
                       </v-container>
                     </div>
 
@@ -213,7 +197,6 @@
                           :items="desserts2"
                           :search="search"
                           hide-actions
-                          :pagination.sync="pagination2"
                           class="elevation-1"
                         >
                           <template v-slot:items="props">
@@ -223,27 +206,12 @@
                             <td class="justify-center">{{ props.item.titulo }}</td>
                             <td class="justify-center">{{ props.item.nivel }}</td>
                             <td class="justify-center">
-                              <v-btn
-                                class="ma-2"
-                                tile
-                                depressed
-                                dark
-                                icon
-                                color="#192A3E"
-                                small
-                                :to="{name: 'EditarCargo'}"
-                              >
-                                <v-icon small>edit</v-icon>
-                              </v-btn>
                               <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
                                 <v-icon small>delete</v-icon>
                               </v-btn>
                             </td>
                           </template>
                         </v-data-table>
-                        <div class="text-xs-center pt-2">
-                          <v-pagination v-model="pagination2.page" :length="pages2"></v-pagination>
-                        </div>
                       </v-container>
                     </div>
 
@@ -342,8 +310,6 @@ export default {
       drawer: true,
       right: null,
       search: "",
-      pagination1: {},
-      pagination2: {},
       hidden: false,
       tituloCargo: "",
       missaoCargo: "",
@@ -437,28 +403,6 @@ export default {
       if (this.likesAllFruit) return "mdi-close-box";
       if (this.likesSomeFruit) return "mdi-minus-box";
       return "mdi-checkbox-blank-outline";
-    },
-    pages1() {
-      if (
-        this.pagination1.rowsPerPage == null ||
-        this.pagination1.totalItems == null
-      )
-        return 0;
-
-      return Math.ceil(
-        this.pagination1.totalItems / this.pagination1.rowsPerPage
-      );
-    },
-    pages2() {
-      if (
-        this.pagination2.rowsPerPage == null ||
-        this.pagination2.totalItems == null
-      )
-        return 0;
-
-      return Math.ceil(
-        this.pagination2.totalItems / this.pagination2.rowsPerPage
-      );
     }
   },
   methods: {

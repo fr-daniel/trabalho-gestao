@@ -58,7 +58,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile>
+        <v-list-tile :to="{name: 'ListarFuncionarios'}">
           <v-list-tile-action>
             <v-icon color="#C2CFE0">assignment_ind</v-icon>
           </v-list-tile-action>
@@ -101,7 +101,6 @@ export default {
   name: "app-menu",
   data() {
     return {
-      search: "",
       drawer: true,
       right: null
     };

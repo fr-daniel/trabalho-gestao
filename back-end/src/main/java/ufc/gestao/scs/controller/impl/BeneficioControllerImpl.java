@@ -27,7 +27,7 @@ public class BeneficioControllerImpl implements BeneficioController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Beneficio> createTreinamento(@RequestBody Beneficio b) {
+    public ResponseEntity<Beneficio> createBeneficio(@RequestBody Beneficio b) {
         Beneficio beneficio = beneficioService.salvarBeneficio(b);
         return new ResponseEntity<>(beneficio, HttpStatus.CREATED);
     }

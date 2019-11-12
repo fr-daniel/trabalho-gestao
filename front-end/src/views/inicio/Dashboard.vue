@@ -55,7 +55,7 @@
 
 
 <script>
-import CadastrarCargo from "../CadastrarCargo";
+import CadastrarCargo from "../cargo/CadastrarCargo";
 export default {
   components: { CadastrarCargo },
   data() {

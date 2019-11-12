@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import ufc.gestao.scs.model.Beneficio;
+import ufc.gestao.scs.model.Cargo;
 import ufc.gestao.scs.repository.CargoRepository;
 import ufc.gestao.scs.service.CargoService;
 
@@ -21,6 +23,17 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public List<Map<String, Object>> buscarCargos() {
         return cargoRepository.findAllCargosView();
+    }
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void excluirCargo(Integer id) {
+        this.cargoRepository.deleteById(id);
+    }
+
+    @Override
+    public Cargo salvarCargo(Cargo c) {
+        return cargoRepository.save(c);
     }
 
 }

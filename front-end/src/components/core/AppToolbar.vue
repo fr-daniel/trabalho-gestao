@@ -44,7 +44,14 @@
 export default {
   name: "app-toolbar",
   data() {
-    return {};
+    return {
+      search: ""
+    };
+  },
+  methods:{
+    logout() {
+      this.$router.push("/logout");
+    }
   }
 };
 </script>

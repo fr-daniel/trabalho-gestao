@@ -6,7 +6,7 @@
           <v-card>
             <v-container>
               <v-toolbar flat color="white">
-                <CadastrarBeneficio></CadastrarBeneficio>
+                <CadastrarBeneficio @cadastrou-beneficio="atualizarTable"></CadastrarBeneficio>
               </v-toolbar>
               <v-data-table
                 :headers="headers"
@@ -86,7 +86,6 @@
 <script>
 import axios from "axios";
 import CadastrarBeneficio from "../beneficio/CadastrarBeneficio";
-import store from "@/store";
 
 export default {
     props: {
@@ -147,6 +146,7 @@ export default {
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
       beneficios: [],
+      beneficioDelete: null,
       dSnackbar: false,
       dMensagem: "",
       dCor: ""
@@ -162,9 +162,13 @@ export default {
       });
     },
 
-    excluirBeneficio() {
+    atualizarTable(beneficio) {
+      this.beneficios.push(beneficio);
+    },
+
+   excluirBeneficio() {
       axios
-        .delete("/beneficio/" + this.beneficioDelete.id)
+        .delete("/beneficio/excluir/" + this.beneficioDelete.id)
         .then(() => {
           this.beneficios.splice(
             this.beneficios.indexOf(this.beneficioDelete),
@@ -173,12 +177,12 @@ export default {
           this.beneficioDelete = null;
 
           this.dSnackbar = true;
-          this.dMensagem = "Exame excluído com sucesso";
+          this.dMensagem = "Benefício excluído com sucesso";
           this.dCor = "success";
         })
         .catch(error => {
           this.dSnackbar = true;
-          this.dMensagem = "Ocorreu um erro ao excluir o treinamento!";
+          this.dMensagem = "Ocorreu um erro ao excluir o benefício!";
           this.dCor = "error";
         });
 
@@ -188,9 +192,6 @@ export default {
     abrirDialogExcluirBeneficio(beneficio) {
       this.beneficioDelete = beneficio;
       this.dialog = true;
-    },
-    logout() {
-      this.$router.push("/logout");
     }
   },
   computed: {

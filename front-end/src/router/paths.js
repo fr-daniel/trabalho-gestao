@@ -13,10 +13,11 @@ import NovaSenhaPage from "../views/inicio/NovaSenha";
 import MsgAlteracaoSenhaPage from "../views/inicio/MsgAlteracaoSenha";
 import TelaInicialPage from "../views/inicio/TelaInicial";
 import DashboardPage from "../views/inicio/Dashboard";
-import ListarCargosPage from "../views/ListarCargos";
-import EditarCargoPage from "../views/EditarCargo";
+import ListarCargosPage from "../views/cargo/ListarTodos";
+import EditarCargoPage from "../views/cargo/EditarCargo";
 import ListarTreinamentosPage from "../views/treinamento/ListarTodos";
 import ListarBeneficiosPage from "../views/beneficio/ListarTodos";
+import ListarFuncionariosPage from "../views/funcionario/ListarTodos";
 
 export default [
   {
@@ -77,34 +78,34 @@ export default [
     component: DashboardPage
   },
   {
-    path: "/listarCargos",
-    meta: {
-      requiresAuth: true,
-      permissions: [
-        {
-          role: "ADMINISTRADOR",
-          access: true
-        }
-      ]
-    },
-    props: true,
-    name: "ListarCargos",
-    component: ListarCargosPage
+    path: "/cargo",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "listar",
+        name: "ListarCargos",
+        component: ListarCargosPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
+    
   },
   {
-    path: "/editarCargo",
-    meta: {
-      requiresAuth: true,
-      permissions: [
-        {
-          role: "ADMINISTRADOR",
-          access: true
-        }
-      ]
-    },
-    props: true,
-    name: "EditarCargo",
-    component: EditarCargoPage
+    path: "/cargo",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "editar",
+        name: "EditarCargo",
+        component: EditarCargoPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
+    
   },
   {
     path: "/treinamento",
@@ -130,6 +131,20 @@ export default [
         path: "listar",
         name: "ListarBeneficios",
         component: ListarBeneficiosPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
+  },
+  {
+    path: "/funcionario",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "listar",
+        name: "ListarFuncionarios",
+        component: ListarFuncionariosPage,
         meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
       }
     ]

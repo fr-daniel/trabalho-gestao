@@ -47,7 +47,7 @@
             <span class="white--text">Cancelar</span>
           </v-btn>
 
-          <v-btn class="ma-2" tile color="#109CF1">
+          <v-btn class="ma-2" tile color="#109CF1" @click="submit">
             <span class="white--text">Salvar</span>
           </v-btn>
         </v-card-actions>
@@ -57,7 +57,11 @@
 </template>
 
 <script>
+import Vue from "vue";
 import axios from "axios";
+import VeeValidate from "vee-validate";
+
+Vue.use(VeeValidate);
 
 export default {
   data() {
@@ -66,12 +70,44 @@ export default {
       addBeneficio: false,
       titulo: "",
       informacoes: "",
-      valor: 0
+      valor: 0,
+      dictionary: {},
+      snackbar: false,
+      cor: "",
+      mensagem: ""
     };
   },
-
+  mounted() {
+    this.$validator.localize("pt", this.dictionary);
+  },
   computed: {},
   methods: {
+    submit() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          axios
+            .post("/beneficio", {
+              titulo: this.titulo,
+              informacoes: this.informacoes,
+              valor: this.valor
+            })
+            .then(res => {
+              this.$emit("cadastrou-beneficio", res.data);
+              this.limpar();
+              this.addBeneficio = false;
+            })
+            .catch(() => {
+              this.mensagem = "Ocorreu um erro ao cadastrar o benefício.";
+              this.cor = "error";
+              this.snackbar = true;
+            });
+        } else {
+          this.mensagem = "O formulário contém erros!";
+          this.cor = "error";
+          this.snackbar = true;
+        }
+      });
+    },
     limpar() {
       this.titulo = "", this.informacoes = "", this.valor = 0;
     }
