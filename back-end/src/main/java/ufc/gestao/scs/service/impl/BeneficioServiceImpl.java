@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.repository.BeneficioRepository;
 import ufc.gestao.scs.service.BeneficioService;
 
@@ -27,6 +28,11 @@ public class BeneficioServiceImpl implements BeneficioService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void excluirBeneficio(Integer id) {
         this.beneficioRepository.deleteById(id);
+    }
+
+    @Override
+    public Beneficio salvarBeneficio(Beneficio b) {
+        return beneficioRepository.save(b);
     }
 
 }

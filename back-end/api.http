@@ -38,5 +38,24 @@ Authorization: {{token}}
 }
 
 ###
-DELETE  http://{{host}}/treinamento/excluir/3 HTTP/1.1
+DELETE  http://{{host}}/treinamento/excluir/5 HTTP/1.1
+Authorization: {{token}}
+
+###
+GET http://{{host}}/beneficio/listar HTTP/1.1
+Authorization: {{token}}
+
+###
+POST http://{{host}}/beneficio HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "titulo": "Título beneficio2",
+    "informacoes": "Teste informação2",
+    "valor": 45.12
+}
+
+###
+DELETE  http://{{host}}/beneficio/excluir/8 HTTP/1.1
 Authorization: {{token}}
