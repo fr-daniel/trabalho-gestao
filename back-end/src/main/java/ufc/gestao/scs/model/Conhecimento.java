@@ -18,7 +18,7 @@ public class Conhecimento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String descricao;
+    private String titulo;
 
     @Enumerated(EnumType.STRING)
     private NivelConhecimento nivel;
@@ -31,12 +31,12 @@ public class Conhecimento {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTitutlo(String titulo) {
+        this.titulo = titulo;
     }
 
     public NivelConhecimento getNivel() {

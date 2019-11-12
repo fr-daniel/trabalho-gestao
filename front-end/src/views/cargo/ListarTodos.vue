@@ -23,8 +23,6 @@
                     </td>
                     <td class="justify-center">{{ props.item.id }}</td>
                     <td class="justify-center">{{ props.item.titulacao }}</td>
-                    <td class="justify-center">{{ props.item.area }}</td>
-                    <td class="justify-center">{{ props.item.unidade   }}</td>
                     <td class="justify-center">{{ props.item.salarioBaseMinimo }}</td>
                     <td class="justify-center">{{ props.item.salarioBaseMaximo }}</td>
                     <td class="justify-center">
@@ -40,7 +38,16 @@
                       >
                         <v-icon small>edit</v-icon>
                       </v-btn>
-                      <v-btn class="ma-2" tile depressed dark icon color="#F7685B" small>
+                      <v-btn
+                        @click="abrirDialogExcluirCargo(props.item)"
+                        class="ma-2"
+                        tile
+                        depressed
+                        dark
+                        icon
+                        color="#F7685B"
+                        small
+                      >
                         <v-icon small>delete</v-icon>
                       </v-btn>
                     </td>
@@ -120,16 +127,6 @@ export default {
           align: "left",
           sortable: false,
           value: "titulacao"
-        },
-        {
-          text: "Área",
-          sortable: false,
-          value: "area"
-        },
-        {
-          text: "Unidade",
-          sortable: false,
-          value: "unidade"
         },
         { text: "Salário Base Mínimo", sortable: false, value: "salarioBMin" },
         { text: "Salário Base Máximo", sortable: false, value: "salarioBMax" },

@@ -1,12 +1,6 @@
 package ufc.gestao.scs.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import ufc.gestao.scs.model.enums.ClassificacaoTreinamento;
 
@@ -18,6 +12,7 @@ public class Treinamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name="descricao", columnDefinition="TEXT")
     private String descricao;
 
     @Enumerated(EnumType.STRING)

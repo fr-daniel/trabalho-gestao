@@ -12,7 +12,7 @@ import ufc.gestao.scs.model.Cargo;
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
 
-    @Query("SELECT c.id as id, c.titulacao as titulacao, c.area as area, c.unidade as unidade, c.salarioBaseMinimo as salarioBaseMinimo, c.salarioBaseMaximo as salarioBaseMinimo FROM Cargo as c")
+    @Query("SELECT c.id as id, c.titulacao as titulacao, c.missao as missao, c.experienciaMinima as experienciaMinima, c.area as area, c.unidade as unidade, c.salarioBaseMinimo as salarioBaseMinimo, c.salarioBaseMaximo as salarioBaseMaximo FROM Cargo as c")
     List<Map<String, Object>> findAllCargosView();
 
 }

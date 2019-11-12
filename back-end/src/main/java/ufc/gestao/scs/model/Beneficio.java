@@ -2,11 +2,7 @@ package ufc.gestao.scs.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "beneficio")
@@ -17,7 +13,10 @@ public class Beneficio {
     private Integer id;
 
     private String titulo;
+
+    @Column(name="informacoes", columnDefinition="TEXT")
     private String informacoes;
+
     private Double valor;
 
     public Integer getId() {
