@@ -20,6 +20,7 @@
                 <v-flex xs12 sm6 d-flex>
                   <v-select
                     :items="classificacoes"
+                    v-model="classificacao"
                     item-text="text"
                     item-value="value"
                     label="Classificação do Treinamento"
@@ -41,7 +42,7 @@
             <span class="white--text">Cancelar</span>
           </v-btn>
 
-          <v-btn class="ma-2" tile color="#109CF1">
+          <v-btn class="ma-2" tile color="#109CF1" @click="submit">
             <span class="white--text">Salvar</span>
           </v-btn>
         </v-card-actions>
@@ -51,7 +52,11 @@
 </template>
 
 <script>
+import Vue from "vue";
 import axios from "axios";
+import VeeValidate from "vee-validate";
+
+Vue.use(VeeValidate);
 
 export default {
   data() {
@@ -59,17 +64,51 @@ export default {
       hidden: false,
       addTreinamento: false,
       titulo: "",
+      classificacao: "",
       classificacoes: [
         { text: "Desejável", value: "DESEJAVEL" },
         { text: "Requerido", value: "REQUERIDO" }
-      ]
+      ],
+      dictionary: {},
+      snackbar: false,
+      cor: "",
+      mensagem: ""
     };
   },
-
-  computed: {},
+  mounted() {
+    this.$validator.localize("pt", this.dictionary);
+  },
   methods: {
+    submit() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          axios
+            .post("/treinamento", {
+              descricao: this.titulo,
+              classificacao: this.classificacao
+            })
+            .then(res => {
+              this.$emit("cadastrou-treinamento", res.data);
+              this.limpar();
+              this.addTreinamento = false;
+            })
+            .catch(() => {
+              this.mensagem = "Ocorreu um erro ao cadastrar o treinamento.";
+              this.cor = "error";
+              this.snackbar = true;
+            });
+        } else {
+          this.mensagem = "O formulário contém erros!";
+          this.cor = "error";
+          this.snackbar = true;
+        }
+      });
+      // this.limpar();
+    },
+
     limpar() {
-      this.descricao = "";
+      this.titulo = "";
+      this.classificacao = "";
     }
   }
 };

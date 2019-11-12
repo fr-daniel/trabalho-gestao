@@ -7,13 +7,12 @@
             <v-container>
               <div>
                 <v-toolbar flat color="white">
-                  <CadastrarTreinamento></CadastrarTreinamento>
+                  <CadastrarTreinamento @cadastrou-treinamento="atualizarTable"></CadastrarTreinamento>
                 </v-toolbar>
                 <v-data-table
                   :headers="headers"
                   :items="treinamentos"
                   :search="search"
-                  hide-actions
                   :pagination.sync="pagination"
                   class="elevation-1"
                 >
@@ -54,9 +53,6 @@
                     </td>
                   </template>
                 </v-data-table>
-                <div class="text-xs-center pt-2">
-                  <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-                </div>
               </div>
             </v-container>
           </v-card>
@@ -163,9 +159,12 @@ export default {
       });
     },
 
+    atualizarTable(treinamento) {
+      this.treinamentos.push(treinamento);
+    },
     excluirTreinamento() {
       axios
-        .delete("/treinamento/" + this.treinamentoDelete.id)
+        .delete("/treinamento/excluir/" + this.treinamentoDelete.id)
         .then(() => {
           this.treinamentos.splice(
             this.treinamentos.indexOf(this.treinamentoDelete),
@@ -174,7 +173,7 @@ export default {
           this.treinamentoDelete = null;
 
           this.dSnackbar = true;
-          this.dMensagem = "Exame excluído com sucesso";
+          this.dMensagem = "Treinamento excluído com sucesso";
           this.dCor = "success";
         })
         .catch(error => {
@@ -189,10 +188,6 @@ export default {
     abrirDialogExcluirTreinamento(treinamento) {
       this.treinamentoDelete = treinamento;
       this.dialog = true;
-    },
-
-    logout() {
-      this.$router.push("/logout");
     }
   },
   computed: {
