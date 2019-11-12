@@ -7,49 +7,75 @@
             <v-container>
               <div>
                 <v-toolbar flat color="white">
-
                   <CadastrarCargo @cadastrou-cargo="atualizarTable"></CadastrarCargo>
                 </v-toolbar>
                 <v-data-table
                   :headers="headers"
                   :items="cargos"
                   :search="search"
-                  hide-actions
                   class="elevation-1"
                 >
                   <template v-slot:items="props">
                     <td>
-                      <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="primary"
+                            small
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>search</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Ver mais</span>
+                      </v-tooltip>
                     </td>
                     <td class="justify-center">{{ props.item.id }}</td>
                     <td class="justify-center">{{ props.item.titulacao }}</td>
-                    <td class="justify-center">{{ props.item.salarioBaseMinimo }}</td>
-                    <td class="justify-center">{{ props.item.salarioBaseMaximo }}</td>
+                    <td class="justify-center">{{ props.item.area }}</td>
+                    <td class="justify-center">{{ props.item.unidade }}</td>
                     <td class="justify-center">
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        depressed
-                        dark
-                        icon
-                        color="#192A3E"
-                        small
-                        :to="{name: 'EditarCargo'}"
-                      >
-                        <v-icon small>edit</v-icon>
-                      </v-btn>
-                      <v-btn
-                        @click="abrirDialogExcluirCargo(props.item)"
-                        class="ma-2"
-                        tile
-                        depressed
-                        dark
-                        icon
-                        color="#F7685B"
-                        small
-                      >
-                        <v-icon small>delete</v-icon>
-                      </v-btn>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="#192A3E"
+                            small
+                            :to="{name: 'EditarCargo'}"
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>edit</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Editar</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            @click="abrirDialogExcluirCargo(props.item)"
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="#F7685B"
+                            small
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>delete</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Remover</span>
+                      </v-tooltip>
                     </td>
                   </template>
                 </v-data-table>
@@ -59,7 +85,7 @@
         </v-flex>
       </v-layout>
 
-       <v-snackbar :color="dCor" right top v-model="dSnackbar">{{ dMensagem }}</v-snackbar>
+      <v-snackbar :color="dCor" right top v-model="dSnackbar">{{ dMensagem }}</v-snackbar>
 
       <v-dialog max-width="290" v-model="dialog">
         <v-card>
@@ -76,7 +102,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
     </v-container>
   </v-app>
 </template>
@@ -128,8 +153,8 @@ export default {
           sortable: false,
           value: "titulacao"
         },
-        { text: "Salário Base Mínimo", sortable: false, value: "salarioBMin" },
-        { text: "Salário Base Máximo", sortable: false, value: "salarioBMax" },
+        { text: "Área", sortable: false, value: "area" },
+        { text: "Unidade", sortable: false, value: "unidade" },
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
       cargos: [],
@@ -157,10 +182,7 @@ export default {
       axios
         .delete("/cargo/excluir/" + this.cargoDelete.id)
         .then(() => {
-          this.cargos.splice(
-            this.cargos.indexOf(this.cargoDelete),
-            1
-          );
+          this.cargos.splice(this.cargos.indexOf(this.cargoDelete), 1);
           this.cargoDelete = null;
 
           this.dSnackbar = true;

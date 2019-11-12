@@ -13,43 +13,70 @@
                   :headers="headers"
                   :items="treinamentos"
                   :search="search"
-                  :pagination.sync="pagination"
                   class="elevation-1"
                 >
                   <template v-slot:items="props">
                     <td>
-                      <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="primary"
+                            small
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>search</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Ver mais</span>
+                      </v-tooltip>
                     </td>
                     <td class="justify-center">{{ props.item.id }}</td>
-                    <td class="justify-center">{{ props.item.descricao }}</td>
+                    <td class="justify-center">{{ props.item.titulo }}</td>
                     <td
                       class="justify-center"
                     >{{ getLabelClassificaoTreinamento(props.item.classificacao) }}</td>
                     <td class="justify-center">
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        depressed
-                        dark
-                        icon
-                        color="#192A3E"
-                        small
-                        :to="{name: 'EditarCargo'}"
-                      >
-                        <v-icon small>edit</v-icon>
-                      </v-btn>
-                      <v-btn
-                        @click="abrirDialogExcluirTreinamento(props.item)"
-                        class="ma-2"
-                        tile
-                        depressed
-                        dark
-                        icon
-                        color="#F7685B"
-                        small
-                      >
-                        <v-icon small>delete</v-icon>
-                      </v-btn>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="#192A3E"
+                            small
+                            v-on="{ ...tooltip }"
+                            :to="{name: 'EditarCargo'}"
+                          >
+                            <v-icon small>edit</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Editar</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            @click="abrirDialogExcluirTreinamento(props.item)"
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="#F7685B"
+                            small
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>delete</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Remover</span>
+                      </v-tooltip>
                     </td>
                   </template>
                 </v-data-table>
@@ -108,7 +135,6 @@ export default {
       right: null,
       expand: false,
       search: "",
-      pagination: {},
       selected: [],
       headers: [
         {
@@ -124,10 +150,10 @@ export default {
           value: "id"
         },
         {
-          text: "Descrição",
+          text: "Título",
           align: "left",
           sortable: false,
-          value: "descricao"
+          value: "titulo"
         },
         {
           text: "Classificação",
@@ -190,19 +216,7 @@ export default {
       this.dialog = true;
     }
   },
-  computed: {
-    pages() {
-      if (
-        this.pagination.rowsPerPage == null ||
-        this.pagination.totalItems == null
-      )
-        return 0;
-
-      return Math.ceil(
-        this.pagination.totalItems / this.pagination.rowsPerPage
-      );
-    }
-  }
+  computed: {}
 };
 </script>
 

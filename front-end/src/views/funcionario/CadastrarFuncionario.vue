@@ -1,13 +1,13 @@
 <template>
   <v-layout row justify-center>
     <v-spacer></v-spacer>
-    <v-dialog v-model="addCargo" persistent max-width="1000">
-      <template #activator="{ on: addCargo  }">
-        <v-btn class="ma-2" tile color="#2ED47A" v-on="{ ...addCargo }">
-          <span class="white--text">
-            <v-icon left>add</v-icon>Adicionar Novo Cargo
-          </span>
-        </v-btn>
+    <v-dialog v-model="addFuncionario" persistent max-width="1000">
+      <template #activator="{ on: addFuncionario  }">
+                        <v-btn class="ma-2" tile color="#F7685B" v-on="{ ...addFuncionario }">
+                  <span class="white--text">
+                    <v-icon left>add</v-icon>Adicionar Funcionário
+                  </span>
+                </v-btn>
       </template>
 
       <v-card>
@@ -57,7 +57,7 @@
           </v-container>
         </v-card-text>
         <v-card-actions class="justify-center">
-          <v-btn class="ma-2" tile color="#F7685B" @click="addCargo = false, limpar()">
+          <v-btn class="ma-2" tile color="#F7685B" @click="addFuncionario = false, limpar()">
             <span class="white--text">Cancelar</span>
           </v-btn>
 
@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       hidden: false,
-      addCargo: false,
+      addFuncionario: false,
       titulacao: "",
       missao: "",
       experienciaMinima: "",

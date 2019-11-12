@@ -100,15 +100,6 @@
                             </v-layout>
                           </v-card-text>
                         </v-layout>
-                        <v-card-actions class="justify-center">
-                          <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
-                            <span class="white--text">Cancelar</span>
-                          </v-btn>
-
-                          <v-btn class="ma-2" tile color="#109CF1">
-                            <span class="white--text">Salvar</span>
-                          </v-btn>
-                        </v-card-actions>
                       </v-container>
                     </div>
 
@@ -134,8 +125,8 @@
                         <v-layout>
                           <v-spacer></v-spacer>
                           <v-card-actions>
-                            <v-btn class="ma-2" tile color="#109CF1">
-                              <span class="white--text">Salvar</span>
+                            <v-btn class="ma-2" tile color="primary">
+                              <span class="white--text">Adicionar</span>
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
@@ -186,8 +177,8 @@
                         <v-layout>
                           <v-spacer></v-spacer>
                           <v-card-actions>
-                            <v-btn class="ma-2" tile color="#109CF1">
-                              <span class="white--text">Salvar</span>
+                            <v-btn class="ma-2" tile color="primary">
+                              <span class="white--text">Adicionar</span>
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
@@ -245,8 +236,8 @@
                         <v-layout>
                           <v-spacer></v-spacer>
                           <v-card-actions>
-                            <v-btn class="ma-2" tile color="#109CF1">
-                              <span class="white--text">Salvar</span>
+                            <v-btn class="ma-2" tile color="primary">
+                              <span class="white--text">Adicionar</span>
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
@@ -283,8 +274,8 @@
                         <v-layout>
                           <v-spacer></v-spacer>
                           <v-card-actions>
-                            <v-btn class="ma-2" tile color="#109CF1">
-                              <span class="white--text">Salvar</span>
+                            <v-btn class="ma-2" tile color="primary">
+                              <span class="white--text">Adicionar</span>
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
@@ -292,6 +283,15 @@
                     </div>
                   </v-tab-item>
                 </v-tabs>
+                                        <v-card-actions class="justify-center">
+                          <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
+                            <span class="white--text">Cancelar</span>
+                          </v-btn>
+
+                          <v-btn class="ma-2" tile color="#109CF1">
+                            <span class="white--text">Salvar</span>
+                          </v-btn>
+                        </v-card-actions>
               </v-card>
             </v-app>
           </div>

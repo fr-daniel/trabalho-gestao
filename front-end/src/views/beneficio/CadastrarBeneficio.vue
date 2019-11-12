@@ -53,6 +53,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar :color="dCor" right top v-model="dSnackbar">{{ dMensagem }}</v-snackbar>
   </v-layout>
 </template>
 
@@ -64,6 +65,20 @@ import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 
 export default {
+  props: {
+    cor: {
+      type: String,
+      default: ""
+    },
+    snackbar: {
+      type: Boolean,
+      default: false
+    },
+    mensagem: {
+      type: String,
+      default: ""
+    }
+  }, 
   data() {
     return {
       hidden: false,
@@ -72,9 +87,9 @@ export default {
       informacoes: "",
       valor: 0,
       dictionary: {},
-      snackbar: false,
-      cor: "",
-      mensagem: ""
+      dSnackbar: false,
+      dMensagem: "",
+      dCor: ""
     };
   },
   mounted() {
@@ -95,16 +110,19 @@ export default {
               this.$emit("cadastrou-beneficio", res.data);
               this.limpar();
               this.addBeneficio = false;
+              this.dSnackbar = true;
+              this.dMensagem = "Benefício cadastrado com sucesso";
+              this.dCor = "success";
             })
             .catch(() => {
-              this.mensagem = "Ocorreu um erro ao cadastrar o benefício.";
-              this.cor = "error";
-              this.snackbar = true;
+              this.dMensagem = "Ocorreu um erro ao cadastrar o benefício.";
+              this.dCor = "error";
+              this.dSnackbar = true;
             });
         } else {
-          this.mensagem = "O formulário contém erros!";
-          this.cor = "error";
-          this.snackbar = true;
+          this.dMensagem = "O formulário contém erros!";
+          this.dCor = "error";
+          this.dSnackbar = true;
         }
       });
     },
