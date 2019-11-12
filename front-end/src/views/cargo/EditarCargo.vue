@@ -11,7 +11,7 @@
                   <v-tabs-slider color="blue"></v-tabs-slider>
 
                   <v-tab href="#tab-1">
-                    CARGOS
+                    CARGO
                     <v-icon>work</v-icon>
                   </v-tab>
 
@@ -305,6 +305,7 @@
 import axios from "axios";
 
 export default {
+  props: ["id"],
   data() {
     return {
       drawer: true,
@@ -406,6 +407,20 @@ export default {
     }
   },
   methods: {
+    initialize() {
+      axios.get("/cargo/" + this.id).then(res => {
+        this.titulo = res.data.titulo;
+        this.localProva = res.data.localProva;
+        this.numeroVagas = res.data.numeroVagas;
+        this.descricao = res.data.descricao;
+        this.inicioInscricoes = res.data.inicioInscricoes;
+        this.terminoInscricoes = res.data.terminoInscricoes;
+        this.dataHoraProva = res.data.dataHoraProva;
+        this.dataResultado = res.data.dataResultado;
+        this.inicioReavaliacao = res.data.inicioReavaliacao;
+        this.terminoReavaliacao = res.data.terminoReavaliacao;
+      });
+    },
     toggle() {
       this.$nextTick(() => {
         if (this.likesAllFruit) {

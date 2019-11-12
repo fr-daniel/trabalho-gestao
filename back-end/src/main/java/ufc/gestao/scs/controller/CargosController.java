@@ -19,4 +19,7 @@ public interface CargosController {
     @ApiOperation(value = "Exclui um Cargo", notes = "Este controller é responsável por deletar um cargo no sistema")
     ResponseEntity<Void> deletarCargo(Integer cargoId);
 
+    @ApiOperation(value = "Atualiza um cargo", notes = "Este controller é responsável por atualizar os dados de um cargo")
+    ResponseEntity atualizar(Cargo exame);
+
 }

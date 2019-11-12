@@ -39,4 +39,11 @@ public class CargoControllerImpl implements CargosController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Override
+    @PutMapping
+    public ResponseEntity atualizar(@RequestBody Cargo cargo) {
+        this.cargoService.atualizarCargo(cargo);
+        return new ResponseEntity(cargo.getId(), HttpStatus.OK);
+    }
+
 }

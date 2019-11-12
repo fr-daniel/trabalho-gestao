@@ -1,6 +1,5 @@
 package ufc.gestao.scs.service;
 
-import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.model.Cargo;
 
 import java.util.List;
@@ -14,4 +13,5 @@ public interface CargoService {
 
     Cargo salvarCargo(Cargo c);
 
+    Integer atualizarCargo(Cargo c);
 }

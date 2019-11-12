@@ -1,9 +1,7 @@
 <template>
   <v-app id="telaInicial">
     <div class="organizarLogo">
-      <router-link to="/">
-        <v-img alt="Logo Sistema de Proficiência" id="logo" src="/static/logo-01.png"></v-img>
-      </router-link>
+      <router-link to="/">Sistema de Cargos e Salários (SCS)</router-link>
     </div>
     <v-content>
       <v-container fill-height fluid>
@@ -73,41 +71,6 @@ export default {
   }
 }
 
-@media all and (max-width: 799px) and (min-width: 640px) {
-  #telaInicial {
-    background: #efefef url("/static/back-640.png");
-    background-size: 640px 410px;
-  }
-}
-
-@media all and (max-width: 1023px) and (min-width: 768px) {
-  #telaInicial {
-    background: #efefef url("/static/back-800.png");
-    background-size: 800px 512px;
-  }
-}
-
-@media all and (max-width: 1279px) and (min-width: 1024px) {
-  #telaInicial {
-    background: #efefef url("/static/back-1024.png");
-    background-size: 1024px 656px;
-  }
-}
-
-@media all and (max-width: 1561px) and (min-width: 1280px) {
-  #telaInicial {
-    background: #efefef url("/static/back-1280.png");
-    background-size: 1280px 819px;
-  }
-}
-
-@media all and (min-width: 1562px) {
-  #telaInicial {
-    background: #efefef url("/static/back.png");
-    background-size: 1562px 1000px;
-  }
-}
-
 #telaInicial {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -120,10 +83,13 @@ p {
 }
 
 .organizarLogo {
-  width: 98px;
-  height: 34px;
   margin-top: 24px;
   margin-left: 24px;
-  position: fixed;
+  text-align: center;
+}
+
+.organizarLogo a {
+  font-size: 1.6em;
+  text-decoration: none;
 }
 </style>

@@ -4,7 +4,7 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNTE2Nzk5LCJleHAiOjE1NzM1NTI3OTl9.Z-rebydrR9uVTc3S3t1_1zgqB2hN6O1W73z2fvmpsK8
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNTYyNzkzLCJleHAiOjE1NzM1OTg3OTN9.nbWG0VkCf8E_0K3cUG6ldx8smCwFzHCrDZ7VGEIAeqY
 
 ###
 
@@ -59,3 +59,33 @@ Authorization: {{token}}
 ###
 DELETE  http://{{host}}/beneficio/excluir/8 HTTP/1.1
 Authorization: {{token}}
+
+
+###
+
+PUT  http://{{host}}/cargo
+Authorization: {{token}}
+content-type: application/json
+
+{
+    "id": 4,
+    "titulacao": "Programador Java Senior",
+    "area": "computação",
+    "experienciaMinima": "2 anos",      
+    "missao": "programar",
+    "salarioBaseMaximo": 1200,
+    "salarioBaseMinimo": 5000,
+    "unidade": "Fortaleza",
+    "atividades": [
+        { "titulo": "aaa", "descricao": "desc aaa"}
+    ]
+}
+
+
+###
+
+POST  http://{{host}}/atividade
+Authorization: {{token}}
+content-type: application/json
+
+ {"titulo": "aaa", "descricao": "desc aaa"}
