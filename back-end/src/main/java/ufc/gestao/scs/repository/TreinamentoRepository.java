@@ -12,7 +12,7 @@ import ufc.gestao.scs.model.Treinamento;
 @Repository
 public interface TreinamentoRepository extends JpaRepository<Treinamento, Integer> {
 
-    @Query("SELECT t.id as id, t.descricao as descricao, t.classificacao as classificacao FROM Treinamento as t")
+    @Query("SELECT t.id as id, t.titulo as titulo, t.classificacao as classificacao FROM Treinamento as t")
     List<Map<String, Object>> findAllTreinamentosView();
 
 }

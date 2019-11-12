@@ -38,13 +38,8 @@
               </div>
               <v-layout>
                 <v-spacer></v-spacer>
-
-                <v-btn class="ma-2" tile color="#F7685B">
-                  <span class="white--text">
-                    <v-icon left>add</v-icon>Adicionar Funcionário
-                  </span>
-                </v-btn>
               </v-layout>
+              <CadastrarFuncionario></CadastrarFuncionario>
             </v-card-title>
           </v-container>
         </v-card>
@@ -56,8 +51,9 @@
 
 <script>
 import CadastrarCargo from "../cargo/CadastrarCargo";
+import CadastrarFuncionario from "../funcionario/CadastrarFuncionario";
 export default {
-  components: { CadastrarCargo },
+  components: { CadastrarCargo, CadastrarFuncionario },
   data() {
     return {
       drawer: true,

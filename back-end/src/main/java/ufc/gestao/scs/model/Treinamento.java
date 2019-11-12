@@ -12,8 +12,7 @@ public class Treinamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="descricao", columnDefinition="TEXT")
-    private String descricao;
+    private String titulo;
 
     @Enumerated(EnumType.STRING)
     private ClassificacaoTreinamento classificacao;
@@ -26,12 +25,12 @@ public class Treinamento {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public ClassificacaoTreinamento getClassificacao() {

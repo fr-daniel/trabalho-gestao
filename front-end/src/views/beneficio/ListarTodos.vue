@@ -12,19 +12,34 @@
                 :headers="headers"
                 :items="beneficios"
                 :search="search"
-                hide-actions
-                :pagination.sync="pagination"
                 class="elevation-1"
               >
                 <template v-slot:items="props">
                   <td>
-                    <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="primary"
+                            small
+                            v-on="{ ...tooltip }"
+                          >
+                            <v-icon small>search</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Ver mais</span>
+                      </v-tooltip>
                   </td>
                   <td class="justify-center">{{ props.item.id }}</td>
                   <td class="justify-center">{{ props.item.titulo }}</td>
-                  <td class="justify-center">{{ props.item.informacoes }}</td>
                   <td class="justify-center">{{ props.item.valor }}</td>
                   <td class="justify-center">
+                    <v-tooltip bottom>
+                      <template #activator="{ on: tooltip }">
                     <v-btn
                       class="ma-2"
                       tile
@@ -33,10 +48,16 @@
                       icon
                       color="#192A3E"
                       small
+                      v-on="{ ...tooltip }"
                       :to="{name: 'EditarCargo'}"
                     >
                       <v-icon small>edit</v-icon>
                     </v-btn>
+                    </template>
+                      <span>Editar</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                      <template #activator="{ on: tooltip }">
                     <v-btn
                         @click="abrirDialogExcluirBeneficio(props.item)"
                         class="ma-2"
@@ -46,15 +67,16 @@
                         icon
                         color="#F7685B"
                         small
+                        v-on="{ ...tooltip }"
                       >
                         <v-icon small>delete</v-icon>
                       </v-btn>
+                    </template>
+                      <span>Remover</span>
+                    </v-tooltip>
                   </td>
                 </template>
               </v-data-table>
-              <div class="text-xs-center pt-2">
-                <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-              </div>
             </v-container>
           </v-card>
         </v-flex>
@@ -132,12 +154,6 @@ export default {
           value: "titulo"
         },
         {
-          text: "Informações",
-          align: "left",
-          sortable: false,
-          value: "informacoes"
-        },
-        {
           text: "Valor",
           align: "left",
           sortable: false,
@@ -194,19 +210,7 @@ export default {
       this.dialog = true;
     }
   },
-  computed: {
-    pages() {
-      if (
-        this.pagination.rowsPerPage == null ||
-        this.pagination.totalItems == null
-      )
-        return 0;
-
-      return Math.ceil(
-        this.pagination.totalItems / this.pagination.rowsPerPage
-      );
-    }
-  }
+  computed: {}
 };
 </script>
 
