@@ -18,7 +18,7 @@ public class Beneficio {
 
     private String titulo;
     private String informacoes;
-    private String valor;
+    private Double valor;
 
     public Integer getId() {
         return id;
@@ -44,11 +44,11 @@ public class Beneficio {
         this.informacoes = informacoes;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

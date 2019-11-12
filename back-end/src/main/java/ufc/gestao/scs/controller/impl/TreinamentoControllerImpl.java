@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +27,7 @@ public class TreinamentoControllerImpl implements TreinamentoController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Treinamento> createTreinamento(Treinamento t) {
+    public ResponseEntity<Treinamento> createTreinamento(@RequestBody Treinamento t) {
         Treinamento treinamento = treinamentoService.salvarTreinamento(t);
         return new ResponseEntity<>(treinamento, HttpStatus.CREATED);
     }
@@ -39,7 +41,7 @@ public class TreinamentoControllerImpl implements TreinamentoController {
 
     @Override
     @DeleteMapping("/excluir/{treinamentoId}")
-    public ResponseEntity<Void> deletarTreinamento(Integer treinamentoId) {
+    public ResponseEntity<Void> deletarTreinamento(@PathVariable("treinamentoId") Integer treinamentoId) {
         treinamentoService.excluirTreinamento(treinamentoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

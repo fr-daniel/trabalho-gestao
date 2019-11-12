@@ -4,7 +4,7 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNDgwMDU5LCJleHAiOjE1NzM1MTYwNTl9.e_9T_sKF1C4QAH7C2OAGs55RpqSEa2_IM_g-ehftcdo
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNTE2Nzk5LCJleHAiOjE1NzM1NTI3OTl9.Z-rebydrR9uVTc3S3t1_1zgqB2hN6O1W73z2fvmpsK8
 
 ###
 
@@ -25,4 +25,18 @@ Authorization: {{token}}
 
 ###
 GET http://{{host}}/treinamento/listar HTTP/1.1
+Authorization: {{token}}
+
+###
+POST http://{{host}}/treinamento HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "descricao": "Teste",
+    "classificacao": "REQUERIDO"
+}
+
+###
+DELETE  http://{{host}}/treinamento/excluir/3 HTTP/1.1
 Authorization: {{token}}
