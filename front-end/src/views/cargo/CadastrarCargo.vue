@@ -40,7 +40,7 @@
                     v-model="salarioBaseMinimo"
                     label="Salário Base Mínimo"
                     value
-                    append-icon="monetization_on"
+                    append-icon="attach_money"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs4>
@@ -49,7 +49,7 @@
                     v-model="salarioBaseMaximo"
                     label="Salário Base Máximo"
                     value
-                    append-icon="monetization_on"
+                    append-icon="attach_money"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -102,8 +102,8 @@ export default {
       experienciaMinima: "",
       area: "",
       unidade: "",
-      salarioBaseMinimo: 0,
-      salarioBaseMaximo: 0,
+      salarioBaseMinimo: '',
+      salarioBaseMaximo: '',
       dictionary: {},
       dSnackbar: false,
       dMensagem: "",

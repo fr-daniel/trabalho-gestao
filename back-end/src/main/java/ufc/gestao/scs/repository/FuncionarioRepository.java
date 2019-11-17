@@ -10,7 +10,10 @@ import java.util.Map;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
 
-    @Query("SELECT f.id as id, f.nome as nome, f.cpf as cpf, f.email as email, f.telefone as telefone, f.formacaoAcademica as formacaoAcademica, f.salario as salario  FROM Funcionario as f")
+    @Query("SELECT f.id as id, f.nome as nome, f.cpf as cpf, f.formacaoAcademica as formacaoAcademica, s.salarioBase as salarioBase  FROM Funcionario as f JOIN Salario as s ON s.id = f.salario")
     List<Map<String, Object>> findAllFuncionariosView();
+
+    @Query("SELECT f.id as id, f.nome as nome, f.telefone as telefone, f.email as email  FROM Funcionario as f")
+    List<Map<String, Object>> findAllEmailsView();
 
 }

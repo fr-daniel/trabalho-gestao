@@ -29,7 +29,7 @@
                     v-model="valor"
                     label="Valor"
                     value
-                    append-icon="monetization_on"
+                    append-icon="attach_money"
                   ></v-text-field>
                 </v-flex>
               </v-flex>
@@ -83,9 +83,9 @@ export default {
     return {
       hidden: false,
       addBeneficio: false,
-      titulo: "",
-      informacoes: "",
-      valor: 0,
+      titulo: '',
+      informacoes: '',
+      valor: '',
       dictionary: {},
       dSnackbar: false,
       dMensagem: "",
@@ -127,7 +127,7 @@ export default {
       });
     },
     limpar() {
-      this.titulo = "", this.informacoes = "", this.valor = 0;
+      this.titulo = '', this.informacoes = '', this.valor = '';
     }
   }
 };

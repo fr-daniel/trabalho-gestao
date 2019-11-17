@@ -5,7 +5,7 @@
       <template #activator="{ on: addTreinamento  }">
         <v-btn class="ma-2" tile color="#2ED47A" v-on="{ ...addTreinamento }">
           <span class="white--text">
-            <v-icon left>add</v-icon>Adicionar Novo Treinamento
+            <v-icon left>add</v-icon>Adicionar Treinamento
           </span>
         </v-btn>
       </template>
@@ -24,7 +24,6 @@
                     item-text="text"
                     item-value="value"
                     label="Classificação do Treinamento"
-                    prepend-inner-icon="dehaze"
                   ></v-select>
                 </v-flex>
               </v-flex>

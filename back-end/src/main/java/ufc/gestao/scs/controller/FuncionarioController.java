@@ -2,6 +2,7 @@ package ufc.gestao.scs.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import ufc.gestao.scs.model.Funcionario;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public interface FuncionarioController {
 
     @ApiOperation(value = "Lista todos os Funcionários", notes = "Este controller é responsável por listar todos os funcionários cadastrados no sistema")
     ResponseEntity<List<Map<String, Object>>> listarFuncionarios();
+
+    @GetMapping("/listar/emails")
+    ResponseEntity<List<Map<String, Object>>> listarEmails();
 
     @ApiOperation(value = "Exclui um Funcionário", notes = "Este controller é responsável por deletar um funcionário no sistema")
     ResponseEntity<Void> deletarFuncionario(Integer funcionarioId);

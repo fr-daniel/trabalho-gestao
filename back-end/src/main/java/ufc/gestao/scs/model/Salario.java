@@ -19,8 +19,7 @@ public class Salario {
     private Double salarioBase;
     private Integer cargaHoraria;
 
-    @OneToOne
-    @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "salario")
     private Funcionario funcionario;
 
     public Double getSalarioBase() {

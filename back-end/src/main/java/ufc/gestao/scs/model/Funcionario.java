@@ -49,7 +49,8 @@ public class Funcionario {
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 
-	@OneToOne(mappedBy = "funcionario")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "salario_id", referencedColumnName = "id")
 	private Salario salario;
 
 	public Integer getId() {

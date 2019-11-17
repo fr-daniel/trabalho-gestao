@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ufc.gestao.scs.controller.BeneficioController;
 import ufc.gestao.scs.controller.FuncionarioController;
-import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.model.Funcionario;
-import ufc.gestao.scs.service.BeneficioService;
 import ufc.gestao.scs.service.FuncionarioService;
 
 import java.util.List;
@@ -32,6 +29,13 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     @GetMapping("/listar")
     public ResponseEntity<List<Map<String, Object>>> listarFuncionarios() {
         List<Map<String, Object>> funcionarios = funcionarioService.buscarFuncionarios();
+        return ResponseEntity.ok(funcionarios);
+    }
+
+    @Override
+    @GetMapping("/listar/emails")
+    public ResponseEntity<List<Map<String, Object>>> listarEmails() {
+        List<Map<String, Object>> funcionarios = funcionarioService.buscarEmails();
         return ResponseEntity.ok(funcionarios);
     }
 

@@ -28,8 +28,9 @@
                             color="primary"
                             small
                             v-on="{ ...tooltip }"
+                            :to="{name: 'DetalhesCargo'}"
                           >
-                            <v-icon small>search</v-icon>
+                            <v-icon small>view_list</v-icon>
                           </v-btn>
                         </template>
                         <span>Ver mais</span>
