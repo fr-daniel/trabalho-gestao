@@ -3,53 +3,93 @@
     <v-spacer></v-spacer>
     <v-dialog v-model="addFuncionario" persistent max-width="1000">
       <template #activator="{ on: addFuncionario  }">
-                        <v-btn class="ma-2" tile color="#F7685B" v-on="{ ...addFuncionario }">
-                  <span class="white--text">
-                    <v-icon left>add</v-icon>Adicionar Funcionário
-                  </span>
-                </v-btn>
+        <v-btn class="ma-2" tile color="#F7685B" v-on="{ ...addFuncionario }">
+          <span class="white--text">
+            <v-icon left>add</v-icon>Adicionar Funcionário
+          </span>
+        </v-btn>
       </template>
 
       <v-card>
         <v-card-text>
-          <v-card-title class="headline black white--text">Cadastrar Cargo</v-card-title>
+          <v-card-title class="headline black white--text">Cadastrar Funcionário</v-card-title>
           <v-container grid-list-md>
             <v-layout wrap>
-              <v-flex xs12>
+              <v-flex xs8>
+                <v-text-field flat v-model="nome" label="Nome" value append-icon="person"></v-text-field>
+              </v-flex>
+              <v-flex xs4>
                 <v-text-field
                   flat
-                  v-model="titulacao"
-                  label="Título do Cargo"
+                  v-model="formacaoAcademica"
+                  label="Formação Acadêmica"
                   value
-                  append-icon="title"
+                  append-icon="school"
                 ></v-text-field>
-                <v-textarea v-model="missao" label="Missão" value append-icon="format_size"></v-textarea>
-                <v-textarea
-                  v-model="experienciaMinima"
-                  label="Experiência Mínima"
-                  value
-                  append-icon="assignment"
-                ></v-textarea>
-                <v-text-field flat v-model="area" label="Área" value append-icon="school"></v-text-field>
-                <v-text-field flat v-model="unidade" label="Unidade" value append-icon="group"></v-text-field>
               </v-flex>
+              <v-layout row wrap>
+                <v-flex xs4>
+                  <v-text-field
+                    flat
+                    v-model="dataNascimento"
+                    label="Data de Nascimento"
+                    value
+                    append-icon="event"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs4>
+                  <v-select
+                    :items="estadosCivis"
+                    v-model="estadoCivil"
+                    item-text="text"
+                    item-value="value"
+                    label="Estado Civil"
+                  ></v-select>
+                </v-flex>
+                <v-flex xs4>
+                  <v-select
+                    :items="sexos"
+                    v-model="sexo"
+                    item-text="text"
+                    item-value="value"
+                    label="Sexo"
+                  ></v-select>
+                </v-flex>
+              </v-layout>
+              <v-layout row wrap>
+                <v-flex xs4>
+                  <v-text-field flat v-model="cpf" label="CPF" value append-icon="assignment_ind"></v-text-field>
+                </v-flex>
+                <v-flex xs4>
+                  <v-text-field flat v-model="rg" label="RG" value append-icon="assignment_ind"></v-text-field>
+                </v-flex>
+                <v-flex xs4>
+                  <v-text-field flat v-model="nis" label="NIS" value append-icon="assignment_ind"></v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-layout row wrap>
+                <v-flex xs8>
+                  <v-text-field flat v-model="email" label="Email" value append-icon="mail"></v-text-field>
+                </v-flex>
+                <v-flex xs4>
+                  <v-text-field flat v-model="telefone" label="Telefone" value append-icon="phone"></v-text-field>
+                </v-flex>
+              </v-layout>
               <v-layout row wrap justify-center>
                 <v-flex xs4>
                   <v-text-field
                     flat
-                    v-model="salarioBaseMinimo"
-                    label="Salário Base Mínimo"
-                    value
-                    append-icon="monetization_on"
+                    v-model="salario.salarioBase"
+                    label="Salário Base"
+                    append-icon="attach_money"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs4>
                   <v-text-field
                     flat
-                    v-model="salarioBaseMaximo"
-                    label="Salário Base Máximo"
-                    value
-                    append-icon="monetization_on"
+                    v-model="salario.cargaHoraria"
+                    label="Carga Horária"
+                    append-icon="access_time"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -82,13 +122,30 @@ export default {
     return {
       hidden: false,
       addFuncionario: false,
-      titulacao: "",
-      missao: "",
-      experienciaMinima: "",
-      area: "",
-      unidade: "",
-      salarioBaseMinimo: 0,
-      salarioBaseMaximo: 0,
+      nome: "",
+      email: "",
+      telefone: "",
+      dataNascimento: "",
+      estadoCivil: "",
+      sexo: "",
+      cpf: "",
+      rg: "",
+      nis: "",
+      formacaoAcademica: "",
+      salario: {
+        salarioBase: "",
+        cargaHoraria: ""
+      },
+      estadosCivis: [
+        { text: "Solteiro", value: "SOLTEIRO" },
+        { text: "Casado", value: "CASADO" },
+        { text: "Divorciado", value: "DIVORCIADO" },
+        { text: "Viúvo", value: "VIUVO" }
+      ],
+      sexos: [
+        { text: "Masculino", value: "MASCULINO" },
+        { text: "Feminino", value: "FEMININO" }
+      ],
       dictionary: {},
       snackbar: false,
       cor: "",
@@ -103,22 +160,29 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           axios
-            .post("/cargo", {
-              titulacao: this.titulacao,
-              missao: this.missao,
-              experienciaMinima: this.experienciaMinima,
-              area: this.area,
-              unidade: this.unidade,
-              salarioBaseMinimo: this.salarioBaseMinimo,
-              salarioBaseMaximo: this.salarioBaseMaximo
+            .post("/funcionario", {
+              nome: this.nome,
+              email: this.email,
+              telefone: this.telefone,
+              //dataNascimento: this.dataNascimento,
+              estadoCivil: this.estadoCivil,
+              sexo: this.sexo,
+              cpf: this.cpf,
+              rg: this.rg,
+              nis: this.nis,
+              formacaoAcademica: this.formacaoAcademica,
+              salario: {
+                salarioBase: this.salario.salarioBase,
+                cargaHoraria: this.salario.cargaHoraria
+              }
             })
             .then(res => {
               this.$emit("cadastrou-funcionario", res.data);
               this.limpar();
-              this.addCargo = false;
+              this.addFuncionario = false;
             })
             .catch(() => {
-              this.mensagem = "Ocorreu um erro ao cadastrar o cargo.";
+              this.mensagem = "Ocorreu um erro ao cadastrar o funcionário.";
               this.cor = "error";
               this.snackbar = true;
             });
@@ -132,13 +196,18 @@ export default {
     },
 
     limpar() {
-      this.titulacao = "";
-      this.missao = "";
-      this.experienciaMinima = "";
-      this.area = "";
-      this.unidade = "";
-      this.salarioBaseMinimo = 0;
-      this.salarioBaseMaximo = 0;
+      (this.nome = ""),
+        (this.email = ""),
+        (this.telefone = ""),
+        (this.dataNascimento = ""),
+        (this.estadoCivil = ""),
+        (this.sexo = ""),
+        (this.cpf = ""),
+        (this.rg = ""),
+        (this.nis = ""),
+        (this.formacaoAcademica = ""),
+        (this.salarioBase = ""),
+        (this.cargaHoraria = "");
     }
   }
 };

@@ -16,62 +16,114 @@
               >
                 <template v-slot:items="props">
                   <td>
-                      <v-tooltip bottom>
-                        <template #activator="{ on: tooltip }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            depressed
-                            dark
-                            icon
-                            color="primary"
-                            small
-                            v-on="{ ...tooltip }"
-                          >
-                            <v-icon small>search</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Ver mais</span>
-                      </v-tooltip>
+                    <v-tooltip bottom>
+                      <template #activator="{ on: tooltip }">
+                        <v-btn
+                          class="ma-2"
+                          tile
+                          depressed
+                          dark
+                          icon
+                          color="primary"
+                          small
+                          v-on="{ ...tooltip }"
+                          :to="{name: 'DetalhesBeneficio'}"
+                        >
+                          <v-icon small>view_list</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Ver mais</span>
+                    </v-tooltip>
                   </td>
                   <td class="justify-center">{{ props.item.id }}</td>
                   <td class="justify-center">{{ props.item.titulo }}</td>
                   <td class="justify-center">{{ props.item.valor }}</td>
                   <td class="justify-center">
+                    <v-dialog v-model="editarBeneficio" persistent max-width="800">
+                      <template #activator="{ on: editarBeneficio  }">
+                        <v-tooltip bottom>
+                          <template #activator="{ on: tooltip }">
+                            <v-btn
+                              class="ma-2"
+                              tile
+                              depressed
+                              dark
+                              icon
+                              color="#192A3E"
+                              small
+                              v-on="{ ...tooltip, ...editarBeneficio }"
+                              @click="editarBeneficio=true"
+                            >
+                              <v-icon small>edit</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Editar</span>
+                        </v-tooltip>
+                      </template>
+
+                      <v-card>
+                        <v-card-text>
+                          <v-card-title class="headline black white--text">Editar Benefício</v-card-title>
+                          <v-container grid-list-md>
+                            <v-layout wrap>
+                              <v-flex xs12>
+                                <v-text-field
+                                  flat
+                                  label="Título"
+                                  value
+                                  append-icon="title"
+                                ></v-text-field>
+                                <v-textarea
+                                  label="Informações"
+                                  value
+                                  append-icon="description"
+                                ></v-textarea>
+                                <v-flex xs12 sm4 d-flex>
+                                  <v-text-field
+                                    flat
+                                    label="Valor"
+                                    value
+                                    append-icon="attach_money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                            </v-layout>
+                          </v-container>
+                        </v-card-text>
+                        <v-card-actions class="justify-center">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            color="#F7685B"
+                            @click="editarBeneficio = false"
+                            v-on:click="limpar()"
+                          >
+                            <span class="white--text">Cancelar</span>
+                          </v-btn>
+
+                          <v-btn class="ma-2" tile color="#109CF1">
+                            <span class="white--text">Salvar</span>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+
                     <v-tooltip bottom>
                       <template #activator="{ on: tooltip }">
-                    <v-btn
-                      class="ma-2"
-                      tile
-                      depressed
-                      dark
-                      icon
-                      color="#192A3E"
-                      small
-                      v-on="{ ...tooltip }"
-                      :to="{name: 'EditarCargo'}"
-                    >
-                      <v-icon small>edit</v-icon>
-                    </v-btn>
-                    </template>
-                      <span>Editar</span>
-                    </v-tooltip>
-                    <v-tooltip bottom>
-                      <template #activator="{ on: tooltip }">
-                    <v-btn
-                        @click="abrirDialogExcluirBeneficio(props.item)"
-                        class="ma-2"
-                        tile
-                        depressed
-                        dark
-                        icon
-                        color="#F7685B"
-                        small
-                        v-on="{ ...tooltip }"
-                      >
-                        <v-icon small>delete</v-icon>
-                      </v-btn>
-                    </template>
+                        <v-btn
+                          @click="abrirDialogExcluirBeneficio(props.item)"
+                          class="ma-2"
+                          tile
+                          depressed
+                          dark
+                          icon
+                          color="#F7685B"
+                          small
+                          v-on="{ ...tooltip }"
+                        >
+                          <v-icon small>delete</v-icon>
+                        </v-btn>
+                      </template>
                       <span>Remover</span>
                     </v-tooltip>
                   </td>
@@ -99,7 +151,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
     </v-container>
   </v-app>
 </template>
@@ -110,7 +161,7 @@ import axios from "axios";
 import CadastrarBeneficio from "../beneficio/CadastrarBeneficio";
 
 export default {
-    props: {
+  props: {
     cor: {
       type: String,
       default: ""
@@ -163,6 +214,7 @@ export default {
       ],
       beneficios: [],
       beneficioDelete: null,
+      editarBeneficio: false,
       dSnackbar: false,
       dMensagem: "",
       dCor: ""
@@ -182,7 +234,7 @@ export default {
       this.beneficios.push(beneficio);
     },
 
-   excluirBeneficio() {
+    excluirBeneficio() {
       axios
         .delete("/beneficio/excluir/" + this.beneficioDelete.id)
         .then(() => {

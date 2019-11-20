@@ -9,6 +9,8 @@ public interface FuncionarioService {
 
     List<Map<String, Object>> buscarFuncionarios();
 
+    List<Map<String, Object>> buscarEmails();
+
     void excluirFuncionario(Integer id);
 
     Funcionario salvarFuncionario(Funcionario f);

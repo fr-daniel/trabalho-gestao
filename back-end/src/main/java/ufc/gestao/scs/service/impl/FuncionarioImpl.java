@@ -24,6 +24,11 @@ public class FuncionarioImpl implements FuncionarioService {
     }
 
     @Override
+    public List<Map<String, Object>> buscarEmails() {
+        return funcionarioRepository.findAllEmailsView();
+    }
+
+    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void excluirFuncionario(Integer id) {
         this.funcionarioRepository.deleteById(id);

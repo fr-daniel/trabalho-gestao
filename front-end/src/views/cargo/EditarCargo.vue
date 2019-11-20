@@ -83,7 +83,7 @@
                                     v-model="salarioBaseMinimo"
                                     label="Salário Base Mínimo"
                                     value
-                                    append-icon="monetization_on"
+                                    append-icon="attach_money"
                                   ></v-text-field>
                                 </v-flex>
 
@@ -93,7 +93,7 @@
                                     v-model="salarioBaseMaximo"
                                     label="Salário Base Máximo"
                                     value
-                                    append-icon="monetization_on"
+                                    append-icon="attach_money"
                                   ></v-text-field>
                                 </v-flex>
                               </v-layout>
@@ -170,7 +170,6 @@
                             <v-select
                               :items="niveisConhecimento"
                               label="Nível do Conhecimento"
-                              prepend-inner-icon="dehaze"
                             ></v-select>
                           </v-flex>
                         </v-layout>
@@ -283,15 +282,15 @@
                     </div>
                   </v-tab-item>
                 </v-tabs>
-                                        <v-card-actions class="justify-center">
-                          <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
-                            <span class="white--text">Cancelar</span>
-                          </v-btn>
+                <v-card-actions class="justify-center">
+                  <v-btn class="ma-2" tile color="#F7685B" :to="{name: 'ListarCargos'}">
+                    <span class="white--text">Cancelar</span>
+                  </v-btn>
 
-                          <v-btn class="ma-2" tile color="#109CF1">
-                            <span class="white--text">Salvar</span>
-                          </v-btn>
-                        </v-card-actions>
+                  <v-btn class="ma-2" tile color="#109CF1">
+                    <span class="white--text">Salvar</span>
+                  </v-btn>
+                </v-card-actions>
               </v-card>
             </v-app>
           </div>
@@ -317,8 +316,8 @@ export default {
       experienciaMinima: "",
       area: "",
       unidade: "",
-      salarioBaseMinimo: 0,
-      salarioBaseMaximo: 0,
+      salarioBaseMinimo: "",
+      salarioBaseMaximo: "",
       tituloAtividade: "",
       descricaoAtividade: "",
       tituloConhecimento: "",

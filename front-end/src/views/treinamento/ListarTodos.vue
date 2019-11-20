@@ -16,49 +16,75 @@
                   class="elevation-1"
                 >
                   <template v-slot:items="props">
-                    <td>
-                      <v-tooltip bottom>
-                        <template #activator="{ on: tooltip }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            depressed
-                            dark
-                            icon
-                            color="primary"
-                            small
-                            v-on="{ ...tooltip }"
-                          >
-                            <v-icon small>search</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Ver mais</span>
-                      </v-tooltip>
-                    </td>
                     <td class="justify-center">{{ props.item.id }}</td>
                     <td class="justify-center">{{ props.item.titulo }}</td>
                     <td
                       class="justify-center"
                     >{{ getLabelClassificaoTreinamento(props.item.classificacao) }}</td>
                     <td class="justify-center">
-                      <v-tooltip bottom>
-                        <template #activator="{ on: tooltip }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            depressed
-                            dark
-                            icon
-                            color="#192A3E"
-                            small
-                            v-on="{ ...tooltip }"
-                            :to="{name: 'EditarCargo'}"
-                          >
-                            <v-icon small>edit</v-icon>
-                          </v-btn>
+                      <v-dialog v-model="editarTreinamento" persistent max-width="800">
+                        <template #activator="{ on: editarTreinamento  }">
+                          <v-tooltip bottom>
+                            <template #activator="{ on: tooltip }">
+                              <v-btn
+                                class="ma-2"
+                                tile
+                                depressed
+                                dark
+                                icon
+                                color="#192A3E"
+                                small
+                                v-on="{ ...tooltip, ...editarTreinamento }"
+                                @click="editarTreinamento=true"
+                              >
+                                <v-icon small>edit</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Editar</span>
+                          </v-tooltip>
                         </template>
-                        <span>Editar</span>
-                      </v-tooltip>
+
+                        <v-card>
+                          <v-card-text>
+                            <v-card-title class="headline black white--text">Editar Treinamento</v-card-title>
+                            <v-container grid-list-md>
+                              <v-layout wrap>
+                                <v-flex xs12>
+                                  <v-text-field
+                                    flat
+                                    label="Título"
+                                    value
+                                    append-icon="title"
+                                  ></v-text-field>
+                                  <v-flex xs12 sm6 d-flex>
+                                    <v-select
+                                      item-text="text"
+                                      item-value="value"
+                                      label="Classificação do Treinamento"
+                                    ></v-select>
+                                  </v-flex>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                          </v-card-text>
+                          <v-card-actions class="justify-center">
+                            <v-btn
+                              class="ma-2"
+                              tile
+                              color="#F7685B"
+                              @click="editarTreinamento = false"
+                              v-on:click="limpar()"
+                            >
+                              <span class="white--text">Cancelar</span>
+                            </v-btn>
+
+                            <v-btn class="ma-2" tile color="#109CF1">
+                              <span class="white--text">Salvar</span>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+
                       <v-tooltip bottom>
                         <template #activator="{ on: tooltip }">
                           <v-btn
@@ -138,12 +164,6 @@ export default {
       selected: [],
       headers: [
         {
-          text: "",
-          align: "left",
-          sortable: false,
-          value: "selecionarTreinamento"
-        },
-        {
           text: "ID",
           align: "left",
           sortable: true,
@@ -163,6 +183,7 @@ export default {
         },
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
+      editarTreinamento: false,
       treinamentos: [],
       dialog: false,
       treinamentoDelete: null,

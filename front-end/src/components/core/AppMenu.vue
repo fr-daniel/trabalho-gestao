@@ -60,16 +60,16 @@
 
         <v-list-tile :to="{name: 'ListarFuncionarios'}">
           <v-list-tile-action>
-            <v-icon color="#C2CFE0">assignment_ind</v-icon>
+            <v-icon color="#C2CFE0">account_box</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Todos os Funcionários</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile>
+        <v-list-tile :to="{name: 'ListarEmail'}">
           <v-list-tile-action>
-            <v-icon color="#C2CFE0">mail</v-icon>
+            <v-icon color="#C2CFE0">contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Email dos Funcionários</v-list-tile-title>
