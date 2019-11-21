@@ -40,7 +40,7 @@
                     <td class="justify-center">{{ props.item.nome }}</td>
                     <td class="justify-center">{{ props.item.cpf }}</td>
                     <td class="justify-center">{{ props.item.formacaoAcademica }}</td>
-                    <td class="justify-center">R$ {{ props.item.salarioBase }}</td>
+                    <td class="justify-center">R$ {{ props.item.salarioBase }}, 00</td>
 
                     <v-dialog v-model="editarFuncionario" persistent max-width="800">
                       <template #activator="{ on: editarFuncionario  }">
@@ -55,7 +55,7 @@
                               color="#192A3E"
                               small
                               v-on="{ ...tooltip, ...editarFuncionario }"
-                              @click="editarFuncionario=true"
+                              @click="funcionarioEditar(props.item.id)"
                             >
                               <v-icon small>edit</v-icon>
                             </v-btn>
@@ -75,6 +75,7 @@
                                   label="Nome"
                                   value
                                   append-icon="person"
+                                  v-model="funcionario.nome"
                                 ></v-text-field>
                               </v-flex>
                               <v-flex xs4>
@@ -83,6 +84,7 @@
                                   label="Formação Acadêmica"
                                   value
                                   append-icon="school"
+                                  v-model="funcionario.formacaoAcademica"
                                 ></v-text-field>
                               </v-flex>
                               <v-layout row wrap>
@@ -92,20 +94,25 @@
                                     label="Data de Nascimento"
                                     value
                                     append-icon="event"
+                                    v-model="funcionario.dataNascimento"
                                   ></v-text-field>
                                 </v-flex>
                                 <v-flex xs4>
                                   <v-select
+                                    :items="estadosCivis"
                                     item-text="text"
                                     item-value="value"
                                     label="Estado Civil"
+                                    v-model="funcionario.estadoCivil"
                                   ></v-select>
                                 </v-flex>
                                 <v-flex xs4>
                                   <v-select
+                                    :items="sexos"
                                     item-text="text"
                                     item-value="value"
                                     label="Sexo"
+                                    v-model="funcionario.sexo"
                                   ></v-select>
                                 </v-flex>
                               </v-layout>
@@ -116,6 +123,7 @@
                                     label="CPF"
                                     value
                                     append-icon="assignment_ind"
+                                    v-model="funcionario.cpf"
                                   ></v-text-field>
                                 </v-flex>
                                 <v-flex xs4>
@@ -124,6 +132,7 @@
                                     label="RG"
                                     value
                                     append-icon="assignment_ind"
+                                    v-model="funcionario.rg"
                                   ></v-text-field>
                                 </v-flex>
                                 <v-flex xs4>
@@ -132,6 +141,7 @@
                                     label="NIS"
                                     value
                                     append-icon="assignment_ind"
+                                    v-model="funcionario.nis"
                                   ></v-text-field>
                                 </v-flex>
                               </v-layout>
@@ -142,6 +152,7 @@
                                     label="Email"
                                     value
                                     append-icon="mail"
+                                    v-model="funcionario.email"
                                   ></v-text-field>
                                 </v-flex>
                                 <v-flex xs4>
@@ -150,6 +161,7 @@
                                     label="Telefone"
                                     value
                                     append-icon="phone"
+                                    v-model="funcionario.telefone"
                                   ></v-text-field>
                                 </v-flex>
                               </v-layout>
@@ -159,6 +171,7 @@
                                     flat
                                     label="Salário Base"
                                     append-icon="attach_money"
+                                    v-model="funcionario.salarioBase"
                                   ></v-text-field>
                                 </v-flex>
                                 <v-flex xs4>
@@ -166,6 +179,7 @@
                                     flat
                                     label="Carga Horária"
                                     append-icon="access_time"
+                                    v-model="funcionario.cargaHoraria"
                                   ></v-text-field>
                                 </v-flex>
                               </v-layout>
@@ -177,7 +191,7 @@
                             class="ma-2"
                             tile
                             color="#F7685B"
-                            @click="editarFuncionario = false, limpar()"
+                            @click="editarFuncionario = false"
                           >
                             <span class="white--text">Cancelar</span>
                           </v-btn>
@@ -302,7 +316,32 @@ export default {
       funcionarioDelete: null,
       dSnackbar: false,
       dMensagem: "",
-      dCor: ""
+      dCor: "",
+      estadosCivis: [
+        { text: "Solteiro", value: "SOLTEIRO" },
+        { text: "Casado", value: "CASADO" },
+        { text: "Divorciado", value: "DIVORCIADO" },
+        { text: "Viúvo", value: "VIUVO" }
+      ],
+      sexos: [
+        { text: "Masculino", value: "MASCULINO" },
+        { text: "Feminino", value: "FEMININO" }
+      ],
+      funcionario: {
+        nome: "",
+        formacaoAcademica: "",
+        dataNascimento: "",
+        estadoCivil: "",
+        sexo: "",
+        cpf: "",
+        rg: "",
+        nis: "",
+        email: "",
+        telefone: "",
+        salarioBase: "",
+        cargaHoraria: ""
+      },
+      y: ""
     };
   },
   created: function() {
@@ -345,7 +384,27 @@ export default {
     abrirDialogExcluirFuncionario(funcionario) {
       this.funcionarioDelete = funcionario;
       this.dialog = true;
-    }
+    },
+
+    funcionarioEditar(id) {
+      axios.get("/funcionario/listar/" + id).then(res => {
+        this.y = res.data;
+        console.log(this.y);
+        this.funcionario.nome = this.y.nome;
+        this.funcionario.formacaoAcademica = this.y.formacaoAcademica;
+        this.funcionario.dataNascimento = this.y.dataNascimento;    
+        this.funcionario.estadoCivil = this.y.estadoCivil;
+        this.funcionario.sexo = this.y.sexo;
+        this.funcionario.cpf = this.y.cpf;
+        this.funcionario.rg = this.y.rg;    
+        this.funcionario.nis = this.y.nis;
+        this.funcionario.email = this.y.email;
+        this.funcionario.telefone = this.y.telefone;
+        this.funcionario.salarioBase = this.y.salarioBase;
+        this.funcionario.cargaHoraria = this.y.cargaHoraria;
+      });
+    },
+
   },
   computed: {}
 };
