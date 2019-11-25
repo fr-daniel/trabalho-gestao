@@ -5,11 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ufc.gestao.scs.controller.FuncionarioController;
+import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.model.Funcionario;
 import ufc.gestao.scs.service.FuncionarioService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/funcionario")
@@ -37,6 +39,17 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     public ResponseEntity<List<Map<String, Object>>> listarEmails() {
         List<Map<String, Object>> funcionarios = funcionarioService.buscarEmails();
         return ResponseEntity.ok(funcionarios);
+    }
+
+    @Override
+    @GetMapping(value = "/listar/{id}")
+    public ResponseEntity<Map<String, Object>> buscaFuncionario(@PathVariable(value = "id") Integer id) {
+        Optional<Map<String, Object>> funcionario = Optional.ofNullable(funcionarioService.findFuncionarioById(id));
+
+        if (funcionario.isPresent()) {
+            return new ResponseEntity<>(funcionario.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override

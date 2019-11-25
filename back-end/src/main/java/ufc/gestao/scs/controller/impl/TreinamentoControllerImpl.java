@@ -2,17 +2,12 @@ package ufc.gestao.scs.controller.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ufc.gestao.scs.controller.TreinamentoController;
 import ufc.gestao.scs.model.Treinamento;
@@ -40,10 +35,29 @@ public class TreinamentoControllerImpl implements TreinamentoController {
     }
 
     @Override
+    @GetMapping(value = "/listar/{id}")
+    public ResponseEntity<Treinamento> buscaTreinamento(@PathVariable(value = "id") Integer id) {
+        Optional<Treinamento> treinamento = treinamentoService.findById(id);
+
+        if (treinamento.isPresent()) {
+            return new ResponseEntity<>(treinamento.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
     @DeleteMapping("/excluir/{treinamentoId}")
     public ResponseEntity<Void> deletarTreinamento(@PathVariable("treinamentoId") Integer treinamentoId) {
         treinamentoService.excluirTreinamento(treinamentoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    @PutMapping("/editar")
+    public ResponseEntity<Treinamento> editarTreinamento(Treinamento t) {
+        this.treinamentoService.editarTreinamento(t);
+        return new ResponseEntity(t.getId(), HttpStatus.OK);
+
     }
 
 }

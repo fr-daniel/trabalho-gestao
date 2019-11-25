@@ -2,6 +2,7 @@ package ufc.gestao.scs.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ufc.gestao.scs.model.Beneficio;
+import ufc.gestao.scs.model.Treinamento;
 import ufc.gestao.scs.repository.BeneficioRepository;
 import ufc.gestao.scs.service.BeneficioService;
 
@@ -34,5 +36,11 @@ public class BeneficioServiceImpl implements BeneficioService {
     public Beneficio salvarBeneficio(Beneficio b) {
         return beneficioRepository.save(b);
     }
+
+    @Override
+    public Optional<Beneficio> findById(Integer id) {
+        return beneficioRepository.findById(id);
+    }
+
 
 }

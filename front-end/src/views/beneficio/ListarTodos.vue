@@ -37,7 +37,7 @@
                   </td>
                   <td class="justify-center">{{ props.item.id }}</td>
                   <td class="justify-center">{{ props.item.titulo }}</td>
-                  <td class="justify-center">{{ props.item.valor }}</td>
+                  <td class="justify-center">R$ {{ props.item.valor }}, 00</td>
                   <td class="justify-center">
                     <v-dialog v-model="editarBeneficio" persistent max-width="800">
                       <template #activator="{ on: editarBeneficio  }">
@@ -52,7 +52,7 @@
                               color="#192A3E"
                               small
                               v-on="{ ...tooltip, ...editarBeneficio }"
-                              @click="editarBeneficio=true"
+                              @click="beneficioEditar(props.item.id)"
                             >
                               <v-icon small>edit</v-icon>
                             </v-btn>
@@ -72,11 +72,13 @@
                                   label="Título"
                                   value
                                   append-icon="title"
+                                  v-model="beneficio.titulo"
                                 ></v-text-field>
                                 <v-textarea
                                   label="Informações"
                                   value
                                   append-icon="description"
+                                  v-model="beneficio.informacoes"
                                 ></v-textarea>
                                 <v-flex xs12 sm4 d-flex>
                                   <v-text-field
@@ -84,6 +86,7 @@
                                     label="Valor"
                                     value
                                     append-icon="attach_money"
+                                    v-model="beneficio.valor"
                                   ></v-text-field>
                                 </v-flex>
                               </v-flex>
@@ -96,7 +99,6 @@
                             tile
                             color="#F7685B"
                             @click="editarBeneficio = false"
-                            v-on:click="limpar()"
                           >
                             <span class="white--text">Cancelar</span>
                           </v-btn>
@@ -217,7 +219,13 @@ export default {
       editarBeneficio: false,
       dSnackbar: false,
       dMensagem: "",
-      dCor: ""
+      dCor: "",
+      beneficio: {
+        titulo: "",
+        informacoes: "",
+        valor: ""
+      },
+      dados: ""
     };
   },
   created: function() {
@@ -260,7 +268,18 @@ export default {
     abrirDialogExcluirBeneficio(beneficio) {
       this.beneficioDelete = beneficio;
       this.dialog = true;
-    }
+    },
+
+    beneficioEditar(id) {
+      axios.get("/beneficio/listar/" + id).then(res => {
+        this.dados = res.data;
+        console.log(this.dados.id);
+        this.beneficio.titulo = this.dados.titulo;
+        this.beneficio.informacoes = this.dados.informacoes;
+        this.beneficio.valor = this.dados.valor;        
+      });
+    },
+
   },
   computed: {}
 };

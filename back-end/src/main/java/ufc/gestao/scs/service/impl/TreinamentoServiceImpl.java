@@ -2,6 +2,7 @@ package ufc.gestao.scs.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,16 @@ public class TreinamentoServiceImpl implements TreinamentoService {
     public Treinamento salvarTreinamento(Treinamento t) {
         return treinamentoRepository.save(t);
     }
+
+    @Override
+    public Treinamento editarTreinamento(Treinamento t) {
+        return treinamentoRepository.save(t);
+    }
+
+    @Override
+    public Optional<Treinamento> findById(Integer id) {
+        return treinamentoRepository.findById(id);
+    }
+
 
 }

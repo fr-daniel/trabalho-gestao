@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.model.Funcionario;
 import ufc.gestao.scs.repository.FuncionarioRepository;
 import ufc.gestao.scs.service.FuncionarioService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
@@ -37,6 +39,11 @@ public class FuncionarioImpl implements FuncionarioService {
     @Override
     public Funcionario salvarFuncionario(Funcionario f) {
         return funcionarioRepository.save(f);
+    }
+
+    @Override
+    public Map<String, Object> findFuncionarioById(Integer id) {
+        return funcionarioRepository.findFuncionarioById(id);
     }
 
 }

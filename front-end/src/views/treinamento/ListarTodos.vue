@@ -35,7 +35,7 @@
                                 color="#192A3E"
                                 small
                                 v-on="{ ...tooltip, ...editarTreinamento }"
-                                @click="editarTreinamento=true"
+                                @click="treinamentoEditar(props.item.id)"
                               >
                                 <v-icon small>edit</v-icon>
                               </v-btn>
@@ -55,14 +55,17 @@
                                     label="Título"
                                     value
                                     append-icon="title"
+                                    v-model="treinamento.titulo"
                                   ></v-text-field>
-                                  <v-flex xs12 sm6 d-flex>
-                                    <v-select
-                                      item-text="text"
-                                      item-value="value"
-                                      label="Classificação do Treinamento"
-                                    ></v-select>
-                                  </v-flex>
+                                <v-flex xs12 sm6 d-flex>
+                                  <v-select
+                                    :items="classificacoes"
+                                    item-text="text"
+                                    item-value="value"
+                                    label="Classificação do Treinamento"
+                                    v-model="treinamento.classificacao"
+                                  ></v-select>
+                                </v-flex>
                                 </v-flex>
                               </v-layout>
                             </v-container>
@@ -73,7 +76,6 @@
                               tile
                               color="#F7685B"
                               @click="editarTreinamento = false"
-                              v-on:click="limpar()"
                             >
                               <span class="white--text">Cancelar</span>
                             </v-btn>
@@ -183,13 +185,22 @@ export default {
         },
         { text: "Opções", sortable: false, value: "opcoes" }
       ],
+      classificacoes: [
+        { text: "Desejável", value: "DESEJAVEL" },
+        { text: "Requerido", value: "REQUERIDO" }
+      ],
       editarTreinamento: false,
       treinamentos: [],
       dialog: false,
       treinamentoDelete: null,
       dSnackbar: false,
       dMensagem: "",
-      dCor: ""
+      dCor: "",
+      treinamento: {
+        titulo: "",
+        classificacao: ""
+      },
+      y: ""
     };
   },
   created: function() {
@@ -235,7 +246,17 @@ export default {
     abrirDialogExcluirTreinamento(treinamento) {
       this.treinamentoDelete = treinamento;
       this.dialog = true;
-    }
+    },
+
+    treinamentoEditar(id) {
+      axios.get("/treinamento/listar/" + id).then(res => {
+        this.y = res.data;
+        console.log(this.y.id);
+        this.treinamento.titulo = this.y.titulo;
+        this.treinamento.classificacao = this.y.classificacao;        
+      });
+    },
+
   },
   computed: {}
 };
