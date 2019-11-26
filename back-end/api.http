@@ -4,7 +4,7 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTc0NzY4NjA4LCJleHAiOjE1NzQ4MDQ2MDh9._U4GL-Qpmom8a8Cxw3F6hfzuYQWHkKTJGFy2hlAwaoY
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTIzODA1MDMzNiIsInJvbGVzIjpbXSwiaWF0IjoxNTc0NzcyMjg3LCJleHAiOjE1NzQ4MDgyODd9.8Fd7wvmkCa8IflF3A0NeBuWzX68PA4OxAtWQrXK1GCY
 
 ###
 
@@ -14,13 +14,18 @@ POST http://{{host}}/login HTTP/1.1
 content-type: application/json
 
 {
-    "cpf": "60342875370",
+    "cpf": "21238050336",
     "password": "123456"
 }
 
 ###
 
 GET http://{{host}}/usuario/1 HTTP/1.1
+Authorization: {{token}}
+
+###
+
+GET http://{{host}}/funcionario/listar/1 HTTP/1.1
 Authorization: {{token}}
 
 ###

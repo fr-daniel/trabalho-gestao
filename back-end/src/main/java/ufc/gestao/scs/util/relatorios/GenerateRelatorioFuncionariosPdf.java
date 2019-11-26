@@ -99,7 +99,7 @@ public class GenerateRelatorioFuncionariosPdf {
                 cell.setPaddingTop(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(formatter.format(funcionario.getSalario()) + " R$"));
+                cell = new PdfPCell(new Phrase(formatter.format(funcionario.getSalario().getSalarioBase()) + " R$"));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 cell.setPaddingRight(5);
