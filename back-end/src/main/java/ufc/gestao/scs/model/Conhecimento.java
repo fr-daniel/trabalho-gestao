@@ -15,7 +15,7 @@ import ufc.gestao.scs.model.enums.NivelConhecimento;
 public class Conhecimento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String titulo;

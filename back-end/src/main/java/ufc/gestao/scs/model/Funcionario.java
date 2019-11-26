@@ -23,7 +23,7 @@ import ufc.gestao.scs.model.enums.Sexo;
 public class Funcionario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String nome;

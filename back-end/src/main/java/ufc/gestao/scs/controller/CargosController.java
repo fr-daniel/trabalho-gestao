@@ -16,6 +16,9 @@ public interface CargosController {
     @ApiOperation(value = "Lista todos os Cargos", notes = "Este controller é responsável por listar todos os cargos cadastrados no sistema")
     ResponseEntity<List<Map<String, Object>>> listarCargos();
 
+    @ApiOperation(value = "Buscar informações de um Cargo", notes = "Este controller é responsável por buscar um cargo no sistema")
+    ResponseEntity<Map<String, Object>> buscarCargo(Integer id);
+
     @ApiOperation(value = "Exclui um Cargo", notes = "Este controller é responsável por deletar um cargo no sistema")
     ResponseEntity<Void> deletarCargo(Integer cargoId);
 

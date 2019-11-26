@@ -41,4 +41,9 @@ public class CargoServiceImpl implements CargoService {
         return cargo.getId();
     }
 
+    @Override
+    public Map<String, Object> buscarCargo(Integer id) {
+        return cargoRepository.findCargoById(id);
+    }
+
 }

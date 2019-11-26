@@ -9,7 +9,7 @@ import ufc.gestao.scs.model.enums.ClassificacaoTreinamento;
 public class Treinamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String titulo;

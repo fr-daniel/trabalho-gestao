@@ -46,4 +46,10 @@ public class CargoControllerImpl implements CargosController {
         return new ResponseEntity(cargo.getId(), HttpStatus.OK);
     }
 
+    @Override
+    @GetMapping("/{cargoId}")
+    public ResponseEntity<Map<String, Object>> buscarCargo(@PathVariable("cargoId") Integer id) {
+        return new ResponseEntity<>(cargoService.buscarCargo(id), HttpStatus.OK);
+    }
+
 }

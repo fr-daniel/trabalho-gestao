@@ -9,6 +9,8 @@ public interface CargoService {
 
     List<Map<String, Object>> buscarCargos();
 
+    Map<String, Object> buscarCargo(Integer id);
+
     void excluirCargo(Integer id);
 
     Cargo salvarCargo(Cargo c);

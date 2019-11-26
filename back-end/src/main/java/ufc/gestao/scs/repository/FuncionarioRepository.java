@@ -2,6 +2,8 @@ package ufc.gestao.scs.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import ufc.gestao.scs.model.Funcionario;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     @Query("SELECT f.id as id, f.nome as nome, f.telefone as telefone, f.email as email  FROM Funcionario as f")
     List<Map<String, Object>> findAllEmailsView();
 
-    @Query("SELECT f.id as id, f.nome as nome, f.cpf as cpf, f.rg as rg, f.nis as nis, f.email as email, f.telefone as telefone, f.formacaoAcademica as formacaoAcademica, f.dataNascimento as dataNascimento, f.estadoCivil as estadoCivil, f.sexo as sexo, s.salarioBase as salarioBase, s.cargaHoraria as cargaHoraria  FROM Funcionario as f JOIN Salario as s ON s.id = f.salario")
-    Map<String, Object> findFuncionarioById(Integer id);
+    @Query("SELECT f.id as id, f.nome as nome, f.cpf as cpf, f.rg as rg, f.nis as nis, f.email as email, f.telefone as telefone, f.formacaoAcademica as formacaoAcademica, f.dataNascimento as dataNascimento, f.estadoCivil as estadoCivil, f.sexo as sexo, s.salarioBase as salarioBase, s.cargaHoraria as cargaHoraria  FROM Funcionario as f JOIN Salario as s ON s.funcionario.id = f.id WHERE f.id = :id")
+    Map<String, Object> findFuncionarioById(@Param("id") Integer id);
 
 }

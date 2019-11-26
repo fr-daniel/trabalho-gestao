@@ -4,7 +4,7 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTczNTYyNzkzLCJleHAiOjE1NzM1OTg3OTN9.nbWG0VkCf8E_0K3cUG6ldx8smCwFzHCrDZ7VGEIAeqY
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDM0Mjg3NTM3MCIsInJvbGVzIjpbXSwiaWF0IjoxNTc0NzY4NjA4LCJleHAiOjE1NzQ4MDQ2MDh9._U4GL-Qpmom8a8Cxw3F6hfzuYQWHkKTJGFy2hlAwaoY
 
 ###
 
@@ -58,6 +58,18 @@ Authorization: {{token}}
 
 ###
 DELETE  http://{{host}}/beneficio/excluir/8 HTTP/1.1
+Authorization: {{token}}
+
+###
+GET  http://{{host}}/cargo/1 HTTP/1.1
+Authorization: {{token}}
+
+###
+GET  http://{{host}}/relatorio/cargos HTTP/1.1
+Authorization: {{token}}
+
+###
+GET  http://{{host}}/relatorio/funcionarios HTTP/1.1
 Authorization: {{token}}
 
 

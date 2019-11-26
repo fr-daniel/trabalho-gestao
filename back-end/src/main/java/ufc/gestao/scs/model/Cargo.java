@@ -9,12 +9,12 @@ import javax.persistence.*;
 public class Cargo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String titulacao;
 
-    @Column(name="missao", columnDefinition="TEXT")
+    @Column(name = "missao", columnDefinition = "TEXT")
     private String missao;
 
     private String experienciaMinima;

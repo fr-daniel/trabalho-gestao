@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Salario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Double salarioBase;
