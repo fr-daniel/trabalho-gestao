@@ -7,8 +7,33 @@
             <v-container>
               <div>
                 <v-toolbar flat color="white">
-                  <CadastrarCargo @cadastrou-cargo="atualizarTable"></CadastrarCargo>
+                  <v-flex class="botao">
+                    <v-btn class="botao" tile color="#885AF8" @click="gerarRelatorio()">
+                      <span class="white--text">
+                        <v-icon left>library_books</v-icon>Gerar Relatório
+                      </span>
+                    </v-btn>
+                  </v-flex>
+
+                  <v-flex>
+                    <CadastrarCargo @cadastrou-cargo="atualizarTable"></CadastrarCargo>
+                  </v-flex>
                 </v-toolbar>
+                <v-card-title>
+                  <h3>
+                    <b>Cargos</b>
+                  </h3>
+
+                  <v-spacer></v-spacer>
+
+                  <v-text-field
+                    v-model="search"
+                    append-icon="search"
+                    label="Buscar Cargo"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                </v-card-title>
                 <v-data-table
                   :headers="headers"
                   :items="cargos"
@@ -16,26 +41,6 @@
                   class="elevation-1"
                 >
                   <template v-slot:items="props">
-                    <td>
-                      <v-tooltip bottom>
-                        <template #activator="{ on: tooltip }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            depressed
-                            dark
-                            icon
-                            color="primary"
-                            small
-                            v-on="{ ...tooltip }"
-                            :to="{name: 'DetalhesCargo'}"
-                          >
-                            <v-icon small>view_list</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Ver mais</span>
-                      </v-tooltip>
-                    </td>
                     <td class="justify-center">{{ props.item.id }}</td>
                     <td class="justify-center">{{ props.item.titulacao }}</td>
                     <td class="justify-center">{{ props.item.area }}</td>
@@ -76,6 +81,24 @@
                           </v-btn>
                         </template>
                         <span>Remover</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="primary"
+                            small
+                            v-on="{ ...tooltip }"
+                            :to="{name: 'DetalhesCargo'}"
+                          >
+                            <v-icon small>view_list</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Ver mais</span>
                       </v-tooltip>
                     </td>
                   </template>
@@ -137,12 +160,6 @@ export default {
       selected: [],
       headers: [
         {
-          text: "",
-          align: "left",
-          sortable: false,
-          value: "selecionarCargo"
-        },
-        {
           text: "ID",
           align: "left",
           sortable: true,
@@ -170,6 +187,17 @@ export default {
     this.initialize();
   },
   methods: {
+    gerarRelatorio() {
+      axios
+        .get("relatorio/cargos", {
+          responseType: "blob" // had to add this one here
+        })
+        .then(response => {
+          const content = response.headers["content-type"];
+          download(response.data, "relatório de cargos", content);
+        })
+        .catch(error => console.log(error));
+    },
     initialize() {
       axios.get("cargo/listar").then(res => {
         this.cargos = res.data;
@@ -209,4 +237,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.botao {
+  margin-left: 180px;
+}
 </style>

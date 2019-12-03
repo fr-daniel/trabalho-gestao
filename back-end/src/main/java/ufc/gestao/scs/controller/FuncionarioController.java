@@ -17,9 +17,6 @@ public interface FuncionarioController {
     @ApiOperation(value = "Lista todos os Funcionários", notes = "Este controller é responsável por listar todos os funcionários cadastrados no sistema")
     ResponseEntity<List<Map<String, Object>>> listarFuncionarios();
 
-    @GetMapping("/listar/emails")
-    ResponseEntity<List<Map<String, Object>>> listarEmails();
-
     @ApiOperation(value = "Lista um funcinário", notes = "Este controller é responsável por listar um funcionário cadastrado no sistema com base no id")
     ResponseEntity<Map<String, Object>> buscaFuncionario(Integer id);
 

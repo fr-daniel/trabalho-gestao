@@ -35,13 +35,6 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     }
 
     @Override
-    @GetMapping("/listar/emails")
-    public ResponseEntity<List<Map<String, Object>>> listarEmails() {
-        List<Map<String, Object>> funcionarios = funcionarioService.buscarEmails();
-        return ResponseEntity.ok(funcionarios);
-    }
-
-    @Override
     @GetMapping(value = "/listar/{id}")
     public ResponseEntity<Map<String, Object>> buscaFuncionario(@PathVariable(value = "id") Integer id) {
         Optional<Map<String, Object>> funcionario = Optional.ofNullable(funcionarioService.findFuncionarioById(id));

@@ -1,7 +1,7 @@
 <template>
   <v-app id="telaInicial">
     <div class="organizarLogo">
-      <router-link to="/">Sistema de Cargos e Salários (SCS)</router-link>
+      <router-link to="/"></router-link>
     </div>
     <v-content>
       <v-container fill-height fluid>
@@ -72,6 +72,7 @@ export default {
 }
 
 #telaInicial {
+  background: #109cf1;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

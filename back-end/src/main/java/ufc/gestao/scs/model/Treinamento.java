@@ -14,6 +14,9 @@ public class Treinamento {
 
     private String titulo;
 
+    @Column(name = "informacoes", columnDefinition = "TEXT")
+    private String informacoes;
+
     @Enumerated(EnumType.STRING)
     private ClassificacaoTreinamento classificacao;
 

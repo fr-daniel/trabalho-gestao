@@ -8,6 +8,21 @@
               <v-toolbar flat color="white">
                 <CadastrarBeneficio @cadastrou-beneficio="atualizarTable"></CadastrarBeneficio>
               </v-toolbar>
+              <v-card-title>
+                <h3>
+                  <b>Benefícios</b>
+                </h3>
+
+                <v-spacer></v-spacer>
+
+                <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Buscar Benefício"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-card-title>
               <v-data-table
                 :headers="headers"
                 :items="beneficios"
@@ -15,26 +30,6 @@
                 class="elevation-1"
               >
                 <template v-slot:items="props">
-                  <td>
-                    <v-tooltip bottom>
-                      <template #activator="{ on: tooltip }">
-                        <v-btn
-                          class="ma-2"
-                          tile
-                          depressed
-                          dark
-                          icon
-                          color="primary"
-                          small
-                          v-on="{ ...tooltip }"
-                          :to="{name: 'DetalhesBeneficio'}"
-                        >
-                          <v-icon small>view_list</v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Ver mais</span>
-                    </v-tooltip>
-                  </td>
                   <td class="justify-center">{{ props.item.id }}</td>
                   <td class="justify-center">{{ props.item.titulo }}</td>
                   <td class="justify-center">R$ {{ props.item.valor }}, 00</td>
@@ -74,32 +69,52 @@
                                   append-icon="title"
                                   v-model="beneficio.titulo"
                                 ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12>
                                 <v-textarea
                                   label="Informações"
                                   value
                                   append-icon="description"
                                   v-model="beneficio.informacoes"
                                 ></v-textarea>
-                                <v-flex xs12 sm4 d-flex>
-                                  <v-text-field
-                                    flat
-                                    label="Valor"
-                                    value
-                                    append-icon="attach_money"
-                                    v-model="beneficio.valor"
-                                  ></v-text-field>
-                                </v-flex>
+                              </v-flex>
+                              <v-flex xs4 d-flex>
+                                <v-text-field
+                                  flat
+                                  label="Valor"
+                                  value
+                                  append-icon="attach_money"
+                                  v-model="beneficio.valor"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs8>
+                                <v-select
+                                  v-model="cargoSelecionado"
+                                  :items="cargos"
+                                  label="Selecionar Cargos"
+                                  multiple
+                                >
+                                  <template v-slot:prepend-item>
+                                    <v-list-tile ripple @click="toggle">
+                                      <v-list-tile-action>
+                                        <v-icon
+                                          :color="cargoSelecionado.length > 0 ? 'indigo darken-4' : ''"
+                                        >{{ icon }}</v-icon>
+                                      </v-list-tile-action>
+                                      <v-list-tile-content>
+                                        <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                                      </v-list-tile-content>
+                                    </v-list-tile>
+                                    <v-divider class="mt-2"></v-divider>
+                                  </template>
+                                  <template v-slot:append-item></template>
+                                </v-select>
                               </v-flex>
                             </v-layout>
                           </v-container>
                         </v-card-text>
                         <v-card-actions class="justify-center">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            color="#F7685B"
-                            @click="editarBeneficio = false"
-                          >
+                          <v-btn class="ma-2" tile color="#F7685B" @click="editarBeneficio = false">
                             <span class="white--text">Cancelar</span>
                           </v-btn>
 
@@ -127,6 +142,24 @@
                         </v-btn>
                       </template>
                       <span>Remover</span>
+                    </v-tooltip>
+                    <v-tooltip bottom>
+                      <template #activator="{ on: tooltip }">
+                        <v-btn
+                          class="ma-2"
+                          tile
+                          depressed
+                          dark
+                          icon
+                          color="primary"
+                          small
+                          v-on="{ ...tooltip }"
+                          :to="{name: 'DetalhesBeneficio'}"
+                        >
+                          <v-icon small>view_list</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Ver mais</span>
                     </v-tooltip>
                   </td>
                 </template>
@@ -189,12 +222,6 @@ export default {
       selected: [],
       headers: [
         {
-          text: "",
-          align: "left",
-          sortable: false,
-          value: "selecionarBeneficio"
-        },
-        {
           text: "ID",
           align: "left",
           sortable: true,
@@ -225,13 +252,34 @@ export default {
         informacoes: "",
         valor: ""
       },
-      dados: ""
+      dados: "",
+      cargos: [],
+      cargoSelecionado: []
     };
   },
   created: function() {
     this.initialize();
+    this.listarCargos();
+  },
+  computed: {
+    likesAllFruit() {
+      return this.cargoSelecionado.length === this.cargos.length;
+    },
+    likesSomeFruit() {
+      return this.cargoSelecionado.length > 0 && !this.likesAllFruit;
+    },
+    icon() {
+      if (this.likesAllFruit) return "mdi-close-box";
+      if (this.likesSomeFruit) return "mdi-minus-box";
+      return "mdi-checkbox-blank-outline";
+    }
   },
   methods: {
+    listarCargos() {
+      axios.get("cargo/listar").then(res => {
+        this.cargos = res.data;
+      });
+    },
     initialize() {
       axios.get("beneficio/listar").then(res => {
         this.beneficios = res.data;
@@ -276,12 +324,20 @@ export default {
         console.log(this.dados.id);
         this.beneficio.titulo = this.dados.titulo;
         this.beneficio.informacoes = this.dados.informacoes;
-        this.beneficio.valor = this.dados.valor;        
+        this.beneficio.valor = this.dados.valor;
       });
     },
 
-  },
-  computed: {}
+    toggle() {
+      this.$nextTick(() => {
+        if (this.likesAllFruit) {
+          this.cargoSelecionado = [];
+        } else {
+          this.cargoSelecionado = this.cargos.slice();
+        }
+      });
+    }
+  }
 };
 </script>
 

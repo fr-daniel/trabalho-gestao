@@ -26,16 +26,11 @@
                   </v-tab>
 
                   <v-tab href="#tab-4">
-                    TREINAMENTOS
-                    <v-icon>assignment_turned_in</v-icon>
-                  </v-tab>
-
-                  <v-tab href="#tab-5">
-                    BENEFÍCIOS
+                    REMUNERAÇÃO
                     <v-icon>monetization_on</v-icon>
                   </v-tab>
 
-                  <v-tab-item v-for="i in 5" :key="i" :value="'tab-' + i">
+                  <v-tab-item v-for="i in 4" :key="i" :value="'tab-' + i">
                     <div v-if="i == 1">
                       <v-container grid-list-md>
                         <v-layout row wrap>
@@ -76,27 +71,6 @@
                                   append-icon="group"
                                 ></v-text-field>
                               </v-flex>
-                              <v-layout row wrap justify-center>
-                                <v-flex xs4>
-                                  <v-text-field
-                                    flat
-                                    v-model="salarioBaseMinimo"
-                                    label="Salário Base Mínimo"
-                                    value
-                                    append-icon="attach_money"
-                                  ></v-text-field>
-                                </v-flex>
-
-                                <v-flex xs4>
-                                  <v-text-field
-                                    flat
-                                    v-model="salarioBaseMaximo"
-                                    label="Salário Base Máximo"
-                                    value
-                                    append-icon="attach_money"
-                                  ></v-text-field>
-                                </v-flex>
-                              </v-layout>
                             </v-layout>
                           </v-card-text>
                         </v-layout>
@@ -130,7 +104,21 @@
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
+                        <v-card-title>
+                          <h3>
+                            <b>Atividades</b>
+                          </h3>
 
+                          <v-spacer></v-spacer>
+
+                          <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Buscar Atividade"
+                            single-line
+                            hide-details
+                          ></v-text-field>
+                        </v-card-title>
                         <v-data-table
                           :headers="headersAtividades"
                           :items="desserts1"
@@ -139,9 +127,7 @@
                           class="elevation-1"
                         >
                           <template v-slot:items="props">
-                            <td>
-                              <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
-                            </td>
+                            <td class="justify-center">{{ props.item.id }}</td>
                             <td class="justify-center">{{ props.item.titulo }}</td>
                             <td class="justify-center">{{ props.item.descricao }}</td>
                             <td class="justify-center">
@@ -167,10 +153,7 @@
                             ></v-text-field>
                           </v-flex>
                           <v-flex xs12 sm4 d-flex>
-                            <v-select
-                              :items="niveisConhecimento"
-                              label="Nível do Conhecimento"
-                            ></v-select>
+                            <v-select :items="niveisConhecimento" label="Nível do Conhecimento"></v-select>
                           </v-flex>
                         </v-layout>
                         <v-layout>
@@ -181,7 +164,21 @@
                             </v-btn>
                           </v-card-actions>
                         </v-layout>
+                        <v-card-title>
+                          <h3>
+                            <b>Conhecimentos</b>
+                          </h3>
 
+                          <v-spacer></v-spacer>
+
+                          <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Buscar Conhecimento"
+                            single-line
+                            hide-details
+                          ></v-text-field>
+                        </v-card-title>
                         <v-data-table
                           :headers="headersConhecimentos"
                           :items="desserts2"
@@ -190,9 +187,7 @@
                           class="elevation-1"
                         >
                           <template v-slot:items="props">
-                            <td>
-                              <v-checkbox :input-value="props.selected" primary hide-details></v-checkbox>
-                            </td>
+                            <td class="justify-center">{{ props.item.id }}</td>
                             <td class="justify-center">{{ props.item.titulo }}</td>
                             <td class="justify-center">{{ props.item.nivel }}</td>
                             <td class="justify-center">
@@ -205,78 +200,35 @@
                       </v-container>
                     </div>
 
-                    <div v-if="i == 4">
+                    <div v-if="i === 4">
                       <v-container grid-list-xl fluid>
                         <v-layout row wrap>
-                          <v-flex xs12 sm12 d-flex>
-                            <v-select
-                              v-model="selectedFruits"
-                              :items="fruits"
-                              label="Selecionar Treinamentos"
-                              multiple
-                            >
-                              <template v-slot:prepend-item>
-                                <v-list-tile ripple @click="toggle">
-                                  <v-list-tile-action>
-                                    <v-icon
-                                      :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
-                                    >{{ icon }}</v-icon>
-                                  </v-list-tile-action>
-                                  <v-list-tile-content>
-                                    <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
-                                  </v-list-tile-content>
-                                </v-list-tile>
-                                <v-divider class="mt-2"></v-divider>
-                              </template>
-                              <template v-slot:append-item></template>
-                            </v-select>
+                          <v-flex xs12>
+                            <h5>
+                              <b>Valor dos Benefícios</b>
+                            </h5>R$ 500,00
                           </v-flex>
-                        </v-layout>
-                        <v-layout>
-                          <v-spacer></v-spacer>
-                          <v-card-actions>
-                            <v-btn class="ma-2" tile color="primary">
-                              <span class="white--text">Adicionar</span>
-                            </v-btn>
-                          </v-card-actions>
-                        </v-layout>
-                      </v-container>
-                    </div>
+                          <v-layout row wrap justify-center>
+                            <v-flex xs4>
+                              <v-text-field
+                                flat
+                                v-model="salarioBaseMinimo"
+                                label="Salário Base Mínimo"
+                                value
+                                append-icon="attach_money"
+                              ></v-text-field>
+                            </v-flex>
 
-                    <div v-if="i === 5">
-                      <v-container grid-list-xl fluid>
-                        <v-layout row wrap>
-                          <v-flex xs12 sm12 d-flex>
-                            <v-select
-                              v-model="selectedFruits"
-                              :items="fruits"
-                              label="Selecionar Benefícios"
-                              multiple
-                            >
-                              <template v-slot:prepend-item>
-                                <v-list-tile ripple @click="toggle">
-                                  <v-list-tile-action>
-                                    <v-icon
-                                      :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''"
-                                    >{{ icon }}</v-icon>
-                                  </v-list-tile-action>
-                                  <v-list-tile-content>
-                                    <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
-                                  </v-list-tile-content>
-                                </v-list-tile>
-                                <v-divider class="mt-2"></v-divider>
-                              </template>
-                              <template v-slot:append-item></template>
-                            </v-select>
-                          </v-flex>
-                        </v-layout>
-                        <v-layout>
-                          <v-spacer></v-spacer>
-                          <v-card-actions>
-                            <v-btn class="ma-2" tile color="primary">
-                              <span class="white--text">Adicionar</span>
-                            </v-btn>
-                          </v-card-actions>
+                            <v-flex xs4>
+                              <v-text-field
+                                flat
+                                v-model="salarioBaseMaximo"
+                                label="Salário Base Máximo"
+                                value
+                                append-icon="attach_money"
+                              ></v-text-field>
+                            </v-flex>
+                          </v-layout>
                         </v-layout>
                       </v-container>
                     </div>
@@ -287,7 +239,7 @@
                     <span class="white--text">Cancelar</span>
                   </v-btn>
 
-                  <v-btn class="ma-2" tile color="#109CF1">
+                  <v-btn class="ma-2" tile color="#2ED47A">
                     <span class="white--text">Salvar</span>
                   </v-btn>
                 </v-card-actions>
@@ -326,26 +278,17 @@ export default {
         { text: "Médio", value: "MÉDIO" },
         { text: "Avançado", value: "AVANÇADO" }
       ],
-      fruits: [
-        "Apples",
-        "Apricots",
-        "Avocado",
-        "Bananas",
-        "Blueberries",
-        "Blackberries"
-      ],
-      selectedFruits: [],
       headersAtividades: [
         {
-          text: "",
+          text: "ID",
           align: "left",
-          sortable: false,
-          value: "selecionarAtividade"
+          sortable: true,
+          value: "id"
         },
         {
           text: "Título",
           align: "left",
-          sortable: true,
+          sortable: false,
           value: true
         },
         {
@@ -357,22 +300,22 @@ export default {
       ],
       desserts1: [
         {
-          selecionarAtividade: "",
+          id: "1",
           titulo: "AAAAAAAAA",
           descricao: "12/11/2019"
         }
       ],
       headersConhecimentos: [
         {
-          text: "",
+          text: "ID",
           align: "left",
-          sortable: false,
-          value: "selecionarConhecimento"
+          sortable: true,
+          value: "id"
         },
         {
           text: "Título",
           align: "left",
-          sortable: true,
+          sortable: false,
           value: true
         },
         {
@@ -384,7 +327,7 @@ export default {
       ],
       desserts2: [
         {
-          selecionarConhecimento: "",
+          id: "1",
           titulo: "AAAAAAAAA",
           nivel: "Básico"
         }
@@ -392,19 +335,7 @@ export default {
     };
   },
 
-  computed: {
-    likesAllFruit() {
-      return this.selectedFruits.length === this.fruits.length;
-    },
-    likesSomeFruit() {
-      return this.selectedFruits.length > 0 && !this.likesAllFruit;
-    },
-    icon() {
-      if (this.likesAllFruit) return "mdi-close-box";
-      if (this.likesSomeFruit) return "mdi-minus-box";
-      return "mdi-checkbox-blank-outline";
-    }
-  },
+  computed: {},
   methods: {
     initialize() {
       axios.get("/cargo/" + this.id).then(res => {
@@ -418,15 +349,6 @@ export default {
         this.dataResultado = res.data.dataResultado;
         this.inicioReavaliacao = res.data.inicioReavaliacao;
         this.terminoReavaliacao = res.data.terminoReavaliacao;
-      });
-    },
-    toggle() {
-      this.$nextTick(() => {
-        if (this.likesAllFruit) {
-          this.selectedFruits = [];
-        } else {
-          this.selectedFruits = this.fruits.slice();
-        }
       });
     }
   }

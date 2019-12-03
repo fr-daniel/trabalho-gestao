@@ -1,9 +1,9 @@
 <template>
   <v-layout row justify-center>
     <v-spacer></v-spacer>
-    <v-dialog v-model="addFuncionario" persistent max-width="1000">
+    <v-dialog v-model="addFuncionario" persistent max-width="800">
       <template #activator="{ on: addFuncionario  }">
-        <v-btn class="ma-2" tile color="#F7685B" v-on="{ ...addFuncionario }">
+        <v-btn class="botao" tile color="#109CF1" v-on="{ ...addFuncionario }">
           <span class="white--text">
             <v-icon left>add</v-icon>Adicionar Funcionário
           </span>
@@ -55,8 +55,6 @@
                     label="Sexo"
                   ></v-select>
                 </v-flex>
-              </v-layout>
-              <v-layout row wrap>
                 <v-flex xs4>
                   <v-text-field flat v-model="cpf" label="CPF" value append-icon="assignment_ind"></v-text-field>
                 </v-flex>
@@ -66,16 +64,22 @@
                 <v-flex xs4>
                   <v-text-field flat v-model="nis" label="NIS" value append-icon="assignment_ind"></v-text-field>
                 </v-flex>
-              </v-layout>
-              <v-layout row wrap>
                 <v-flex xs8>
                   <v-text-field flat v-model="email" label="Email" value append-icon="mail"></v-text-field>
                 </v-flex>
                 <v-flex xs4>
                   <v-text-field flat v-model="telefone" label="Telefone" value append-icon="phone"></v-text-field>
                 </v-flex>
-              </v-layout>
-              <v-layout row wrap justify-center>
+                <v-flex xs4 d-flex>
+                  <v-select
+                    :items="cargos"
+                    v-model="cargoSelecionado"
+                    item-text="cargos.titulacao"
+                    item-value="cargos.titulacao"
+                    label="Cargo"
+                    return-object
+                  ></v-select>
+                </v-flex>
                 <v-flex xs4>
                   <v-text-field
                     flat
@@ -101,7 +105,7 @@
             <span class="white--text">Cancelar</span>
           </v-btn>
 
-          <v-btn class="ma-2" tile color="#109CF1" @click="submit">
+          <v-btn class="ma-2" tile color="#2ED47A" @click="submit">
             <span class="white--text">Salvar</span>
           </v-btn>
         </v-card-actions>
@@ -114,6 +118,7 @@
 import Vue from "vue";
 import axios from "axios";
 import VeeValidate from "vee-validate";
+import download from "downloadjs";
 
 Vue.use(VeeValidate);
 
@@ -149,13 +154,24 @@ export default {
       dictionary: {},
       snackbar: false,
       cor: "",
-      mensagem: ""
+      mensagem: "",
+      cargos: [],
+      cargoSelecionado: []
     };
   },
   mounted() {
     this.$validator.localize("pt", this.dictionary);
+    this.listarCargos();
   },
   methods: {
+    listarCargos() {
+      axios
+        .get("cargo/listar", {})
+        .then(response => {
+          this.cargos = response.data;
+        })
+        .catch(error => console.log(error));
+    },
     submit() {
       this.$validator.validateAll().then(result => {
         if (result) {
@@ -207,11 +223,15 @@ export default {
         (this.nis = ""),
         (this.formacaoAcademica = ""),
         (this.salarioBase = ""),
-        (this.cargaHoraria = "");
+        (this.cargaHoraria = ""),
+        (this.cargoSelecionado = "");
     }
   }
 };
 </script>
 
 <style>
+.botao {
+  max-width: 250px;
+}
 </style>

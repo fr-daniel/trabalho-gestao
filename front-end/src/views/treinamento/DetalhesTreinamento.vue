@@ -5,10 +5,10 @@
         <v-flex xs12>
           <v-card>
             <v-card-title class="headline black white--text">
-              Dados do Benefício
+              Dados do Treinamento
               <v-spacer></v-spacer>
 
-              <v-btn icon color="white" outline @click="$router.push('/beneficio/listar')">
+              <v-btn icon color="white" outline @click="$router.push('/treinamento/listar')">
                 <v-icon>arrow_back</v-icon>
               </v-btn>
 
@@ -27,8 +27,8 @@
                       </v-flex>
                       <v-flex xs4>
                         <h5>
-                          <b>Valor</b>
-                        </h5>R$ 100,00
+                          <b>Classificação</b>
+                        </h5>Desejável
                       </v-flex>
                       <v-flex xs12>
                         <h5>
@@ -37,7 +37,7 @@
                       </v-flex>
                       <v-flex xs12>
                         <h5>
-                          <b>Cargos que Utilizam o Benefício</b>
+                          <b>Cargos que Utilizam o Treinamento</b>
                         </h5>Somos uma nova concessionária de scooters e patinetes 100% elétricas, Estamos a procura de um profissional que possa desenvolver uma parceria duradoura para abrirmos o mercado e expandir para todo o território nacional. Nossa marca é a no.1 na China, por i (...)
                       </v-flex>
                     </v-layout>
