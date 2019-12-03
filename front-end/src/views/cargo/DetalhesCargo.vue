@@ -92,7 +92,7 @@
                       <v-flex xs4>
                         <h5>
                           <b>Nível do Conhecimento</b>
-                        </h5>(88)99866-7009
+                        </h5>Básico
                       </v-flex>
 
                       <v-flex xs12>
@@ -112,7 +112,7 @@
                       <v-flex xs4>
                         <h5>
                           <b>Classificação do Treinamento</b>
-                        </h5>40 horas semanais
+                        </h5>Desejável
                       </v-flex>
 
                       <v-flex xs12>
@@ -132,7 +132,7 @@
                       <v-flex xs4>
                         <h5>
                           <b>Valor</b>
-                        </h5>40 horas semanais
+                        </h5>R$ 500,00
                       </v-flex>
                       <v-flex xs12>
                         <h5>

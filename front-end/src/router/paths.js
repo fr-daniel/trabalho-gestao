@@ -18,10 +18,10 @@ import EditarCargoPage from "../views/cargo/EditarCargo";
 import ListarTreinamentosPage from "../views/treinamento/ListarTodos";
 import ListarBeneficiosPage from "../views/beneficio/ListarTodos";
 import ListarFuncionariosPage from "../views/funcionario/ListarTodos";
-import ListarEmailsPage from "../views/funcionario/ListarEmail";
 import DetalhesFuncionarioPage from "../views/funcionario/DetalhesFuncionario";
 import DetalhesCargoPage from "../views/cargo/DetalhesCargo";
 import DetalhesBeneficioPage from "../views/beneficio/DetalhesBeneficio";
+import DetalhesTreinamentoPage from "../views/treinamento/DetalhesTreinamento";
 
 export default [
   {
@@ -140,6 +140,20 @@ export default [
     ]
   },
   {
+    path: "/treinamento",
+    component: HomePage,
+    redirect: { name: "NotFound" },
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "detalhes",
+        name: "DetalhesTreinamento",
+        component: DetalhesTreinamentoPage,
+        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
+      }
+    ]
+  },
+  {
     path: "/beneficio",
     component: HomePage,
     redirect: { name: "NotFound" },
@@ -177,20 +191,6 @@ export default [
         path: "listar",
         name: "ListarFuncionarios",
         component: ListarFuncionariosPage,
-        meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
-      }
-    ]
-  },
-  {
-    path: "/funcionario",
-    component: HomePage,
-    redirect: { name: "NotFound" },
-    meta: { requiresAuth: true },
-    children: [
-      {
-        path: "listarEmail",
-        name: "ListarEmail",
-        component: ListarEmailsPage,
         meta: { permissions: [{ role: "ADMINISTRADOR", access: true }] }
       }
     ]

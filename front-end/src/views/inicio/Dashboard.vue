@@ -6,7 +6,7 @@
           <v-container>
             <v-card-title primary-title>
               <div>
-                <div class="headline">Cargos Cadastradas</div>
+                <div class="headline">Cargos Cadastrados</div>
                 <div class="grey--text">
                   Data da Última atualização:
                   <span class="black--text">December 23, 2018</span>
@@ -16,7 +16,6 @@
                   <span class="black--text">Gerente de Recursos Humanos</span>
                 </div>
               </div>
-
               <CadastrarCargo></CadastrarCargo>
             </v-card-title>
           </v-container>
@@ -28,7 +27,7 @@
               <div>
                 <div class="headline">Cadastrar Funcionário</div>
                 <div class="grey--text">
-                  Última Atualização:
+                  Data da última atualização:
                   <span class="black--text">20 de outubro de 2019</span>
                 </div>
                 <div class="grey--text">
@@ -70,4 +69,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.botao {
+  max-width: 250px;
+}
 </style>

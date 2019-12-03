@@ -9,6 +9,21 @@
                 <v-toolbar flat color="white">
                   <CadastrarTreinamento @cadastrou-treinamento="atualizarTable"></CadastrarTreinamento>
                 </v-toolbar>
+                                <v-card-title>
+                  <h3>
+                    <b>Treinamento</b>
+                  </h3>
+
+                  <v-spacer></v-spacer>
+
+                  <v-text-field
+                    v-model="search"
+                    append-icon="search"
+                    label="Buscar Treinamento"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                </v-card-title>
                 <v-data-table
                   :headers="headers"
                   :items="treinamentos"
@@ -57,7 +72,16 @@
                                     append-icon="title"
                                     v-model="treinamento.titulo"
                                   ></v-text-field>
-                                <v-flex xs12 sm6 d-flex>
+                                </v-flex>
+                                <v-flex xs12>
+                                  <v-textarea
+                                    label="Informações"
+                                    value
+                                    append-icon="description"
+                                    v-model="treinamento.informacoes"
+                                  ></v-textarea>
+                                </v-flex>
+                                <v-flex xs4 d-flex>
                                   <v-select
                                     :items="classificacoes"
                                     item-text="text"
@@ -66,6 +90,28 @@
                                     v-model="treinamento.classificacao"
                                   ></v-select>
                                 </v-flex>
+                                <v-flex xs8>
+                                  <v-select
+                                    v-model="cargoSelecionado"
+                                    :items="cargos"
+                                    label="Selecionar Cargos"
+                                    multiple
+                                  >
+                                    <template v-slot:prepend-item>
+                                      <v-list-tile ripple @click="toggle">
+                                        <v-list-tile-action>
+                                          <v-icon
+                                            :color="cargoSelecionado.length > 0 ? 'indigo darken-4' : ''"
+                                          >{{ icon }}</v-icon>
+                                        </v-list-tile-action>
+                                        <v-list-tile-content>
+                                          <v-list-tile-title>Selecionar Tudo</v-list-tile-title>
+                                        </v-list-tile-content>
+                                      </v-list-tile>
+                                      <v-divider class="mt-2"></v-divider>
+                                    </template>
+                                    <template v-slot:append-item></template>
+                                  </v-select>
                                 </v-flex>
                               </v-layout>
                             </v-container>
@@ -104,6 +150,24 @@
                           </v-btn>
                         </template>
                         <span>Remover</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template #activator="{ on: tooltip }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            depressed
+                            dark
+                            icon
+                            color="primary"
+                            small
+                            v-on="{ ...tooltip }"
+                            :to="{name: 'DetalhesTreinamento'}"
+                          >
+                            <v-icon small>view_list</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Ver mais</span>
                       </v-tooltip>
                     </td>
                   </template>
@@ -198,15 +262,37 @@ export default {
       dCor: "",
       treinamento: {
         titulo: "",
+        informacoes: "",
         classificacao: ""
       },
-      y: ""
+      y: "",
+      cargos: [],
+      cargoSelecionado: []
     };
   },
   created: function() {
     this.initialize();
+    this.listarCargos();
+  },
+  computed: {
+    likesAllFruit() {
+      return this.cargoSelecionado.length === this.cargos.length;
+    },
+    likesSomeFruit() {
+      return this.cargoSelecionado.length > 0 && !this.likesAllFruit;
+    },
+    icon() {
+      if (this.likesAllFruit) return "mdi-close-box";
+      if (this.likesSomeFruit) return "mdi-minus-box";
+      return "mdi-checkbox-blank-outline";
+    }
   },
   methods: {
+    listarCargos() {
+      axios.get("cargo/listar").then(res => {
+        this.cargos = res.data;
+      });
+    },
     getLabelClassificaoTreinamento(fase) {
       return store.getters["enums/getLabelClassificacaoTreinamento"](fase);
     },
@@ -253,12 +339,21 @@ export default {
         this.y = res.data;
         console.log(this.y.id);
         this.treinamento.titulo = this.y.titulo;
-        this.treinamento.classificacao = this.y.classificacao;        
+        this.treinamentos.informacoes = this.y.informacoes;
+        this.treinamento.classificacao = this.y.classificacao;
       });
     },
 
-  },
-  computed: {}
+    toggle() {
+      this.$nextTick(() => {
+        if (this.likesAllFruit) {
+          this.cargoSelecionado = [];
+        } else {
+          this.cargoSelecionado = this.cargos.slice();
+        }
+      });
+    }
+  }
 };
 </script>
 

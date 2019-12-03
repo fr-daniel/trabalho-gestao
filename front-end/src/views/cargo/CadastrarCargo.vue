@@ -1,9 +1,9 @@
 <template>
   <v-layout row justify-center>
     <v-spacer></v-spacer>
-    <v-dialog v-model="addCargo" persistent max-width="1000">
+    <v-dialog v-model="addCargo" persistent max-width="800">
       <template #activator="{ on: addCargo  }">
-        <v-btn class="ma-2" tile color="#2ED47A" v-on="{ ...addCargo }">
+        <v-btn class="botao" tile color="#109CF1" v-on="{ ...addCargo }">
           <span class="white--text">
             <v-icon left>add</v-icon>Adicionar Novo Cargo
           </span>
@@ -33,26 +33,6 @@
                 <v-text-field flat v-model="area" label="Área" value append-icon="school"></v-text-field>
                 <v-text-field flat v-model="unidade" label="Unidade" value append-icon="group"></v-text-field>
               </v-flex>
-              <v-layout row wrap justify-center>
-                <v-flex xs4>
-                  <v-text-field
-                    flat
-                    v-model="salarioBaseMinimo"
-                    label="Salário Base Mínimo"
-                    value
-                    append-icon="attach_money"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs4>
-                  <v-text-field
-                    flat
-                    v-model="salarioBaseMaximo"
-                    label="Salário Base Máximo"
-                    value
-                    append-icon="attach_money"
-                  ></v-text-field>
-                </v-flex>
-              </v-layout>
             </v-layout>
           </v-container>
         </v-card-text>
@@ -61,7 +41,7 @@
             <span class="white--text">Cancelar</span>
           </v-btn>
 
-          <v-btn class="ma-2" tile color="#109CF1" @click="submit">
+          <v-btn class="ma-2" tile color="#2ED47A" @click="submit">
             <span class="white--text">Salvar</span>
           </v-btn>
         </v-card-actions>
@@ -75,11 +55,12 @@
 import Vue from "vue";
 import axios from "axios";
 import VeeValidate from "vee-validate";
+import download from "downloadjs";
 
 Vue.use(VeeValidate);
 
 export default {
-    props: {
+  props: {
     cor: {
       type: String,
       default: ""
@@ -102,8 +83,8 @@ export default {
       experienciaMinima: "",
       area: "",
       unidade: "",
-      salarioBaseMinimo: '',
-      salarioBaseMaximo: '',
+      salarioBaseMinimo: "",
+      salarioBaseMaximo: "",
       dictionary: {},
       dSnackbar: false,
       dMensagem: "",
@@ -155,12 +136,15 @@ export default {
       this.experienciaMinima = "";
       this.area = "";
       this.unidade = "";
-      this.salarioBaseMinimo = 0;
-      this.salarioBaseMaximo = 0;
+      this.salarioBaseMinimo = "";
+      this.salarioBaseMaximo = "";
     }
   }
 };
 </script>
 
 <style>
+.botao {
+  max-width: 250px;
+}
 </style>

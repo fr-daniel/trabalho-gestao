@@ -2,11 +2,16 @@
   <div id="appRoot">
     <template v-if="!$route.meta.public">
       <v-app>
-        <app-toolbar></app-toolbar>
-
         <app-menu></app-menu>
 
         <v-content class="mt-5">
+          <div class="layout column align-center">
+            <img
+              id="logo"
+              src="/static/logo-01.png"
+              alt="Logo Sistema de Sistema Inteno de Cargos e Salários"
+            />
+          </div>
           <v-container fluid>
             <div class="page-wrapper">
               <router-view></router-view>
@@ -56,5 +61,9 @@ export default {
 
 .v-content {
   padding-top: 0 !important;
+}
+
+#logo {
+  max-width: 350px;
 }
 </style>

@@ -103,6 +103,16 @@
 
                       <v-flex xs4>
                         <h5>
+                          <b>Cargo</b>
+                        </h5>Desenvolvedor front-end
+                      </v-flex>
+                      <v-flex xs6>
+                        <h5>
+                          <b>Benefícios do Cargo</b>
+                        </h5>R$ 500,00
+                      </v-flex>
+                      <v-flex xs4>
+                        <h5>
                           <b>Salário Base</b>
                         </h5>R$ 2.500,00
                       </v-flex>
@@ -110,6 +120,11 @@
                         <h5>
                           <b>Carga Horária</b>
                         </h5>40 horas semanais
+                      </v-flex>
+                      <v-flex xs4>
+                        <h5>
+                          <b>Remuneração Total</b>
+                        </h5>R$ 3.000,00
                       </v-flex>
                     </v-layout>
                   </v-flex>
