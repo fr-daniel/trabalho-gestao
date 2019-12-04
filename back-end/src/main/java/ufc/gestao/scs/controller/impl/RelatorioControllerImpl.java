@@ -17,6 +17,7 @@ import ufc.gestao.scs.model.Cargo;
 import ufc.gestao.scs.model.Funcionario;
 import ufc.gestao.scs.repository.CargoRepository;
 import ufc.gestao.scs.repository.FuncionarioRepository;
+import ufc.gestao.scs.service.RelatorioService;
 import ufc.gestao.scs.util.relatorios.GenerateRelatorioCargosPdf;
 import ufc.gestao.scs.util.relatorios.GenerateRelatorioFuncionariosPdf;
 
@@ -26,7 +27,7 @@ public class RelatorioControllerImpl implements RelatorioController {
 
     @Autowired
     private CargoRepository cargoRepository;
-
+    
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 

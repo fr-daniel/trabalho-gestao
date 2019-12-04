@@ -41,14 +41,12 @@ public class BeneficioControllerImpl implements BeneficioController {
     }
 
     @Override
-    @GetMapping(value = "/listar/{id}")
-    public ResponseEntity<Beneficio> buscaBeneficio(@PathVariable(value = "id") Integer id) {
-        Optional<Beneficio> beneficio = beneficioService.findById(id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Map<String, Object>> buscaBeneficio(@PathVariable(value = "id") Integer id) {
+    	Map<String, Object> beneficio = beneficioService.findBeneficioById(id);
 
-        if (beneficio.isPresent()) {
-            return new ResponseEntity<>(beneficio.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(beneficio, HttpStatus.OK);
+        
     }
 
     @Override

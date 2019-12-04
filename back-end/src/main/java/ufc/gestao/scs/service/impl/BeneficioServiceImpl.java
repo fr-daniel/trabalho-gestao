@@ -42,5 +42,10 @@ public class BeneficioServiceImpl implements BeneficioService {
         return beneficioRepository.findById(id);
     }
 
+	@Override
+	public Map<String, Object> findBeneficioById(Integer id) {
+		return beneficioRepository.findBeneficioInfoById(id);
+	}
+
 
 }

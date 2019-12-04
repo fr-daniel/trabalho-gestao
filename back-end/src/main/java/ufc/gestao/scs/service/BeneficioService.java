@@ -16,4 +16,6 @@ public interface BeneficioService {
     Beneficio salvarBeneficio(Beneficio b);
 
     Optional<Beneficio> findById(Integer id);
+    
+    Map<String, Object> findBeneficioById(Integer id);
 }

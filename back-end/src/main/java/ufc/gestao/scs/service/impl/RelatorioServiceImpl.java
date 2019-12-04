@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import ufc.gestao.scs.model.Cargo;
 import ufc.gestao.scs.repository.CargoRepository;
 import ufc.gestao.scs.service.RelatorioService;
 
@@ -20,6 +21,12 @@ public class RelatorioServiceImpl implements RelatorioService {
 	 
 	@Override
 	public List<Map<String, Object>> buscarInfoCargos() {
+		List<Cargo> cargos = cargoRepository.findAll();
+		
+		for (Cargo cargo : cargos) {
+			System.out.println(cargoRepository.findBeneficiosByCargoId(cargo.getId()).size());
+		}
+		
 		return null;
 	}
 

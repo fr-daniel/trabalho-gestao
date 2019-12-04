@@ -18,7 +18,7 @@ public interface BeneficioController {
     ResponseEntity<List<Map<String, Object>>> listarBeneficios();
 
     @ApiOperation(value = "Lista um benefício", notes = "Este controller é responsável por listar um benefício cadastrado no sistema com base no id")
-    ResponseEntity<Beneficio> buscaBeneficio(Integer id);
+    ResponseEntity<Map<String, Object>> buscaBeneficio(Integer id);
 
     @ApiOperation(value = "Exclui um Benefício", notes = "Este controller é responsável por deletar um benefício no sistema")
     ResponseEntity<Void> deletarBeneficio(Integer beneficioId);
