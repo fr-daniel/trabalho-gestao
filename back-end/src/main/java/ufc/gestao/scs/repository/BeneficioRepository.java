@@ -20,6 +20,9 @@ public interface BeneficioRepository extends JpaRepository<Beneficio, Integer> {
     
     @Query("SELECT b.id as id, b.titulo as titulo, b.valor as valor FROM Beneficio as b WHERE b.id = :id")
     Map<String, Object> findBeneficioInfoById(@Param("id") Integer id);
+    
+    @Query("SELECT c.id as id, c.titulacao as titulacao FROM Beneficio as b JOIN b.cargos c WHERE b.id = :id")
+    List<Map<String, Object>> findAllCargosBeneficios(@Param("id") Integer id);
 
     Optional<Beneficio> findById(Integer id);
 

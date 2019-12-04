@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 import io.swagger.annotations.ApiOperation;
 import ufc.gestao.scs.model.Beneficio;
-import ufc.gestao.scs.model.Treinamento;
 
 public interface BeneficioController {
 
@@ -23,4 +22,6 @@ public interface BeneficioController {
     @ApiOperation(value = "Exclui um Benefício", notes = "Este controller é responsável por deletar um benefício no sistema")
     ResponseEntity<Void> deletarBeneficio(Integer beneficioId);
 
+    @ApiOperation(value = "Lista um benefício", notes = "Este controller é responsável por listar um benefício cadastrado no sistema com base no id")
+    ResponseEntity<List<Map<String, Object>>> buscaCargosBeneficio(Integer id);
 }

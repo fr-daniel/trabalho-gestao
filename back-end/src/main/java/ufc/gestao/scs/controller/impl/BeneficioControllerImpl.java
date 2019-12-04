@@ -48,6 +48,15 @@ public class BeneficioControllerImpl implements BeneficioController {
             return new ResponseEntity<>(beneficio, HttpStatus.OK);
         
     }
+    
+    @Override
+    @GetMapping(value = "/{id}/cargos")
+    public ResponseEntity<List<Map<String, Object>>> buscaCargosBeneficio(@PathVariable(value = "id") Integer id) {
+    	List<Map<String, Object>> cargos = beneficioService.findAllCargosBeneficios(id);
+
+            return new ResponseEntity<>(cargos, HttpStatus.OK);
+        
+    }
 
     @Override
     @DeleteMapping("/excluir/{beneficioId}")

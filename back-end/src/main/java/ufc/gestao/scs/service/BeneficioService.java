@@ -10,6 +10,7 @@ import ufc.gestao.scs.model.Treinamento;
 public interface BeneficioService {
 
     List<Map<String, Object>> buscarBeneficios();
+    List<Map<String, Object>> findAllCargosBeneficios(Integer id);
 
     void excluirBeneficio(Integer id);
 
