@@ -4,8 +4,7 @@
 @contentType = application/json
 @createdAt = {{$datetime iso8601}}
 @modifiedBy = {{$processEnv USERNAME}}
-@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTIzODA1MDMzNiIsInJvbGVzIjpbXSwiaWF0IjoxNTc0NzcyMjg3LCJleHAiOjE1NzQ4MDgyODd9.8Fd7wvmkCa8IflF3A0NeBuWzX68PA4OxAtWQrXK1GCY
-
+@token = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTIzODA1MDMzNiIsInJvbGVzIjpbXSwiaWF0IjoxNTc1MzkyNTIyLCJleHAiOjE1NzU0Mjg1MjJ9.PT7bH1XuoaZdJMLxiskaEsT6BOR9sjlNr9bdu1EbDQM
 ###
 
 @name = hello

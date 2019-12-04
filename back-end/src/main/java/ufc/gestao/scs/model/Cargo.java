@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "cargo")
 public class Cargo {
@@ -16,6 +19,7 @@ public class Cargo {
 
     @Column(name = "missao", columnDefinition = "TEXT")
     private String missao;
+    
 
     private String experienciaMinima;
     private String area;
@@ -23,9 +27,9 @@ public class Cargo {
 
     private Double salarioBaseMinimo;
     private Double salarioBaseMaximo;
-
-    @ManyToMany
-    @JoinTable(name = "cargo_has_beneficio", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="cargo_beneficio", joinColumns = {@JoinColumn(name="id")}, inverseJoinColumns = {@JoinColumn(referencedColumnName = "id")})
     private List<Beneficio> beneficios;
 
     @ManyToMany
@@ -39,6 +43,9 @@ public class Cargo {
     @OneToMany
     @JoinTable(name = "cargo_has_atividade", joinColumns = @JoinColumn(referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
     private List<Atividade> atividades;
+
+    @OneToMany(mappedBy = "cargo")
+    private List<Funcionario> funcionarios;
 
     public Integer getId() {
         return id;
@@ -134,5 +141,19 @@ public class Cargo {
 
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
+    }
+
+    /**
+     * @return the funcionarios
+     */
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    /**
+     * @param funcionarios the funcionarios to set
+     */
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 }

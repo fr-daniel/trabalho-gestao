@@ -43,8 +43,8 @@
     </v-list>
 
     <div class="barra-lateral-2">
-      <v-divider light=true></v-divider>
-      <v-list class="pt-0" dense>
+      <v-divider light="true"></v-divider>
+      <v-list class="pt-0" dense light="true">
         <v-list-tile :to="{name: 'Dashboard'}">
           <v-list-tile-action>
             <v-icon color="#C2CFE0">dashboard</v-icon>
@@ -144,5 +144,10 @@ export default {
 
 .barra-lateral-3 {
   margin-top: 180px;
+}
+
+.hover-title:hover {
+  color: black !important;
+  background-color: blueviolet !important;
 }
 </style>

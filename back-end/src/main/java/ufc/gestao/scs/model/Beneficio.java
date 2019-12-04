@@ -1,5 +1,7 @@
 package ufc.gestao.scs.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Beneficio {
     private String informacoes;
 
     private Double valor;
+    
+    @ManyToMany(mappedBy = "beneficios", cascade = CascadeType.ALL)
+    private List<Cargo> cargos;
 
     public Integer getId() {
         return id;
@@ -48,5 +53,13 @@ public class Beneficio {
     public void setValor(Double valor) {
         this.valor = valor;
     }
+    
+    public List<Cargo> getCargos() {
+		return cargos;
+	}
+    
+    public void setCargos(List<Cargo> cargos) {
+		this.cargos = cargos;
+	}
 
 }

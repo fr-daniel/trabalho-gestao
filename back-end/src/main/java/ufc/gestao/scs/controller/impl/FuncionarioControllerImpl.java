@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ufc.gestao.scs.controller.FuncionarioController;
-import ufc.gestao.scs.model.Beneficio;
 import ufc.gestao.scs.model.Funcionario;
 import ufc.gestao.scs.service.FuncionarioService;
 

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -52,6 +53,10 @@ public class Funcionario {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "salario_id", referencedColumnName = "id")
 	private Salario salario;
+
+	@ManyToOne
+	@JoinColumn(name = "cargo_id")
+	private Cargo cargo;
 
 	public Integer getId() {
 		return id;
@@ -147,5 +152,29 @@ public class Funcionario {
 
 	public void setSalario(Salario salario) {
 		this.salario = salario;
+	}
+
+	/**
+	 * @return the cargo
+	 */
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	/**
+	 * @param cargo the cargo to set
+	 */
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public Double getSalarioTotal() {
+		Double total = 0.0;
+
+		for (Beneficio beneficio : cargo.getBeneficios()) {
+			total += beneficio.getValor();
+		}
+
+		return salario.getSalarioBase() + total;
 	}
 }

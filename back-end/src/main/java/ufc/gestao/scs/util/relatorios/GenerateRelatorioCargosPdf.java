@@ -22,6 +22,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import ufc.gestao.scs.model.Cargo;
+import ufc.gestao.scs.model.Funcionario;
 
 public class GenerateRelatorioCargosPdf {
 
@@ -53,11 +54,11 @@ public class GenerateRelatorioCargosPdf {
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
-            hcell = new PdfPCell(new Phrase("Salário Base Mínimo", headFont));
+            hcell = new PdfPCell(new Phrase("Quantidade de Funcionários", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
-            hcell = new PdfPCell(new Phrase("Salário Base Máximo", headFont));
+            hcell = new PdfPCell(new Phrase("Custo total", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
@@ -91,13 +92,13 @@ public class GenerateRelatorioCargosPdf {
                 cell.setPaddingTop(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(formatter.format(cargo.getSalarioBaseMinimo()) + " R$"));
+                cell = new PdfPCell(new Phrase(quantidadeFuncionarios(cargo)));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 cell.setPaddingRight(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(formatter.format(cargo.getSalarioBaseMaximo()) + " R$"));
+                cell = new PdfPCell(new Phrase(formatter.format(custoTotal(cargo)) + " R$"));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 cell.setPaddingRight(5);
@@ -126,6 +127,21 @@ public class GenerateRelatorioCargosPdf {
         }
 
         return new ByteArrayInputStream(out.toByteArray());
+    }
+
+    private static int quantidadeFuncionarios(Cargo cargo) {
+        return cargo.getFuncionarios().size();
+    }
+
+    private static double custoTotal(Cargo cargo) {
+        double total = 0;
+
+        for (Funcionario funcionario : cargo.getFuncionarios()) {
+            total += funcionario.getSalarioTotal();
+            System.out.println(total + " aaaa");
+        }
+
+        return total;
     }
 
 }

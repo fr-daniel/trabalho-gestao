@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ufc.gestao.scs.controller.BeneficioController;
 import ufc.gestao.scs.model.Beneficio;
-import ufc.gestao.scs.model.Treinamento;
 import ufc.gestao.scs.service.BeneficioService;
 
 @RestController
